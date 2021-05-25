@@ -26,6 +26,7 @@ class RecipesController < ApplicationController
     else
      render 'new'
     end
+  end
 
   def new
     @recipe = Recipe.new
