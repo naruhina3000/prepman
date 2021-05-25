@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-6 mx-auto my-5">
       <div class="card p-4">
-        <h1>List your kitchen</h1>
+        <h1>Create your recipe</h1>
           <%= simple_form_for @recipe do |f| %>
             <%= f.input :title %>
             <%= f.input :description %>
@@ -11,10 +11,10 @@
             <%= f.input :prep_time %>
             <%= f.input :bake_time %>
             <%= f.input :resting_time %>
-            <%= f.input :diet, collection: Recipe::DIET %>
-            <%= f.input :dish_type, collection: Recipe::DISHTYPE %>
-            <%= f.input :cuisine, collection: Recipe::CUISINE %>
-            <%= f.input :occasion, collection: Recipe::OCCASION, input_html: { multiple: true }%>
+            <%= f.input :diet, collection: Recipe::DIET, input_html: { class: 'select2' } %>
+            <%= f.input :dish_type, collection: Recipe::DISHTYPE, input_html: { class: 'select2' } %>
+            <%= f.input :cuisine, collection: Recipe::CUISINE, input_html: { class: 'select2' } %>
+            <%= f.input :occasion, collection: Recipe::OCCASION, input_html: { class: 'select2' }%>
             <%= f.input :calories %>
             <%= f.input :protein %>
             <%= f.input :fat %>
