@@ -17,12 +17,18 @@ class RecipesController < ApplicationController
   def edit
   end
 
+  def create
+    @recipe = Recipe.new(recipe_params)
+    @user = current_user
+    @recipe.user = @user
+    if @recipe.save
+      redirect_to recipe_steps_path(@recipe)
+    else
+     render 'new'
+    end
+
   def new
     @recipe = Recipe.new
-
-  end
-
-  def create
   end
 
   def destroy
@@ -36,4 +42,10 @@ class RecipesController < ApplicationController
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
+
+  def recipe_params
+    params.require(:recipe).permit(:title, :description, :portion, :difficulty, :prep_time, :bake_time,
+    :resting_time, :diet, :dish_type, :cuisine, :occasion, :calories, :protein, :fat, :carb, :photo)
+  end
 end
+
