@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_kitchen, only: [:show, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def index
     @recipes = Recipe.all
@@ -16,12 +16,19 @@ class RecipesController < ApplicationController
   def edit
   end
 
-  def new
-    @recipe = Recipe.new
-    
+  def create
+    @recipe = Recipe.new(recipe_params)
+    @user = current_user
+    @recipe.user = @user
+    if @recipe.save
+      redirect_to recipe_steps_path(@recipe)
+    else
+     render 'new'
+    end
   end
 
-  def create
+  def new
+    @recipe = Recipe.new
   end
 
   def destroy
@@ -35,4 +42,10 @@ class RecipesController < ApplicationController
   def set_recipe
     @recipe = Recipe.find(params[:id])
   end
+
+  def recipe_params
+    params.require(:recipe).permit(:title, :description, :portion, :difficulty, :prep_time, :bake_time,
+    :resting_time, :diet, :dish_type, :cuisine, :occasion, :calories, :protein, :fat, :carb, :photo)
+  end
 end
+

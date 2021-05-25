@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div class="row my-5">
+        <% @steps.each do |step| %>
+            <div class="col-md-6 py-2">
+                <div class="card m-0">
+                    <div class="card border-0" style="width: 100%; height: 100%">
+                        <% if step.photo.attached? %>
+                        <%= cl_image_tag photo.key, class: "card-img-top" %>
+                        <% end %>
+                        <div class="card-body flex-grow-1 p-3">
+                        <p>Step <%= step.number%></p>
+                        <p><%= step.description %></p>
+                    </div> 
+                </div>
+            </div> 
+        <% end %> 
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Add Step
+</button>
+<%= link_to "Add Ingredients", recipe_ingredients_path(@recipe), class: "btn btn-warning" %>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add step</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <%= simple_form_for [@recipe, @step] do |f| %>
+            <p>Add Step <%= @steps.size + 1 %></p>
+            <%= f.hidden_field :number, input_html: { value: @steps.size + 1} %>
+            <%= f.input :description %>
+            <%= f.input :photo, as: :file %>
+            <%= f.submit "Create Step", class:"btn btn-primary" %>
+          <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
