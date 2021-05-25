@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :planners, only: [:index, :create, :destroy]
 
-  resources :shopping_list, only: [:index, :create, :show, :destroy] do
+  resources :shopping_lists, only: [:index, :new, :create, :show, :destroy] do
     resources :shopping_list_ingredients, only: [:create, :destroy]
   end
 
