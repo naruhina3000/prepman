@@ -1,12 +1,13 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_kitchen, only: [:show, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
 
   def index
     @recipes = Recipe.all
   end
 
   def show
+    @planner = Planner.new
   end
 
   def update
@@ -18,7 +19,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    
+
   end
 
   def create

@@ -1,0 +1,7 @@
+  <h3>Planner</h3>
+  <% @planners.each do |planner| %>
+    <%= planner.date %>
+    <%= planner.recipe.title %>
+    <%= link_to "x", planner_path(planner), method: :delete %>
+    <hr>
+  <% end %>
