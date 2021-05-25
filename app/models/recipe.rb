@@ -29,7 +29,7 @@ class Recipe < ApplicationRecord
   validates :cuisine, inclusion: { in: CUISINE }
   validates :occasion, inclusion: { in: OCCASION }
 
-  # validate total_time
+  # validate :total_time
 
 
 
