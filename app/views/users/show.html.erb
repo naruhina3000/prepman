@@ -1,0 +1,32 @@
+<h1>Hello</h1>
+
+ <h3>Followed Cookbooks</h3>
+  <% @followed_cookbook.each do |cookbook| %>
+    <%= cookbook.title %>
+    <hr>
+  <% end %>
+
+ <h3>Made Dishes</h3>
+  <% @cooked_recipes.each do |recipe| %>
+    <%= recipe.title %>
+    <hr>
+  <% end %>
+
+  <h3>Likes</h3>
+  <% @likes.each do |recipe| %>
+    <%= recipe.title %>
+    <hr>
+  <% end %>
+
+  <h3>My Recipes</h3>
+  <% @recipes.each do |recipe| %>
+    <%= recipe.title %>
+    <hr>
+  <% end %>
+
+  <h3>My Cookbooks</h3>
+  <% @cookbooks.each do |cookbook| %>
+    <%= cookbook.title %>
+    <hr>
+  <% end %>
+
