@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'recipes#index'
-  
+
   resources :recipes do
     resources :ingredients, only: [:index, :create, :update]
     resources :utensils, only: [:index, :create, :update]
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :shopping_list, only: [:index, :create, :show, :destroy] do
-    ressources :shopping_list_ingredients, only: [:create, :destroy]
+    resources :shopping_list_ingredients, only: [:create, :destroy]
   end
 
   resources :favorites, only: [:destroy]
@@ -24,5 +24,5 @@ Rails.application.routes.draw do
   get "/users/:id", to: "users#show", as: :user
   get "/users/:id/edit", to: "users#edit", as: :user_edit
   patch "/users/:id", to: "users#update"
-  
+
 end
