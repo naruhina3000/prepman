@@ -13,8 +13,8 @@ class User < ApplicationRecord
   has_many :favorites
   has_many :reviews
 
-  validates :username, presence: true, uniqueness: true
-  validates :name, presence: true
+  # validates :username, presence: true, uniqueness: true
+  # validates :name, presence: true
 
   def has_favorite?(recipe)
     # self.favorites.pluck(:kitchen_id).include? kitchen.id

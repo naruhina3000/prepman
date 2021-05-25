@@ -1,4 +1,5 @@
 class Recipe < ApplicationRecord
+  has_one_attached :photo
   belongs_to :user
   has_many :planners
   has_many :steps
@@ -28,7 +29,7 @@ class Recipe < ApplicationRecord
   validates :cuisine, inclusion: { in: CUISINE }
   validates :occasion, inclusion: { in: OCCASION }
 
-  validate total_time
+  # validate total_time
 
 
 
