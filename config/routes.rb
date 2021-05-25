@@ -3,15 +3,16 @@ Rails.application.routes.draw do
   root to: 'recipes#index'
 
   resources :recipes do
-    resources :ingredients, only: [:index, :create, :update]
-    resources :utensils, only: [:index, :create, :update]
+    resources :recipe_ingredients, only: [:index, :create, :update]
+    resources :recipe_utensils, only: [:index, :create, :update]
     resources :steps, only: [:index, :new, :create, :edit, :update]
     resources :reviews, only: [:create]
-    resources :planners, only: [:index, :create, :destroy]
     resources :favorites, only: [:create]
     resources :cooked_recipe, only: [:create]
     resources :cookbook_recipe, only: [:create]
   end
+
+  resources :planners, only: [:index, :create, :destroy]
 
   resources :shopping_list, only: [:index, :create, :show, :destroy] do
     resources :shopping_list_ingredients, only: [:create, :destroy]

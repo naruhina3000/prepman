@@ -32,7 +32,6 @@ class Recipe < ApplicationRecord
   # validate :total_time
 
 
-
   def total_time
     (self.prep_time + self.bake_time) > 0
   end

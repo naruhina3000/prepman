@@ -7,6 +7,7 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @planner = Planner.new
   end
 
   def update
@@ -25,7 +26,6 @@ class RecipesController < ApplicationController
     else
      render 'new'
     end
-  end
 
   def new
     @recipe = Recipe.new
