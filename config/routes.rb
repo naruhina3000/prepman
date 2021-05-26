@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     member do
       post :add_to_shopping_list
       patch :publish
-      patch :draft
     end
     resources :recipe_ingredients, only: [:index, :create]
     resources :recipe_utensils, only: [:index, :create]
