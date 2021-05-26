@@ -1,4 +1,6 @@
 <h1><%= @recipe.title %></h1>
+<p class= "btn btn-danger"><%= @recipe.status %></p>
+<br>
 
 <%= link_to "Update Recipe", edit_recipe_path(@recipe), class: "btn btn-info" %>
 

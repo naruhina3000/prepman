@@ -9,6 +9,9 @@
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-nav ml-auto flex-row">
+      <%= link_to "Add Recipe", new_recipe_path, class: "btn btn-outline-info my-2 my-sm-0 mr-2" %>
+    </div>
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
         <li class="nav-item active">
