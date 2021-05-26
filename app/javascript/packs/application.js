@@ -24,6 +24,7 @@ require("channels");
 import "bootstrap";
 import { initSelect2 } from "../components/init_select2";
 import { initFlatPickr } from "../plugins/initFlatPicker";
+import { initIngredientAutocomplete } from "../plugins/initIngredientAutocomplete";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -33,4 +34,5 @@ document.addEventListener("turbolinks:load", () => {
   // Call your functions here, e.g:
   // initSelect2();
   initSelect2();
+  initIngredientAutocomplete();
 });

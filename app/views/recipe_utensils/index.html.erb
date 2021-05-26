@@ -7,6 +7,7 @@
                         <div class="card-body flex-grow-1 p-3">
                         <p><%= recipe_utensil.quantity%></p>
                         <p><%= recipe_utensil.utensil.name %></p>
+                        </div> 
                     </div> 
                 </div>
             </div> 
@@ -15,18 +16,19 @@
 </div>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<%= link_to "Back to ingredients", recipe_recipe_ingredients_path(@recipe), class: "btn btn-warning" %>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#utensilModal">
   Add Utensil
 </button>
 
-<%= link_to "Go to Recipe", recipe_path(@recipe), class: "btn btn-warning" %>
+<%= link_to "Add the steps", recipe_steps_path(@recipe), class: "btn btn-warning" %>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="utensilModal" tabindex="-1" role="dialog" aria-labelledby="utensilModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Utensil</h5>
+        <h5 class="modal-title" id="utensilModalLabel">Add Utensil</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -34,7 +36,7 @@
       <div class="modal-body">
             <%= simple_form_for [@recipe, @recipe_utensil] do |f| %>
             <%= f.input :quantity %>
-            <%= f.association :utensil, input_html: { class: 'select2' } %>
+            <%= f.association :utensil, input_html: { class: 'select2', style:  "width: 100%"  }, label_html: { style: 'display: block' } %>
             <%= f.submit "Add Utensil", class:"btn btn-primary" %>
           <% end %>
       </div>

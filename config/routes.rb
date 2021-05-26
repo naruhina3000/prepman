@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:destroy]
   resources :cooked_recipe, only: [:destroy]
   resources :cookbook_recipe, only: [:destroy]
-
+  resources :ingredients
   get "/users/:id", to: "users#show", as: :user
   get "/users/:id/edit", to: "users#edit", as: :user_edit
   patch "/users/:id", to: "users#update"

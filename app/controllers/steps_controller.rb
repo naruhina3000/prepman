@@ -9,11 +9,11 @@ before_action :set_recipe, only: [:index, :create]
     
     def create
         @step = Step.new(step_params)
-        @step.recipe = @recipe       
+        @step.recipe = @recipe    
         if @step.save
             redirect_to recipe_steps_path(@recipe)
         else
-         render 'new'
+         render "steps/index"
         end
     end
     
@@ -24,8 +24,9 @@ before_action :set_recipe, only: [:index, :create]
     end
 
     def destroy
-        @steps.destroy
-        redirect_to @steps.recipe
+        @step.photo.purge
+        @step.destroy
+        redirect_to request.referer
     end
 
     private
