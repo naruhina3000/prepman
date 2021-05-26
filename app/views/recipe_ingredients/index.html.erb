@@ -9,6 +9,7 @@
                         <p><%= recipe_ingredient.unit %></p>
                         <p><%= recipe_ingredient.ingredient.name %></p>
                         </div>
+                      <%= link_to "Delete Ingredient", recipe_ingredient_path(recipe_ingredient), class: "btn btn-danger", method: :delete %>
                     </div> 
                 </div>
             </div> 

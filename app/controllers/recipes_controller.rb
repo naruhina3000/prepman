@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
+    # @recipes = Recipe.where(category: "publihed")
   end
 
   def show

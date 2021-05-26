@@ -8,9 +8,10 @@
                         <%= cl_image_tag step.photo.key, class: "card-img-top" %>
                         <% end %>
                         <div class="card-body flex-grow-1 p-3">
-                        <p>Step <%= step.number%></p>
+                        <p>Step <%= step.number %></p>
                         <p><%= step.description %></p>
                         </div> 
+                        <%= link_to "Delete Step", step_path(step), class: "btn btn-danger", method: :delete %>
                     </div> 
                 </div>
             </div> 
