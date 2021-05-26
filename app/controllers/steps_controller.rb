@@ -1,5 +1,5 @@
 class StepsController < ApplicationController
-before_action :set_step, only: [:show, :edit, :update, :destroy]
+before_action :set_step, only: [:show, :update, :edit, :destroy]
 before_action :set_recipe, only: [:index, :create]
 
     def index
@@ -16,11 +16,17 @@ before_action :set_recipe, only: [:index, :create]
          render "steps/index"
         end
     end
-    
+
     def edit
-    end 
-    
+    end
+
     def update
+        @recipe = @step.recipe
+        if @step.update(step_params)
+            redirect_to recipe_steps_path(@recipe)
+        else
+          render "steps/index"
+        end
     end
 
     def destroy

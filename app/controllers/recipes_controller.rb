@@ -4,7 +4,7 @@ class RecipesController < ApplicationController
 
   def index
     @recipes = Recipe.all
-    # @recipes = Recipe.where(category: "publihed")
+    # @recipes = Recipe.where(category: "published")
   end
 
   def show
@@ -13,7 +13,11 @@ class RecipesController < ApplicationController
   end
 
   def update
-
+    if @recipe.update(recipe_params)
+      redirect_to recipe_recipe_ingredients_path(@recipe)
+    else
+      render "edit"
+    end
   end
 
   def edit
