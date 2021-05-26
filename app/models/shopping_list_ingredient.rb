@@ -4,6 +4,6 @@ class ShoppingListIngredient < ApplicationRecord
   belongs_to :shopping_list
 
 
-  validates :shopping_list, uniqueness: { scope: :recipe }
+  validates :quantity, presence: true
   validates :shopping_list, uniqueness: { scope: :ingredient }
 end
