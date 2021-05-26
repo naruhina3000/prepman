@@ -12,11 +12,11 @@
                       <%= link_to "Delete Ingredient", recipe_ingredient_path(recipe_ingredient), class: "btn btn-danger", method: :delete %>
                     </div> 
                 </div>
-            </div> 
-        <% end %> 
+            </div>
+        <% end %>
     </div>
 </div>
-            
+
 
 <!-- Button trigger modal -->
 <%= link_to "Edit Recipe", edit_recipe_path(@recipe), class: "btn btn-info" %>
@@ -40,7 +40,7 @@
             <%= simple_form_for [@recipe, @recipe_ingredient] do |f| %>
             <%= f.input :quantity %>
             <%= f.input :unit %>
-            <%= render "ingredients/autocomplete" %>
+            <%= render "ingredients/autocomplete", model_name: 'recipe_ingredient' %>
             <%= f.submit "Add Ingredient", class:"btn btn-primary" %>
           <% end %>
       </div>
