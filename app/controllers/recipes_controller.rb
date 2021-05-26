@@ -40,7 +40,9 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe.photos.purge
+    # if @recipe.photo
+    @recipe.photo.purge
+    # end
     @recipe.destroy
     redirect_to user_path(current_user)
   end

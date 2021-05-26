@@ -6,11 +6,22 @@
     <hr>
   <% end %>
 
- <h3>Made Dishes</h3>
-  <% @cooked_recipes.each do |recipe| %>
-    <%= recipe.title %>
-    <hr>
-  <% end %>
+  <h3>Made Dishes</h3>
+  <div class="row my-5">
+    <% @cooked_recipes.each do |cooked_recipe| %>
+      <div class="col-md-4 py-2">
+        <%= render 'recipes/card', recipe: cooked_recipe.recipe do %>
+        <% if current_user %>
+          <% if current_user.has_cooked_recipe?(cooked_recipe.recipe) %>
+            <%= link_to "Actually I haven't cooked this yet", cooked_recipe_path(current_user.has_cooked_recipe?(cooked_recipe.recipe)), method: :delete, class: "btn btn-info" %>
+          <% else %>
+            <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(cooked_recipe.recipe), method: :post, class: "btn btn-primary" %>
+          <% end %>
+        <% end %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 
   <h3>Likes</h3>
   <div class="row my-5">
@@ -24,10 +35,16 @@
   <hr>
 
   <h3>My Recipes</h3>
-  <% @recipes.each do |recipe| %>
-    <%= recipe.title %>
-    <hr>
-  <% end %>
+  <div class="row my-5">
+    <% @recipes.each do |recipe| %>
+      <div class="col-md-4 py-2">
+          <%= render 'recipes/card', recipe: recipe do %>
+            <%= link_to "Delete", recipe_path(recipe), class: "btn btn-danger", method: :delete %>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
+  <hr>
 
   <h3>My Cookbooks</h3>
   <% @cookbooks.each do |cookbook| %>
