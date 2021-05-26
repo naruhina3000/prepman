@@ -4,7 +4,7 @@ require 'pry-byebug'
 
 # Ingredient.destroy_all
 # Utensil.destroy_all
-# User.destroy_all
+User.destroy_all
 
 
 # url = "https://raw.githubusercontent.com/ek/foodhackathon/master/canyoucookme/public/ingredient-list.json"
@@ -15,22 +15,22 @@ require 'pry-byebug'
 # end
 
 
-Utensil.create(name: "Mixer")
-Utensil.create(name: "Frying Pan")
-Utensil.create(name: "Saucepan")
-Utensil.create(name: "Stock Pot")
-Utensil.create(name: "Sheet Pans")
-Utensil.create(name: "Knives")
-Utensil.create(name: "Weighing Scale")
-Utensil.create(name: "Peeler")
-Utensil.create(name: "Tongs")
-Utensil.create(name: "Whisk")
-Utensil.create(name: "Cutting BOard")
-Utensil.create(name: "Colander")
-Utensil.create(name: "Grater")
+# Utensil.create(name: "Mixer")
+# Utensil.create(name: "Frying Pan")
+# Utensil.create(name: "Saucepan")
+# Utensil.create(name: "Stock Pot")
+# Utensil.create(name: "Sheet Pans")
+# Utensil.create(name: "Knives")
+# Utensil.create(name: "Weighing Scale")
+# Utensil.create(name: "Peeler")
+# Utensil.create(name: "Tongs")
+# Utensil.create(name: "Whisk")
+# Utensil.create(name: "Cutting BOard")
+# Utensil.create(name: "Colander")
+# Utensil.create(name: "Grater")
 
 
-10.times do
+20.times do
     user = User.create!(
         email: Faker::Internet.email,
         username: Faker::Internet.username,
@@ -55,6 +55,7 @@ Utensil.create(name: "Grater")
         cuisine: Recipe::CUISINE.sample,
         occasion: Recipe::OCCASION.sample,
         calories: rand(50..1000),
+        status: "published",
         protein: rand(5..100),
         fat: rand(5..100),
         carb: rand(5..100),
@@ -73,7 +74,7 @@ Utensil.create(name: "Grater")
           ingredient: Ingredient.all.sample,
           recipe: recipe,
           quantity: rand(0..500),
-          unit: Faker::Food.metric_measurement
+          unit: ["gr", "ml", "unit"].sample,
         )
     end
     if [true, false].sample

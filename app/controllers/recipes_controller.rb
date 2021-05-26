@@ -41,7 +41,11 @@ class RecipesController < ApplicationController
 
 
   def add_to_shopping_list
-    @shopping_list = ShoppingList.find(params[:list])
+    if params[:new_list].present?
+      @shopping_list = ShoppingList.create(title: params[:new_list], user:current_user)
+    else
+      @shopping_list = ShoppingList.find(params[:list])
+    end
     @recipe.recipe_ingredients.each do |recipe_ingredient|
       ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: recipe_ingredient.quantity, unit: recipe_ingredient.unit)
     end
