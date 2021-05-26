@@ -5,7 +5,7 @@ class FavoritesController < ApplicationController
     @favorite.recipe = @recipe
     @favorite.user = current_user
     @favorite.save
-    redirect_to request.referer
+    redirect_to recipes_path(anchor: "recipe-#{@recipe.id}")
   end
 
   def destroy

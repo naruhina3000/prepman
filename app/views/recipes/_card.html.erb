@@ -1,4 +1,4 @@
-  <div class="card m-0">
+  <div class="card m-0" id="recipe-<%= recipe.id %>">
       <div class="card border-0" style="width: 100%; height: 100%">
           <% if recipe.photo.attached? %>
           <%= cl_image_tag recipe.photo.key, class: "card-img-top" %>
