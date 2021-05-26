@@ -79,17 +79,24 @@
                 <%= f.submit "Add", class: "btn btn-primary" %>
               </div>
             </div>
-
-
-
-
-
-
-
-
           <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Button cook dish -->
+<%= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
+
+<% if current_user %>
+  <% if current_user.has_favorite?(recipe) %>
+    <%= link_to favorite_path(current_user.has_favorite?(recipe)), method: :delete, class:"bookmark", remote: true do %>
+      <%= image_tag("bookmark-solid.svg", alt: "current-favorite") %>
+    <% end %>
+  <% else %>
+    <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
+      <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+    <% end %>
+  <% end %>
+<% end %>
