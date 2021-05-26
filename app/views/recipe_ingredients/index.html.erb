@@ -9,13 +9,13 @@
                         <p><%= recipe_ingredient.unit %></p>
                         <p><%= recipe_ingredient.ingredient.name %></p>
                         </div>
-                    </div> 
+                    </div>
                 </div>
-            </div> 
-        <% end %> 
+            </div>
+        <% end %>
     </div>
 </div>
-            
+
 
 <!-- Button trigger modal -->
 <%#= link_to "Back to recipe specs", ... route to edit ... , class: "btn btn-warning" %>
@@ -39,7 +39,7 @@
             <%= simple_form_for [@recipe, @recipe_ingredient] do |f| %>
             <%= f.input :quantity %>
             <%= f.input :unit %>
-            <%= render "ingredients/autocomplete" %>
+            <%= render "ingredients/autocomplete", model_name: 'recipe_ingredient' %>
             <%= f.submit "Add Ingredient", class:"btn btn-primary" %>
           <% end %>
       </div>
