@@ -21,6 +21,11 @@ class User < ApplicationRecord
     Favorite.find_by(user: self, recipe: recipe)
   end
 
+  def has_cooked_recipe?(recipe)
+    # self.favorites.pluck(:kitchen_id).include? kitchen.id
+    CookedRecipe.find_by(user: self, recipe: recipe)
+  end
+
 end
 
 

@@ -87,17 +87,20 @@
                 <%= f.submit "Add", class: "btn btn-primary" %>
               </div>
             </div>
-
-
-
-
-
-
-
-
           <% end %>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Button cook dish -->
+<%#= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
+
+<% if current_user %>
+  <% if current_user.has_cooked_recipe?(@recipe) %>
+    <%= link_to "Recipe Cooked", cooked_recipe_path(current_user.has_cooked_recipe?(@recipe)), method: :delete, class: "btn btn-info" %>
+  <% else %>
+    <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
+  <% end %>
+<% end %>
