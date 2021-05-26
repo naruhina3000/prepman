@@ -1,10 +1,10 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_shopping_list]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_shopping_list, :publish]
 
   def index
-    @recipes = Recipe.all
-    # @recipes = Recipe.where(category: "published")
+    # @recipes = Recipe.all
+    @recipes = Recipe.where(status: "published")
   end
 
   def show
@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
 
   def update
     if @recipe.update(recipe_params)
+       @recipe.update(status: "draft")
       redirect_to recipe_recipe_ingredients_path(@recipe)
     else
       render "edit"
@@ -57,6 +58,12 @@ class RecipesController < ApplicationController
     redirect_to request.referer
     flash[:success] = "All the ingredients have been added to your shopping list"
   end
+
+  def publish
+    @recipe.update(status: "published")
+    redirect_to request.referer
+  end
+
 
   private
 
