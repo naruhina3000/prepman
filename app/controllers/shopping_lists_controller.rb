@@ -7,7 +7,6 @@ class ShoppingListsController < ApplicationController
   # end
 
 
-
   def index
     @shopping_lists = current_user.shopping_lists
     @shopping_list = ShoppingList.new
@@ -19,10 +18,12 @@ class ShoppingListsController < ApplicationController
 
   def show
     @shopping_lists = current_user.shopping_lists
+    @shopping_list_ingredient = ShoppingListIngredient.new
+    @shopping_list_ingredients = @shopping_list.shopping_list_ingredients
   end
 
 
-def create
+  def create
     @shopping_list = ShoppingList.new(shopping_list_params)
     @shopping_list.user = current_user
     if @shopping_list.save

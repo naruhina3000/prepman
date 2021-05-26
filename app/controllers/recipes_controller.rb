@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_shopping_list]
 
   def index
     @recipes = Recipe.all
@@ -8,6 +8,7 @@ class RecipesController < ApplicationController
 
   def show
     @planner = Planner.new
+    @shopping_list = ShoppingList.new
   end
 
   def update
@@ -36,6 +37,16 @@ class RecipesController < ApplicationController
     @recipe.photos.purge
     @recipe.destroy
     redirect_to user_path(current_user)
+  end
+
+
+  def add_to_shopping_list
+    @shopping_list = ShoppingList.find(params[:list])
+    @recipe.recipe_ingredients.each do |recipe_ingredient|
+      ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: recipe_ingredient.quantity, unit: recipe_ingredient.unit)
+    end
+    redirect_to request.referer
+    flash[:success] = "All the ingredients have been added to your shopping list"
   end
 
   private

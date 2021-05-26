@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   root to: 'recipes#index'
 
   resources :recipes do
+    member do
+      post :add_to_shopping_list
+    end
     resources :recipe_ingredients, only: [:index, :create, :update]
     resources :recipe_utensils, only: [:index, :create, :update]
     resources :steps, only: [:index, :new, :create, :edit, :update]
@@ -15,8 +18,9 @@ Rails.application.routes.draw do
   resources :planners, only: [:index, :create, :destroy]
 
   resources :shopping_lists, only: [:index, :new, :create, :show, :destroy] do
-    resources :shopping_list_ingredients, only: [:create, :destroy]
+    resources :shopping_list_ingredients, only: [:create]
   end
+  resources :shopping_list_ingredients, only: [:destroy]
 
   resources :favorites, only: [:destroy]
   resources :cooked_recipe, only: [:destroy]
