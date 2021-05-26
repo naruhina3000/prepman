@@ -8,7 +8,13 @@ class RecipeIngredientsController < ApplicationController
     end
     
     def create
-
+        @recipe_ingredient = RecipeIngredient.new(recipe_ingredient_params)
+        @recipe_ingredient.recipe = @recipe
+        if @recipe_ingredient.save
+            redirect_to recipe_recipe_ingredients_path(@recipe)
+        else
+         render "recipe_ingredients/index"
+        end
     end
     
     def edit
@@ -21,7 +27,7 @@ class RecipeIngredientsController < ApplicationController
     def destroy
         @recipe_ingredient = RecipeIngredient.find(params[:id])
         @recipe_ingredient.destroy
-        redirect_to @recipe_ingredient.recipe
+        redirect_to request.referer
     end
 
     private
@@ -35,6 +41,6 @@ class RecipeIngredientsController < ApplicationController
     end
 
     def recipe_ingredient_params
-        params.require(:recipe_ingredient).permit(:quantity, :unit)
+        params.require(:recipe_ingredient).permit(:quantity, :unit, :ingredient_id)
     end
 end
