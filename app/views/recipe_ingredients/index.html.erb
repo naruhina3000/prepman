@@ -8,26 +8,29 @@
                         <p><%= recipe_ingredient.quantity%></p>
                         <p><%= recipe_ingredient.unit %></p>
                         <p><%= recipe_ingredient.ingredient.name %></p>
+                        </div>
                     </div> 
                 </div>
             </div> 
         <% end %> 
     </div>
 </div>
+            
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+<%#= link_to "Back to recipe specs", ... route to edit ... , class: "btn btn-warning" %>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ingredientModal">
   Add Ingredient
 </button>
 
 <%= link_to "Add Utensils", recipe_recipe_utensils_path(@recipe), class: "btn btn-warning" %>
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="ingredientModal" tabindex="-1" role="dialog" aria-labelledby="ingredientModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add ingredient</h5>
+        <h5 class="modal-title" id="ingredientModalLabel">Add ingredient</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -36,7 +39,7 @@
             <%= simple_form_for [@recipe, @recipe_ingredient] do |f| %>
             <%= f.input :quantity %>
             <%= f.input :unit %>
-            <%= f.association :ingredient, input_html: { class: 'select2' } %>
+            <%= render "ingredients/autocomplete" %>
             <%= f.submit "Add Ingredient", class:"btn btn-primary" %>
           <% end %>
       </div>

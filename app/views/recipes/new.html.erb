@@ -14,13 +14,13 @@
             <%= f.input :diet, collection: Recipe::DIET, input_html: { class: 'select2' } %>
             <%= f.input :dish_type, collection: Recipe::DISHTYPE, input_html: { class: 'select2' } %>
             <%= f.input :cuisine, collection: Recipe::CUISINE, input_html: { class: 'select2' } %>
-            <%= f.input :occasion, collection: Recipe::OCCASION, input_html: { class: 'select2' }%>
+            <%= f.input :occasion, collection: Recipe::OCCASION, input_html: { class: 'select2' } %>
             <%= f.input :calories %>
             <%= f.input :protein %>
             <%= f.input :fat %>
             <%= f.input :carb %>
             <%= f.input :photo, as: :file %>
-            <%= f.submit "Add steps", class:"btn btn-primary" %>
+            <%= f.submit "Add ingredients", class:"btn btn-primary" %>
           <% end %>
       </div>
       <hr>
