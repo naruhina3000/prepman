@@ -8,6 +8,7 @@
                         <p><%= recipe_utensil.quantity%></p>
                         <p><%= recipe_utensil.utensil.name %></p>
                         </div> 
+                      <%= link_to "Delete Utensil", recipe_utensil_path(recipe_utensil), class: "btn btn-danger", method: :delete %>
                     </div> 
                 </div>
             </div> 
