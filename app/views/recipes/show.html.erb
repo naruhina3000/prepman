@@ -1,6 +1,14 @@
 <h1><%= @recipe.title %></h1>
 
+<% if @recipe.status == "draft" %>
+  <p class= "btn btn-danger"><%= @recipe.status %></p>
+  <%= link_to "publish recipe", publish_recipe_path(@recipe), class: "btn btn-info mt-2", method: :patch %>
+  <% else %>
+  <p class= "btn btn-success"><%= @recipe.status %></p>
+<% end %>
+<br>
 
+<%= link_to "Update Recipe", edit_recipe_path(@recipe), class: "btn btn-info" %>
 
 
 <!-- Button trigger modal -->
