@@ -13,10 +13,15 @@
   <% end %>
 
   <h3>Likes</h3>
-  <% @likes.each do |recipe| %>
-    <%= recipe.title %>
-    <hr>
-  <% end %>
+  <div class="row my-5">
+    <% @favorites.each do |favorite| %>
+      <div class="col-md-4 py-2">
+          <%= render 'recipes/card', recipe: favorite.recipe, current_user: user_signed_in? ? current_user : nil %>
+      </div>
+    <% end %>
+  </div>
+
+  <hr>
 
   <h3>My Recipes</h3>
   <% @recipes.each do |recipe| %>
