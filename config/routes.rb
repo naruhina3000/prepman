@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     resources :shopping_list_ingredients, only: [:create]
   end
   resources :shopping_list_ingredients, only: [:destroy]
+
+  resources :cookbooks, only: [:index, :new, :create, :show, :destroy]
+
   resources :recipe_ingredients, only: [:destroy]
   resources :recipe_utensils, only: [:destroy]
   resources :steps, only: [:destroy]

@@ -1,6 +1,5 @@
 require 'open-uri'
 require 'json'
-require 'pry-byebug'
 
 # Ingredient.destroy_all
 # Utensil.destroy_all
