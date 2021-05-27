@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
-  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_shopping_list, :publish]
+  before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_shopping_list, :add_to_cookbook, :publish]
 
   def index
     # @recipes = Recipe.all
@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
   def show
     @planner = Planner.new
     @shopping_list = ShoppingList.new
+    @cookbook = Cookbook.new
     @review = Review.new
     @user = @recipe.user
   end
@@ -70,7 +71,7 @@ class RecipesController < ApplicationController
     else
       @cookbook = Cookbook.find(params[:cookbook_list])
     end
-    CookbookRecipe.create(cookbook_id: @cookbook, recipe_id: @recipe)
+    CookbookRecipe.create(cookbook: @cookbook, recipe: @recipe)
     redirect_to request.referer
     flash[:success] = "Your recipe was added to your #{@cookbook.title}"
   end

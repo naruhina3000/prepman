@@ -5,3 +5,14 @@
     <%= link_to "Find your recipe", recipes_path, class: "btn btn-info"%>
 <% end %>
 
+<div class="container-fluid">
+<h1>Recipes</h1>
+    <div class="row my-5">
+        <%  @cookbook_recipes.each do |crecipe| %>
+            <div class="col-md-6 py-2">
+              <%= render 'recipes/card', recipe: crecipe.recipe, current_user: user_signed_in? ? current_user : nil %>
+            </div>
+        <% end %>
+    </div>
+</div>
+

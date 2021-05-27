@@ -8,6 +8,7 @@ class CookbooksController < ApplicationController
   
     def show
       @user = @cookbook.user
+      @cookbook_recipes = @cookbook.cookbook_recipes
     end
   
     def create
