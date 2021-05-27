@@ -52,7 +52,7 @@
 <!-- Button trigger modal -->
 <% if current_user == @user %>
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cookbookModal">
-  Cookbook
+  Create Cookbook
 </button>
 <% end %>
 
@@ -71,7 +71,7 @@
       <div class="modal-body">
         <%= simple_form_for @cookbook do |f| %>
           <%= f.input :title %>
-          <%= f.input :public %>
+          <%= f.input :status, collection: Cookbook::STATUS %>
           <%= f.submit "Create" %>
         <% end %>
       </div>
@@ -81,13 +81,17 @@
 
 
 
-
+<% if current_user == @user %>
   <% @cookbooks.each do |cookbook| %>
     <%= cookbook.title %>
     <%= link_to "see cookbook", cookbook_path(cookbook) %>
-    <% if current_user == @user %>
     <%= link_to "x", cookbook_path(cookbook), method: :delete %>
-    <% end %>
     <hr>
   <% end %>
+  <% else %>
+  <% @public_cookbooks.each do |pcookbook| %>
+    <%= pcookbook.title %>
+    <%= link_to "see cookbook", cookbook_path(pcookbook) %>
+  <% end %>
+<% end %>
 

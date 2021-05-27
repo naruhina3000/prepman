@@ -1,9 +1,16 @@
 <h1><%= @cookbook.title %> </h1>
 
-
 <% if current_user == @user %>
-    <%= link_to "Find your recipe", recipes_path, class: "btn btn-info"%>
+<%= link_to "Find your recipe", recipes_path, class: "btn btn-info"%>
+    <% if @cookbook.status == "private" %>
+      <p class= "btn btn-danger"><%= @cookbook.status %></p>
+      <%= link_to "publish cookbook", publish_cookbook_path(@cookbook), class: "btn btn-info mt-2", method: :patch %>
+      <% else %>
+      <p class= "btn btn-success"><%= @cookbook.status %></p>
+    <% end %>
+    <%= link_to "Update Cookbook", edit_cookbook_path(@cookbook), class: "btn btn-info" %>
 <% end %>
+<br>
 
 <div class="container-fluid">
 <h1>Recipes</h1>
