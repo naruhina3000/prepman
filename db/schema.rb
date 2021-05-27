@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_26_043816) do
+ActiveRecord::Schema.define(version: 2021_05_27_130329) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,10 +74,10 @@ ActiveRecord::Schema.define(version: 2021_05_26_043816) do
 
   create_table "followed_cookbooks", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "cookbook_recipe_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["cookbook_recipe_id"], name: "index_followed_cookbooks_on_cookbook_recipe_id"
+    t.bigint "cookbook_id", null: false
+    t.index ["cookbook_id"], name: "index_followed_cookbooks_on_cookbook_id"
     t.index ["user_id"], name: "index_followed_cookbooks_on_user_id"
   end
 
@@ -212,7 +212,7 @@ ActiveRecord::Schema.define(version: 2021_05_26_043816) do
   add_foreign_key "cooked_recipes", "users"
   add_foreign_key "favorites", "recipes"
   add_foreign_key "favorites", "users"
-  add_foreign_key "followed_cookbooks", "cookbook_recipes"
+  add_foreign_key "followed_cookbooks", "cookbooks"
   add_foreign_key "followed_cookbooks", "users"
   add_foreign_key "planners", "recipes"
   add_foreign_key "planners", "users"
