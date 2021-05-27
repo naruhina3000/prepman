@@ -62,7 +62,7 @@
           <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
             <%= recipe_ingredient.ingredient.name %>,
           <% end %>
-          <%= simple_form_for :recipe, url: add_to_shopping_list_recipe_path, method: :post do |f| %>
+          <%= simple_form_for :recipe, url: add_to_shopping_list_recipe_path(@recipe), method: :post do |f| %>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
               <li class="nav-item" role="presentation">
                 <a class="nav-link active" id="add-list-tab" data-toggle="pill" href="#add-list" role="tab" aria-controls="add-list" aria-selected="true">Home</a>
@@ -104,3 +104,38 @@
     <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
   <% end %>
 <% end %>
+
+
+  <div class="container-fluid">
+    <div class="row justify-content-around" style="margin-bottom: 30px">
+      <div class="col pt-3" style="height: 160px">
+          <div class="d-flex justify-content-between pr-8">
+            <h4 class="my-auto">Reviews</h4>
+            <span class="my-auto my-0"><%= @recipe.reviews.count %> reviews | Average Rating: <%= @recipe.average_rating %> <i class="fas fa-star"></i></span>
+          </div>
+
+            <br>
+            <% @recipe.reviews.each do |review| %>
+              <p><strong>Rating: </strong>
+                <% (review.rating).times do %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+                <% (5 - review.rating).times do %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              </p>
+              <p><strong>Review: </strong><%= review.content %> </p>
+              <div class="short-line"></div>
+            <% end %>
+      </div>
+      <div class="card-text">
+        <h4>Review</h4>
+        <%= simple_form_for [ @recipe, @review ] do |f| %>
+          <%= f.input :rating, collection: Review::RATING %>
+          <%= f.input :content %>
+          <%= f.submit "Review" %>
+        <% end %>
+      </p>
+
+    </div>
+  </div>
