@@ -10,6 +10,7 @@ class RecipesController < ApplicationController
   def show
     @planner = Planner.new
     @shopping_list = ShoppingList.new
+    @review = Review.new
   end
 
   def update
