@@ -18,6 +18,7 @@
         <%  @cookbook_recipes.each do |crecipe| %>
             <div class="col-md-6 py-2">
               <%= render 'recipes/card', recipe: crecipe.recipe, current_user: user_signed_in? ? current_user : nil %>
+              <%= link_to "Delete from cookbook", cookbook_recipe_path(crecipe.id), class: "btn btn-danger", method: :delete %>
             </div>
         <% end %>
     </div>
