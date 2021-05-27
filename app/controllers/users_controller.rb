@@ -9,6 +9,7 @@ class UsersController < ApplicationController
       @favorites = Favorite.where(user: @user)
       @recipes = Recipe.where(user: @user)
       @cookbooks = Cookbook.where(user: @user)
+      @cookbook = Cookbook.new
     end
 
     def edit

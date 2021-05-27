@@ -1,6 +1,6 @@
 class FollowedCookbook < ApplicationRecord
   belongs_to :user
-  belongs_to :cookbook_recipe
+  belongs_to :cookbook
 
-  validates :cookbook_recipe, uniqueness: { scope: :user }
+  validates :cookbook, uniqueness: { scope: :user }
 end
