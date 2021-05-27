@@ -1,9 +1,12 @@
+<div class="container-fluid">
+
 <h1>Hello</h1>
+<%= link_to "Log out", destroy_user_session_path, method: :delete %>
 
  <h3>Followed Cookbooks</h3>
   <% @followed_cookbook.each do |cookbook| %>
     <%= cookbook.title %>
-    <hr>
+    <!-- <hr> -->
   <% end %>
 
   <h3>Made Dishes</h3>
@@ -23,6 +26,7 @@
     <% end %>
   </div>
 
+
   <h3>Likes</h3>
   <div class="row my-5">
     <% @favorites.each do |favorite| %>
@@ -32,7 +36,7 @@
     <% end %>
   </div>
 
-  <hr>
+  <!-- <hr> -->
 
   <h3>My Recipes</h3>
   <div class="row my-5">
@@ -44,11 +48,11 @@
       </div>
     <% end %>
   </div>
-  <hr>
-
+<!--   <hr>
+ -->
   <h3>My Cookbooks</h3>
   <% @cookbooks.each do |cookbook| %>
     <%= cookbook.title %>
-    <hr>
+    <!-- <hr> -->
   <% end %>
-
+</div>
