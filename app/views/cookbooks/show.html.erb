@@ -12,6 +12,14 @@
 <% end %>
 <br>
 
+<% if current_user %>
+  <% if current_user.has_followed_cookbook?(@cookbook) %>
+    <%= link_to "Followed", followed_cookbook_path(current_user.has_followed_cookbook?(@cookbook)), method: :delete, class: "btn btn-info" %>
+  <% else %>
+    <%= link_to "Follow", cookbook_followed_cookbooks_path(@cookbook), method: :post, class: "btn btn-primary" %>
+  <% end %>
+<% end %>
+
 <div class="container-fluid">
 <h1>Recipes</h1>
     <div class="row my-5">

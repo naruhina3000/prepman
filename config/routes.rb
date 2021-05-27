@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       patch :publish
     end
     resources :cookbook_recipe, only: [:create]
+    resources :followed_cookbooks, only: [:create]
   end
 
   resources :recipe_ingredients, only: [:destroy]
@@ -38,6 +39,7 @@ Rails.application.routes.draw do
   resources :favorites, only: [:destroy]
   resources :cooked_recipe, only: [:destroy]
   resources :cookbook_recipes, only: [:destroy]
+  resources :followed_cookbooks, only: [:destroy]
   resources :ingredients
   get "/users/:id", to: "users#show", as: :user
   get "/users/:id/edit", to: "users#edit", as: :user_edit
