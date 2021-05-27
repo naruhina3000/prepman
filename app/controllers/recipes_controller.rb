@@ -11,6 +11,7 @@ class RecipesController < ApplicationController
     @planner = Planner.new
     @shopping_list = ShoppingList.new
     @review = Review.new
+    @user = @recipe.user
   end
 
   def update
@@ -60,6 +61,18 @@ class RecipesController < ApplicationController
     end
     redirect_to request.referer
     flash[:success] = "All the ingredients have been added to your shopping list"
+  end
+
+
+  def add_to_cookbook
+    if params[:new_cookbook_list].present?
+      @cookbook = Cookbook.create(title: params[:new_cookbook_list], user:current_user)
+    else
+      @cookbook = Cookbook.find(params[:cookbook_list])
+    end
+    CookbookRecipe.create(cookbook_id: @cookbook, recipe_id: @recipe)
+    redirect_to request.referer
+    flash[:success] = "Your recipe was added to your #{@cookbook.title}"
   end
 
   def publish

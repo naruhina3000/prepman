@@ -1,0 +1,7 @@
+<h1><%= @cookbook.title %> </h1>
+
+
+<% if current_user == @user %>
+    <%= link_to "Find your recipe", recipes_path, class: "btn btn-info"%>
+<% end %>
+

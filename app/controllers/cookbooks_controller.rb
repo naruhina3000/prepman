@@ -1,25 +1,14 @@
 class CookbooksController < ApplicationController
-
     before_action :set_cookbook, only: [:show, :destroy]
-
-
-    # resources :cookbook, only: [:index, :create, :show, :destroy] do
-    #   resources :cookbook_ingredients, only: [:create, :destroy]
-    # end
-  
   
     def index
       @cookbooks = current_user.cookbooks
       @cookbook = Cookbook.new
     end
   
-    def new
-      @cookbook = Cookbook.new
-    end
-  
     def show
+      @user = @cookbook.user
     end
-  
   
     def create
       @cookbook = Cookbook.new(cookbook_params)

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :recipes do
     member do
       post :add_to_shopping_list
+      post :add_to_cookbook
       patch :publish
     end
     resources :recipe_ingredients, only: [:index, :create]
@@ -13,7 +14,6 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create]
     resources :favorites, only: [:create]
     resources :cooked_recipe, only: [:create]
-    resources :cookbook_recipe, only: [:create]
   end
   resources :steps, only: [:update, :edit]
 
@@ -24,7 +24,9 @@ Rails.application.routes.draw do
   end
   resources :shopping_list_ingredients, only: [:destroy]
 
-  resources :cookbooks, only: [:index, :new, :create, :show, :destroy]
+  resources :cookbooks, only: [:index, :new, :create, :show, :destroy] do
+    resources :cookbook_recipe, only: [:create]
+  end
 
   resources :recipe_ingredients, only: [:destroy]
   resources :recipe_utensils, only: [:destroy]
