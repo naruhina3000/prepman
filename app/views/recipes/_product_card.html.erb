@@ -1,0 +1,11 @@
+<div class="card-product" id="recipe-<%= recipe.id %>">
+    <% if recipe.photo.attached? %>
+        <%= cl_image_tag recipe.photo.key %>
+    <% else %>
+        <%= image_tag "placeholder_recipe.jpg" %>
+    <% end %>
+  <div class="card-product-infos">
+    <h2><%= link_to "#{recipe.title}", recipe_path(recipe) %></h2>
+    <p><%= recipe.description%></p>
+  </div>
+</div>

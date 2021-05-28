@@ -1,3 +1,4 @@
+
   <!-- Button trigger modal -->
 
   <div class="navbar navbar-expand-lg navbar-light navbar-lewagon sticky-top bg-light">
@@ -101,14 +102,11 @@
 
 <!-- Recipes index -->
 
-<div class="container-fluid">
-  <div class="row mb-4">
-      <% @recipes.each do |recipe| %>
-          <div class="col-md-6 py-2">
-            <%= render 'card', recipe: recipe, current_user: user_signed_in? ? current_user : nil %>
-          </div>
-      <% end %>
-  </div>
-  <br>
-  <br>
+    <div class="row my-5">
+        <% @recipes.each do |recipe| %>
+            <div class="col-md-6 py-2">
+              <%= render 'card', recipe: recipe, current_user: user_signed_in? ? current_user : nil %>
+            </div>
+        <% end %>
+    </div>
 </div>

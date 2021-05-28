@@ -30,5 +30,57 @@
             <% end %>
           <% end %>
           <%= yield %>
+          <% case %>
+          <% when recipe.diet == "Vegan" %>
+          <%= image_tag "vegan.svg", class: "diet-logo" %>
+          <% when recipe.diet == "Vegetarian" %>
+          <%= image_tag "vegetarian.svg", class: "diet-logo" %>
+          <% when recipe.diet == "Pescetarian" %>
+          <%= image_tag "pescetarian.svg", class: "diet-logo" %>
+          <% when recipe.diet == "I eat everything" %>
+          <%= image_tag "meat.svg", class: "diet-logo" %>
+          <% when recipe.diet == "Lactose-free" %>
+          <%= image_tag "lactose-free.svg", class: "diet-logo" %>
+          <% else recipe.diet == "Gluten-free" %>
+          <%= image_tag "gluten-free.svg", class: "diet-logo" %>
+          <% end %> 
+
+          <p><%= image_tag "clock.svg", class: "diet-logo" %>
+          
+          <% if recipe.total_time < 60 %>
+              ~<%= recipe.total_time %> min
+          <% else %>
+              ~<%= (recipe.total_time.to_f/60).floor %> h
+              <%= (((recipe.total_time.to_f/60)-(recipe.total_time.to_f/60).floor)*60).floor %> min
+          <% end %>
+          </p>
+        
+          <p>Recipe by 
+            <% if recipe.user.username.blank? %>
+              <%= link_to "Hero with no name", user_path(recipe.user) %>
+            <% else %>
+              <%= link_to "#{recipe.user.username}", user_path(recipe.user) %>
+            <% end %>
+
+            <% if recipe.user.photo.attached? %>
+              <%= cl_image_tag recipe.user.photo.key, class:"avatar" %>
+            <% else %>
+              <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+          <% end %>
+
+          </p>  
+
+          <p>Likes: <%= recipe.favorites.count %></p>
+
+
+          <% if recipe.difficulty == "easy" %>
+          <p>🦸<%= recipe.difficulty %></p>
+          <% elsif recipe.difficulty == "medium" %>
+          <p>🦸🦸<%= recipe.difficulty %></p>
+          <% else %>
+          <p>🦸🦸🦸<%= recipe.difficulty %></p>
+          <% end %>
+
+
       </div>
   </div>
