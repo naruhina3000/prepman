@@ -17,7 +17,7 @@ class Recipe < ApplicationRecord
   has_many :cooked_recipes
 
   DIFFICULTY = ["easy", "medium", "hard"]
-  DIET = ["Vegan", "Vegeterian", "Pescetarian", "I eat everything", "Gluten-free", "Lactose-free"]
+  DIET = ["Vegan", "Vegetarian", "Pescetarian", "I eat everything", "Gluten-free", "Lactose-free"]
   DISHTYPE = ["Starter", "Main", "Dessert", "Beverages", "Snacks", "Breakfast", "Side Dish"]
   CUISINE = ["Chinese", "Italian", "European", "American", "Iberian", "Indian", "Middle Eastern", "Japanese", "Korean", "Mexican", "Indonesian", "Others"]
   OCCASION = ["All Day Recipes", "Weeknight", "Prepare ahead", "Crowd Pleaser", "On the go", "Comfort Food", "Kid-friendly", "Finger food", "BBQ", "Christmas", "Easter", "Valentines Day", "Thanksgiving", "Halloween", "October Fest"]
@@ -31,11 +31,15 @@ class Recipe < ApplicationRecord
   validates :occasion, inclusion: { in: OCCASION }
   validates :status, inclusion: { in: STATUS }
 
-  # validate :total_time
+  # validate :time
 
+
+  def time
+    (self.prep_time + self.bake_time ) > 0
+  end
 
   def total_time
-    (self.prep_time + self.bake_time) > 0
+    self.prep_time + self.bake_time + self.resting_time
   end
 
 
