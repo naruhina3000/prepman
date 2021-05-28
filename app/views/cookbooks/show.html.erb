@@ -1,8 +1,23 @@
 <h1><%= @cookbook.title %> </h1>
 
-
 <% if current_user == @user %>
-    <%= link_to "Find your recipe", recipes_path, class: "btn btn-info"%>
+<%= link_to "Find your recipe", recipes_path, class: "btn btn-info"%>
+    <% if @cookbook.status == "private" %>
+      <p class= "btn btn-danger"><%= @cookbook.status %></p>
+      <%= link_to "publish cookbook", publish_cookbook_path(@cookbook), class: "btn btn-info mt-2", method: :patch %>
+      <% else %>
+      <p class= "btn btn-success"><%= @cookbook.status %></p>
+    <% end %>
+    <%= link_to "Update Cookbook", edit_cookbook_path(@cookbook), class: "btn btn-info" %>
+<% end %>
+<br>
+
+<% if current_user %>
+  <% if current_user.has_followed_cookbook?(@cookbook) %>
+    <%= link_to "Followed", followed_cookbook_path(current_user.has_followed_cookbook?(@cookbook)), method: :delete, class: "btn btn-info" %>
+  <% else %>
+    <%= link_to "Follow", cookbook_followed_cookbooks_path(@cookbook), method: :post, class: "btn btn-primary" %>
+  <% end %>
 <% end %>
 
 <div class="container-fluid">
@@ -11,6 +26,7 @@
         <%  @cookbook_recipes.each do |crecipe| %>
             <div class="col-md-6 py-2">
               <%= render 'recipes/card', recipe: crecipe.recipe, current_user: user_signed_in? ? current_user : nil %>
+              <%= link_to "Delete from cookbook", cookbook_recipe_path(crecipe.id), class: "btn btn-danger", method: :delete %>
             </div>
         <% end %>
     </div>
