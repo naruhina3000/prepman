@@ -9,9 +9,9 @@ class User < ApplicationRecord
   has_many :cookbooks, dependent: :destroy
   has_many :shopping_lists, dependent: :destroy
   has_many :planners, dependent: :destroy
-  has_many :cooked_recipes
-  has_many :followed_cookbooks
-  has_many :favorites
+  has_many :cooked_recipes, dependent: :destroy
+  has_many :followed_cookbooks, dependent: :destroy
+  has_many :favorites, dependent: :destroy
   has_many :reviews
 
   # validates :username, presence: true, uniqueness: true
