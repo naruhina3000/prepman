@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     def show
       @user = User.find(params[:id])
       # @followed_cookbooks = Followed_cookbooks.joins(:cookbook_recipes.where(cookbook_recipesuser: @user)
-      @followed_cookbook = FollowedCookbook.where(user: @user)
+      @followed_cookbooks = FollowedCookbook.where(user: @user)
       @cooked_recipes = CookedRecipe.where(user: @user)
       @favorites = Favorite.where(user: @user)
       @recipes = Recipe.where(user: @user)
