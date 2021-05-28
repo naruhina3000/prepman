@@ -29,59 +29,65 @@
                   placeholder: "Find a Recipe"
                 %>
                 <!-- other filter items -->
-                <div class="container search">
-                  <div class="row justify-content-evenly">
+                <div class="container-fluid px-0">
+                  <div class="row justify-content-evenly mx-0">
 
-                    <div class="col border-right">
-
-                  <!--     <div class="wrapper">
-                        <p><strong>Diet</strong></p>
-                        <%# Recipe::DIET.each  %>
-                      </div> -->
-
-
-               <!--      <div class="search-form-control form-group m-0">
-                      <label for="diet"><strong>Diet:</strong></label>
-                      <input id="diet" name="diet" step="1" type="number" placeholder="Min" value="<%= params[:minsize] %>" style="width: 80px">
-
-                      <input id="diet" type="radio" name="color" value="red"> Red <br>
-
-                    </div> -->
-
-                      <div class="wrapper">
-                        <p><strong>Dish Type</strong></p>
+                      <div class="filter my-2" style="width: 100%;">
+                        <p><strong>Diet:</strong></p>
+                        <% Recipe::DIET.each do |diet| %>
+                          <label for="<%= diet %>"><%= diet %></label>
+                          <input type="checkbox" value="<%= diet %>" id="<%= diet %>" name="diets[]">
+                        <% end %>
                       </div>
 
-                      <div class="wrapper">
-                        <p><strong>Cuisine</strong></p>
+                      <div class="filter my-2">
+                        <p><strong>Dishtype:</strong></p>
+                        <% Recipe::DISHTYPE.each do |dishtype| %>
+                          <label for="<%= dishtype %>"><%= dishtype %></label>
+                          <input type="checkbox" value="<%= dishtype %>" id="<%= dishtype %>" name="dishtypes[]">
+                        <% end %>
                       </div>
 
-                      <div class="wrapper">
-                        <p><strong>Occasion</strong></p>
+                      <div class="filter my-2">
+                        <p><strong>Cuisine:</strong></p>
+                        <% Recipe::CUISINE.each do |cuisine| %>
+                          <label for="<%= cuisine %>"><%= cuisine %></label>
+                          <input type="checkbox" value="<%= cuisine %>" id="<%= cuisine %>" name="cuisines[]">
+                        <% end %>
                       </div>
 
-                    </div>
+                      <div class="filter my-2">
+                        <p><strong>Occasion:</strong></p>
+                        <% Recipe::OCCASION.each do |occasion| %>
+                          <label for="<%= occasion %>"><%= occasion %></label>
+                          <input type="checkbox" value="<%= occasion %>" id="<%= occasion %>" name="occasions[]">
+                        <% end %>
+                      </div>
 
-
-                    <div class="col">
-
-                      <div class="wrapper">
+                      <div class="filter my-2">
                         <p><strong>Difficulty:</strong></p>
+                        <% Recipe::DIFFICULTY.each do |difficulty| %>
+                          <label for="<%= difficulty %>"><%= difficulty %></label>
+                          <input type="checkbox" value="<%= difficulty %>" id="<%= difficulty %>" name="difficulties[]">
+                        <% end %>
                       </div>
 
-                      <div class="wrapper">
-                        <p><strong>Total Time:</strong></p>
+                      <div class="filter my-2">
+                        <p><strong>Rating:</strong></p>
+                        <% Review::RATING.each do |rating| %>
+                          <label for="<%= rating %>"><%= rating %></label>
+                          <input type="checkbox" value="<%= rating %>" id="<%= rating %>" name="ratings[]">
+                        <% end %>
                       </div>
 
-                      <%= submit_tag "Search", class: "btn btn-primary search-btn" %>
+                 <!--    </div> -->
 
-                    </div>
-
-                  </div>
 
                 </div>
+                <%= submit_tag "Search", class: "btn btn-primary search-btn" %>
 
-                <!-- End of filter Items -->
+              </div>
+              <!-- End of filter Items -->
 
               </div>
             <% end %>
@@ -90,7 +96,6 @@
       </div>
     </div>
   </div>
-
 
 
 
@@ -104,4 +109,6 @@
           </div>
       <% end %>
   </div>
+  <br>
+  <br>
 </div>
