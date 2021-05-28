@@ -4,7 +4,11 @@ class RecipesController < ApplicationController
 
   def index
     # @recipes = Recipe.all
-    @recipes = Recipe.where(status: "published")
+    if params[:query].present?
+      @recipes = Recipe.where('title ILIKE ?', "%#{params[:query]}%")
+    else
+      @recipes = Recipe.where(status: "published")
+    end
   end
 
   def show

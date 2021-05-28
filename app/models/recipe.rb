@@ -22,6 +22,7 @@ class Recipe < ApplicationRecord
   CUISINE = ["Chinese", "Italian", "European", "American", "Iberian", "Indian", "Middle Eastern", "Japanese", "Korean", "Mexican", "Indonesian", "Others"]
   OCCASION = ["All Day Recipes", "Weeknight", "Prepare ahead", "Crowd Pleaser", "On the go", "Comfort Food", "Kid-friendly", "Finger food", "BBQ", "Christmas", "Easter", "Valentines Day", "Thanksgiving", "Halloween", "October Fest"]
   STATUS = ["draft", "published"]
+
   validates :title, presence: true
   validates :description, presence: true
   validates :difficulty, inclusion: { in: DIFFICULTY }

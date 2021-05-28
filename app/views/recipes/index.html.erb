@@ -1,10 +1,107 @@
-<div class="container-fluid">
-<h1>All Recipes</h1>
-    <div class="row my-5">
-        <% @recipes.each do |recipe| %>
-            <div class="col-md-6 py-2">
-              <%= render 'card', recipe: recipe, current_user: user_signed_in? ? current_user : nil %>
-            </div>
-        <% end %>
+  <!-- Button trigger modal -->
+
+  <div class="navbar navbar-expand-lg navbar-light navbar-lewagon sticky-top bg-light">
+    <div class="container-fluid h-40">
+      <%= link_to recipes_path, class:"menu-icons", data: {toggle: "modal", target: "#searchModal"} do %>
+        <%= image_tag("search.png", class:"search", alt: "Search") %>
+      <% end %>
     </div>
+  </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="searchLabel">Search:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id='search'>
+            <%= form_tag recipes_path, method: :get do %>
+              <div class="search-form-control form-group m-0" style="width: 100%">
+                <%= text_field_tag :query,
+                  params[:query],
+                  class: "form-control",
+                  placeholder: "Find a Recipe"
+                %>
+                <!-- other filter items -->
+                <div class="container search">
+                  <div class="row justify-content-evenly">
+
+                    <div class="col border-right">
+
+                  <!--     <div class="wrapper">
+                        <p><strong>Diet</strong></p>
+                        <%# Recipe::DIET.each  %>
+                      </div> -->
+
+
+               <!--      <div class="search-form-control form-group m-0">
+                      <label for="diet"><strong>Diet:</strong></label>
+                      <input id="diet" name="diet" step="1" type="number" placeholder="Min" value="<%= params[:minsize] %>" style="width: 80px">
+
+                      <input id="diet" type="radio" name="color" value="red"> Red <br>
+
+                    </div> -->
+
+                      <div class="wrapper">
+                        <p><strong>Dish Type</strong></p>
+                      </div>
+
+                      <div class="wrapper">
+                        <p><strong>Cuisine</strong></p>
+                      </div>
+
+                      <div class="wrapper">
+                        <p><strong>Occasion</strong></p>
+                      </div>
+
+                    </div>
+
+
+                    <div class="col">
+
+                      <div class="wrapper">
+                        <p><strong>Difficulty:</strong></p>
+                      </div>
+
+                      <div class="wrapper">
+                        <p><strong>Total Time:</strong></p>
+                      </div>
+
+                      <%= submit_tag "Search", class: "btn btn-primary search-btn" %>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+                <!-- End of filter Items -->
+
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- Recipes index -->
+
+<div class="container-fluid">
+  <div class="row mb-4">
+      <% @recipes.each do |recipe| %>
+          <div class="col-md-6 py-2">
+            <%= render 'card', recipe: recipe, current_user: user_signed_in? ? current_user : nil %>
+          </div>
+      <% end %>
+  </div>
 </div>
