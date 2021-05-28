@@ -5,7 +5,7 @@
           <% else %>
           <%= image_tag "placeholder_recipe.jpg", class: "card-img-top" %>
           <% end %>
-          <div class="card-body flex-grow-1 p-3">
+<!--           <div class="card-body transparent flex-grow-1 p-3">
               <%= link_to "#{recipe.title}", recipe, style: "color: black; font-size: x-large" %>
               <span><strong>ID: </strong><%= recipe.id %></span>
               <span><strong>Diet: </strong><%= recipe.diet %></span>
@@ -14,73 +14,88 @@
               <span><strong>Occasion: </strong><%= recipe.occasion %></span>
               <span><strong>Difficulty: </strong><%= recipe.difficulty %></span>
               <span><strong>Rating: </strong><%= recipe.average_rating %></span>
-          </div>
-          <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark" do %>
-            <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
-          <% end %>
-          <% if current_user %>
-            <% if current_user.has_favorite?(recipe) %>
-              <%= link_to favorite_path(current_user.has_favorite?(recipe)), method: :delete, class:"bookmark", remote: true do %>
-                <%= image_tag("bookmark-solid.svg", alt: "current-favorite") %>
-              <% end %>
-            <% else %>
-              <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
-                <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+          </div> -->
+
+            <p class="favorite-count"><strong><%= recipe.favorites.count %></strong></p>
+            <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark" do %>
+              <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+            <% end %>
+            <% if current_user %>
+              <% if current_user.has_favorite?(recipe) %>
+                <%= link_to favorite_path(current_user.has_favorite?(recipe)), method: :delete, class:"bookmark", remote: true do %>
+                  <%= image_tag("bookmark-solid.svg", alt: "current-favorite") %>
+                <% end %>
+              <% else %>
+                <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
+                  <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+                <% end %>
               <% end %>
             <% end %>
-          <% end %>
+
           <%= yield %>
-          <% case %>
-          <% when recipe.diet == "Vegan" %>
-          <%= image_tag "vegan.svg", class: "diet-logo" %>
-          <% when recipe.diet == "Vegetarian" %>
-          <%= image_tag "vegetarian.svg", class: "diet-logo" %>
-          <% when recipe.diet == "Pescetarian" %>
-          <%= image_tag "pescetarian.svg", class: "diet-logo" %>
-          <% when recipe.diet == "I eat everything" %>
-          <%= image_tag "meat.svg", class: "diet-logo" %>
-          <% when recipe.diet == "Lactose-free" %>
-          <%= image_tag "lactose-free.svg", class: "diet-logo" %>
-          <% else recipe.diet == "Gluten-free" %>
-          <%= image_tag "gluten-free.svg", class: "diet-logo" %>
-          <% end %> 
+          <div class="container-fluid transparent">
+            <div class="row" style="padding-left: 8px; padding-top: 6px;">
+              <%= link_to "#{recipe.title}", recipe, style: "color: black; font-size: x-large" %>
+            </div>
+            <div class="row recipe-info">
+              <% case %>
+              <% when recipe.diet == "Vegan" %>
+              <%= image_tag "vegan.svg", class: "diet-logo" %>
+              <% when recipe.diet == "Vegetarian" %>
+              <%= image_tag "vegetarian.svg", class: "diet-logo" %>
+              <% when recipe.diet == "Pescetarian" %>
+              <%= image_tag "pescetarian.svg", class: "diet-logo" %>
+              <% when recipe.diet == "I eat everything" %>
+              <%= image_tag "meat.svg", class: "diet-logo" %>
+              <% when recipe.diet == "Lactose-free" %>
+              <%= image_tag "lactose-free.svg", class: "diet-logo" %>
+              <% else recipe.diet == "Gluten-free" %>
+              <%= image_tag "gluten-free.svg", class: "diet-logo" %>
+              <% end %>
 
-          <p><%= image_tag "clock.svg", class: "diet-logo" %>
-          
-          <% if recipe.total_time < 60 %>
-              ~<%= recipe.total_time %> min
-          <% else %>
-              ~<%= (recipe.total_time.to_f/60).floor %> h
-              <%= (((recipe.total_time.to_f/60)-(recipe.total_time.to_f/60).floor)*60).floor %> min
-          <% end %>
-          </p>
-        
-          <p>Recipe by 
-            <% if recipe.user.username.blank? %>
-              <%= link_to "Hero with no name", user_path(recipe.user) %>
-            <% else %>
-              <%= link_to "#{recipe.user.username}", user_path(recipe.user) %>
-            <% end %>
+              <p class="m-0"><%= image_tag "clock.svg", class: "diet-logo" %>
 
-            <% if recipe.user.photo.attached? %>
-              <%= cl_image_tag recipe.user.photo.key, class:"avatar" %>
-            <% else %>
-              <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
-          <% end %>
-
-          </p>  
-
-          <p>Likes: <%= recipe.favorites.count %></p>
+              <% if recipe.total_time < 60 %>
+                  ~<%= recipe.total_time %> min
+              <% else %>
+                  ~<%= (recipe.total_time.to_f/60).floor %> h
+                  <%= (((recipe.total_time.to_f/60)-(recipe.total_time.to_f/60).floor)*60).floor %> min
+              <% end %>
+              </p>
 
 
-          <% if recipe.difficulty == "easy" %>
-          <p>🦸<%= recipe.difficulty %></p>
-          <% elsif recipe.difficulty == "medium" %>
-          <p>🦸🦸<%= recipe.difficulty %></p>
-          <% else %>
-          <p>🦸🦸🦸<%= recipe.difficulty %></p>
-          <% end %>
+              <% if recipe.difficulty == "easy" %>
+                <span>🦸<%= recipe.difficulty %></span>
+              <% elsif recipe.difficulty == "medium" %>
+                <span>🦸🦸<%= recipe.difficulty %></span>
+              <% else %>
+                <span>🦸🦸🦸<%= recipe.difficulty %></span>
+              <% end %>
 
+            </div>
+
+            <div class="row recipe-info">
+              <p class="m-0" style="padding-bottom: 2px;">Recipe by
+                <% if recipe.user.username.blank? %>
+                  <%= link_to "Hero with no name", user_path(recipe.user) %>
+                <% else %>
+                  <%= link_to "#{recipe.user.username}", user_path(recipe.user) %>
+                <% end %>
+
+                <% if recipe.user.photo.attached? %>
+                  <%= cl_image_tag recipe.user.photo.key, class:"avatar" %>
+                <% else %>
+                  <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+              <% end %>
+
+              </p>
+            </div>
+
+       <!--      <p>Likes: <%= recipe.favorites.count %></p> -->
+
+
+
+          </div>
 
       </div>
   </div>
