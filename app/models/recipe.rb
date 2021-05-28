@@ -17,11 +17,12 @@ class Recipe < ApplicationRecord
   has_many :cooked_recipes
 
   DIFFICULTY = ["easy", "medium", "hard"]
-  DIET = ["Vegan", "Vegeterian", "Pescetarian", "I eat everything", "Gluten-free", "Lactose-free"]
+  DIET = ["I eat everything", "Vegan", "Vegeterian", "Pescetarian", "Gluten-free", "Lactose-free"]
   DISHTYPE = ["Starter", "Main", "Dessert", "Beverages", "Snacks", "Breakfast", "Side Dish"]
   CUISINE = ["Chinese", "Italian", "European", "American", "Iberian", "Indian", "Middle Eastern", "Japanese", "Korean", "Mexican", "Indonesian", "Others"]
   OCCASION = ["All Day Recipes", "Weeknight", "Prepare ahead", "Crowd Pleaser", "On the go", "Comfort Food", "Kid-friendly", "Finger food", "BBQ", "Christmas", "Easter", "Valentines Day", "Thanksgiving", "Halloween", "October Fest"]
   STATUS = ["draft", "published"]
+
   validates :title, presence: true
   validates :description, presence: true
   validates :difficulty, inclusion: { in: DIFFICULTY }
@@ -42,7 +43,7 @@ class Recipe < ApplicationRecord
   def average_rating
     ratings = self.reviews.pluck(:rating)
     if ratings.count > 0
-      ratings.sum / ratings.count
+      ratings.sum.to_f / ratings.count.to_f
     else
       0
     end

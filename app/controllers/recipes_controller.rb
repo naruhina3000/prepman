@@ -3,8 +3,60 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_shopping_list, :add_to_cookbook, :publish]
 
   def index
-    # @recipes = Recipe.all
+    # @diet = Recipe::DIET
+    # @dishtype = Recipe::DISHTYPE
+    # @cuisine = Recipe::CUISINE
+    # @occasion = Recipe::OCCASION
+    # @difficulty = Recipe::DIFFICULTY
+    # @average_rating = Recipe.all.each do |recipe|
+    #             recipe.average_rating
+    #           end
+
     @recipes = Recipe.where(status: "published")
+
+    if params[:query].present?
+      @recipes = Recipe.where('title ILIKE ?', "%#{params[:query]}%")
+    end
+
+    # @recipes = @recipes.where('diet = ?', params[:diet]) if params[:diet].present?
+
+    if params[:diets].present?
+     @recipes = @recipes.select do |recipe|
+                  params[:diets].include?(recipe.diet)
+                end
+    end
+
+    if params[:dishtypes].present?
+     @recipes = @recipes.select do |recipe|
+                  params[:dishtypes].include?(recipe.dish_type)
+                end
+    end
+
+    if params[:cuisines].present?
+     @recipes = @recipes.select do |recipe|
+                  params[:cuisines].include?(recipe.cuisine)
+                end
+    end
+
+    if params[:occasions].present?
+     @recipes = @recipes.select do |recipe|
+                  params[:occasions].include?(recipe.occasion)
+                end
+    end
+
+    if params[:difficulties].present?
+     @recipes = @recipes.select do |recipe|
+                  params[:difficulties].include?(recipe.difficulty)
+                end
+    end
+
+
+    if params[:ratings].present?
+     @recipes = @recipes.select do |recipe|
+                  params[:ratings].include?(recipe.average_rating.round.to_s)
+                end
+    end
+
   end
 
   def show
