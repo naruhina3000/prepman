@@ -23,7 +23,7 @@ class CookbookRecipesController < ApplicationController
 
     def destroy
         @cookbook_recipe.destroy
-        redirect_to @cookbook_recipe.shopping_list
+        redirect_to @cookbook_recipe.cookbook
     end
 
     private

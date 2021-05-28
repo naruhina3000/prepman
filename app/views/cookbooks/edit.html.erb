@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 mx-auto my-5">
+      <div class="card p-4">
+        <h1>Edit Cookbook</h1>
+        <%= simple_form_for @cookbook do |f| %>
+          <%= f.input :title %>
+          <%= f.input :status, collection: Cookbook::STATUS %>
+          <%= f.submit "Update" %>
+        <% end %>
+      </div>
+      <hr>
+      <%= link_to "Back", cookbook_path(@cookbook), class: "btn btn-warning" %>
+    </div>
+  </div>
+</div>

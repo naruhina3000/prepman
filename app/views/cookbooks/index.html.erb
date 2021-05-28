@@ -20,7 +20,7 @@
       <div class="modal-body">
         <%= simple_form_for @cookbook do |f| %>
           <%= f.input :title %>
-          <%= f.input :public %>
+          <%= f.input :status, collection: Cookbook::STATUS %>
           <%= f.submit "Create" %>
         <% end %>
       </div>
