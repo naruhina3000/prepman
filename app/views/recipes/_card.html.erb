@@ -7,6 +7,13 @@
           <% end %>
           <div class="card-body flex-grow-1 p-3">
               <%= link_to "#{recipe.title}", recipe, style: "color: black; font-size: x-large" %>
+              <span><strong>ID: </strong><%= recipe.id %></span>
+              <span><strong>Diet: </strong><%= recipe.diet %></span>
+              <span><strong>Dish Type: </strong><%= recipe.dish_type %></span>
+              <span><strong>Cuisine: </strong><%= recipe.cuisine %></span>
+              <span><strong>Occasion: </strong><%= recipe.occasion %></span>
+              <span><strong>Difficulty: </strong><%= recipe.difficulty %></span>
+              <span><strong>Rating: </strong><%= recipe.average_rating %></span>
           </div>
           <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark" do %>
             <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
