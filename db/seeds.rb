@@ -6,27 +6,27 @@ require 'json'
 User.destroy_all
 
 
-url = "https://raw.githubusercontent.com/ek/foodhackathon/master/canyoucookme/public/ingredient-list.json"
-ingredients = JSON.parse(open(url).read)
+# url = "https://raw.githubusercontent.com/ek/foodhackathon/master/canyoucookme/public/ingredient-list.json"
+# ingredients = JSON.parse(open(url).read)
 
-ingredients.each do |ingredient|
-  new_ingredient = Ingredient.create(name: ingredient['searchValue'])
-end
+# ingredients.each do |ingredient|
+#   new_ingredient = Ingredient.create(name: ingredient['searchValue'])
+# end
 
 
-Utensil.create(name: "Mixer")
-Utensil.create(name: "Frying Pan")
-Utensil.create(name: "Saucepan")
-Utensil.create(name: "Stock Pot")
-Utensil.create(name: "Sheet Pans")
-Utensil.create(name: "Knives")
-Utensil.create(name: "Weighing Scale")
-Utensil.create(name: "Peeler")
-Utensil.create(name: "Tongs")
-Utensil.create(name: "Whisk")
-Utensil.create(name: "Cutting BOard")
-Utensil.create(name: "Colander")
-Utensil.create(name: "Grater")
+# Utensil.create(name: "Mixer")
+# Utensil.create(name: "Frying Pan")
+# Utensil.create(name: "Saucepan")
+# Utensil.create(name: "Stock Pot")
+# Utensil.create(name: "Sheet Pans")
+# Utensil.create(name: "Knives")
+# Utensil.create(name: "Weighing Scale")
+# Utensil.create(name: "Peeler")
+# Utensil.create(name: "Tongs")
+# Utensil.create(name: "Whisk")
+# Utensil.create(name: "Cutting BOard")
+# Utensil.create(name: "Colander")
+# Utensil.create(name: "Grater")
 
 
 20.times do
