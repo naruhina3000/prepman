@@ -187,6 +187,20 @@
   z-index: 1000;
 }
 
+.nutritions {
+    border: 2px solid #204742;
+    border-radius: 8px;
+    height: 80px;
+    width: 80px;
+    border-radius: 58px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
 .edit-recipe-icon {
   position: absolute;
   width: 25px;

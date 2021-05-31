@@ -209,8 +209,9 @@
       <p class="recipe-categories"><%= @recipe.dish_type %></p>
       <p class="recipe-categories"><%= @recipe.occasion %></p>
     </div>
-    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
 
+    <h4 style="padding: 12px 0px;">Nutrition: per serving </h4>
+    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
       <div class="nutritions">
         <div class="bd-highlight text-center">Cal</div>
         <div class="bd-highlight text-center"><%= @recipe.calories %></div>
@@ -237,13 +238,13 @@
 
     <h4><strong>Portion:</strong></h4>
 
-    <div class="row mx-auto" style="width: 100%; justify-content: space-evenly; align-items: center; ">
+    <div class="row mx-auto" style="width: 100%; justify-content: space-evenly; align-items: center; margin-bottom: 16px; ">
       <i class="fas fa-minus-circle" style="font-size: 25px"></i>
       <span id="portion-amount" style="font-size: 45px; text-align: center;">1</span>
       <i class="fas fa-plus-circle" style="font-size: 25px"></i>
     </div>
 
-    <h5><strong>Ingredients:</strong></h5>
+    <h4 style="padding-bottom: 8px; "><strong>Ingredients:</strong></h4>
     <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
       <p><span data-unit="<%= recipe_ingredient.quantity.round / @recipe.portion %>" class="ingredient-amount"><%= recipe_ingredient.quantity.round / @recipe.portion %></span> <%= recipe_ingredient.unit %> <%= recipe_ingredient.ingredient.name %></p>
     <% end %>
@@ -319,17 +320,47 @@
  -->
 
   <!-- Modal -->
+  <hr>
 
+  <h5><strong>Utensils:</strong></h5>
+    <% if @recipe.recipe_utensils.count > 0 %>
+      <% @recipe.recipe_utensils.each do |recipe_utensil| %>
+        <span><%= recipe_utensil.quantity%> <%= recipe_utensil.utensil.name %> • </span>
+      <% end %>
+    <% else %>
+      <span> No utensils needed </span>
+    <% end %>
+
+
+<hr>
+
+ <h5><strong>Steps:</strong></h5>
+    <% if @recipe.steps.count > 0 %>
+      <% @recipe.steps.each do |step| %>
+        <span><%= step.number %>. <%= step.description %></span>
+        <div>
+          <% if step.photo.attached? %>
+            <%= cl_image_tag step.photo.key, class: "img-thumbnail" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p> Easy peasy. No steps to prepare this dish!. </p>
+    <% end %>
 
 
   <% if current_user %>
     <% if current_user.has_cooked_recipe?(@recipe) %>
       <%= link_to "Recipe Cooked", cooked_recipe_path(current_user.has_cooked_recipe?(@recipe)), method: :delete, class: "btn btn-info" %>
     <% else %>
-      <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
+      <div style="width: 100%; display: flex; justify-content: center;">
+        <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
+     </div>
     <% end %>
   <% end %>
 
+
+<hr>
 
 
   <div class="row px-15" style="margin-bottom: 30px; padding-left: 15px;">
