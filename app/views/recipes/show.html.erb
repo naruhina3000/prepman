@@ -1,24 +1,30 @@
   <div class="navbar navbar-inner sticky-top">
-    <div class="container-fluid h-40" style="padding-bottom: 4px;">
-      <%= link_to recipes_path, class:"menu-icons", data: {toggle: "modal", target: "#searchModal"} do %>
-        <%= image_tag("search.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
+    <div class="container-fluid h-40" style="padding-bottom: 8px;">
+      <div class="row" style="padding-left: 15px">
+        <%= link_to recipe_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToCookbookModal"} do %>
+          <%= image_tag("cookbook.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
+        <% end %>
+        <%= link_to recipe_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToPlannerModal"} do %>
+          <%= image_tag("yellow-calendar.png", class:"search", style:"height: 24px; margin-left: 0px;", alt: "Search") %>
+        <% end %>
+      </div>
+
+      <p class="favorite-count"><strong><%= @recipe.favorites.count %></strong></p>
+      <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
+        <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+      <% end %>
+      <% if current_user %>
+        <% if current_user.has_favorite?(@recipe) %>
+          <%= link_to favorite_path(current_user.has_favorite?(@recipe)), method: :delete, class:"bookmark", remote: true do %>
+            <%= image_tag("bookmark-solid.svg", alt: "current-favorite") %>
+          <% end %>
+        <% else %>
+          <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
+            <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
-    <p class="favorite-count"><strong><%= @recipe.favorites.count %></strong></p>
-    <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
-      <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
-    <% end %>
-    <% if current_user %>
-      <% if current_user.has_favorite?(@recipe) %>
-        <%= link_to favorite_path(current_user.has_favorite?(@recipe)), method: :delete, class:"bookmark", remote: true do %>
-          <%= image_tag("bookmark-solid.svg", alt: "current-favorite") %>
-        <% end %>
-      <% else %>
-        <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
-          <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
-        <% end %>
-      <% end %>
-    <% end %>
   </div>
 
 <div class="show-recipe-photo">
@@ -33,7 +39,7 @@
 <div class="container-fluid">
   <div class="show-recipe-title">
     <div class="card-show">
-    <div class="transparent">
+    <div class="transparent-recipe-title">
       <h3 class="m-0" style="text-align: center; border-radius: 16px; padding: 4px 16px;"><%= @recipe.title %></h3>
        <div class="container-fluid">
         <div class="row recipe-info" style="padding-top: 0px">
@@ -96,25 +102,24 @@
   <% end %>
 
 
-  <div style="height: 430px;"></div>
-
-  <% if current_user == @user %>
-      <% if @recipe.status == "draft" %>
-        <p class= "btn btn-danger"><%= @recipe.status %></p>
-        <%= link_to "publish recipe", publish_recipe_path(@recipe), class: "btn btn-info mt-2", method: :patch %>
-        <% else %>
-        <p class= "btn btn-success"><%= @recipe.status %></p>
+  <div class="row mx-auto" style="width: 100%; justify-content: center; ">
+    <div class="recipe-status">
+      <% if current_user == @user %>
+          <% if @recipe.status == "draft" %>
+            <p class= "btn btn-danger mb-0"><%= @recipe.status %></p>
+            <%= link_to "publish recipe", publish_recipe_path(@recipe), class: "btn btn-info", method: :patch %>
+          <% else %>
+            <p class= "btn btn-success mb-0"><%= @recipe.status %></p>
+          <% end %>
+          <%= link_to "Update Recipe", edit_recipe_path(@recipe), class: "btn btn-info" %>
       <% end %>
-      <%= link_to "Update Recipe", edit_recipe_path(@recipe), class: "btn btn-info" %>
-  <% end %>
-  <br>
-  <br>
-  <br>
-  <br>
+    </div>
+  </div>
+
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addToPlannerModal">
+<!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addToPlannerModal">
     Add to Planner
-  </button>
+  </button> -->
 
 
   <!-- Modal -->
@@ -140,7 +145,82 @@
     </div>
   </div>
 
+  <div class="modal fade" id="addToCookbookModal" tabindex="-1" role="dialog" aria-labelledby="addToCookbookModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addToCookbookModal">Add <%= @recipe.title %> to your Cookbook:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id='add-recipe-to-cookbook'>
+            <%= simple_form_for :recipe, url: add_to_cookbook_recipe_path(@recipe), method: :post do |f| %>
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="add-cookbook-tab" data-toggle="pill" href="#add-cookbook" role="tab" aria-controls="add-list" aria-selected="true">Create new Cookbook</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="chose-cookbook-tab" data-toggle="pill" href="#chose-cookbook" role="tab" aria-controls="chose-list" aria-selected="false">Choose cookbook</a>
+                </li>
+              </ul>
 
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="add-cookbook" role="tabpanel" aria-labelledby="add-cookbook-tab">
+                  <input type="text" name="new_cookbook_list" class="form-control">
+                  <%= f.submit "Add", class: "btn btn-primary" %>
+                </div>
+                <div class="tab-pane fade" id="chose-cookbook" role="tabpanel" aria-labelledby="chose-cookbook-tab">
+                  <select name="cookbook_list" id="cookbook_list_id" class="select2" style="width: 100%">
+                    <option value="" disabled selected>Choose a list</option>
+                    <% current_user.cookbooks.each do |cbook| %>
+                      <option value="<%= cbook.id %>"><%= cbook.title %></option>
+                    <% end %>
+                  </select>
+                  <%= f.submit "Add", class: "btn btn-primary" %>
+                </div>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="height: 550px;"></div>
+
+  <div>
+    <div class="row mx-auto" style="width: 100%; justify-content: center; align-items: center; ">
+      <div style="margin-right: 8px;">
+        <% if @recipe.user.photo.attached? %>
+          <%= cl_image_tag @recipe.user.photo.key, class:"avatar" %>
+        <% else %>
+          <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+        <% end %>
+      </div>
+      <% if @recipe.user.username.blank? %>
+        <%= link_to "Hero with no name", user_path(@recipe.user) %>
+      <% else %>
+        <%= link_to "#{@recipe.user.username}", user_path(@recipe.user) %>
+      <% end %>
+    </div>
+
+    <hr>
+    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
+      <p class="recipe-categories"><%= @recipe.dish_type %></p>
+      <p class="recipe-categories"><%= @recipe.cuisine %></p>
+      <p class="recipe-categories"><%= @recipe.occasion %></p>
+    </div>
+
+    <p><%= @recipe.description %></p>
+    <h3><strong>Ingredients:</strong></h3>
+    <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
+      <p><%= recipe_ingredient.quantity.round %> <%= recipe_ingredient.unit %> <%= recipe_ingredient.ingredient.name %></p>
+    <% end %>
+
+
+  </div>
   <!-- Button trigger modal -->
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addToShoppingListModal">
     Add to Shopping List
@@ -197,54 +277,12 @@
   <%#= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
 
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addToCookbookModal">
+<!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addToCookbookModal">
     Add to Cookbook
   </button>
-
+ -->
 
   <!-- Modal -->
-  <div class="modal fade" id="addToCookbookModal" tabindex="-1" role="dialog" aria-labelledby="addToCookbookModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="addToCookbookModal">Add <%= @recipe.title %> to your Cookbook:</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div id='add-recipe-to-cookbook'>
-            <%= simple_form_for :recipe, url: add_to_cookbook_recipe_path(@recipe), method: :post do |f| %>
-              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="add-cookbook-tab" data-toggle="pill" href="#add-cookbook" role="tab" aria-controls="add-list" aria-selected="true">Create new Cookbook</a>
-                </li>
-                <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="chose-cookbook-tab" data-toggle="pill" href="#chose-cookbook" role="tab" aria-controls="chose-list" aria-selected="false">Choose cookbook</a>
-                </li>
-              </ul>
-
-              <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="add-cookbook" role="tabpanel" aria-labelledby="add-cookbook-tab">
-                  <input type="text" name="new_cookbook_list" class="form-control">
-                  <%= f.submit "Add", class: "btn btn-primary" %>
-                </div>
-                <div class="tab-pane fade" id="chose-cookbook" role="tabpanel" aria-labelledby="chose-cookbook-tab">
-                  <select name="cookbook_list" id="cookbook_list_id" class="select2" style="width: 100%">
-                    <option value="" disabled selected>Choose a list</option>
-                    <% current_user.cookbooks.each do |cbook| %>
-                      <option value="<%= cbook.id %>"><%= cbook.title %></option>
-                    <% end %>
-                  </select>
-                  <%= f.submit "Add", class: "btn btn-primary" %>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 
@@ -290,6 +328,7 @@
       <% end %>
     </div>
   </div>
+  <div style="height: 77px;"></div>
 </div>
 
 

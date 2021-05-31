@@ -101,9 +101,15 @@
 
 .transparent {
   background-color: rgba(250, 250, 250, 0.60);
+  height: 100%;
+}
+
+.transparent-recipe-title {
+  background-color: rgba(250, 250, 250, 0.60);
   border-radius: 16px;
   height: 100%;
 }
+
 
 .recipe-info {
   padding-left: 12px;
@@ -128,4 +134,9 @@
     justify-content: space-evenly;
     position: absolute;
     top: 440px;
+}
+
+.recipe-status {
+  position: absolute;
+  top: 400px;
 }
