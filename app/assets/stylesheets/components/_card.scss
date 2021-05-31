@@ -140,3 +140,37 @@
   position: absolute;
   top: 400px;
 }
+
+.filter {
+  align-items: center;
+}
+
+.filter-items {
+  margin: 4px;
+}
+
+.recipe-categories {
+  border-radius: 8px;
+  padding: 8px;
+  background-color: #91ACAA;
+  color: white;
+}
+
+.avg-rating {
+  position: absolute;
+  top: 160px;
+  right: 16px;
+  color: #FFD964;
+  font-size: medium;
+  font-weight: 400;
+}
+
+.avg-rating-show {
+  position: absolute;
+  top: 440px;
+  right: 16px;
+  color: #FFD964;
+  font-size: medium;
+  font-weight: 400;
+  z-index: 1000;
+}

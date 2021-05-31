@@ -1,5 +1,5 @@
   <div class="navbar navbar-inner-recipes sticky-top">
-    <div class="container-fluid h-40">
+    <div class="container-fluid h-40" style="padding: 0px">
       <%= link_to recipes_path, class:"menu-icons", data: {toggle: "modal", target: "#searchModal"} do %>
         <%= image_tag("search.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
       <% end %>
@@ -30,54 +30,70 @@
                   class: "form-control",
                   placeholder: "Find a Recipe"
                 %>
+                <br>
                 <!-- other filter items -->
                 <div class="container-fluid px-0">
                   <div class="row justify-content-evenly mx-0">
                       <div class="filter my-2" style="width: 100%;">
-                        <p><strong>Diet:</strong></p>
+                        <span class="filter-items"><strong>Diet:</strong></span>
                         <% Recipe::DIET.each do |diet| %>
                           <label for="<%= diet %>" class="<%= 'active' if params[:diets]&.include?(diet) %>"><%= diet %></label>
                           <input type="checkbox" hidden value="<%= diet %>" id="<%= diet %>" name="diets[]" <%= 'checked' if params[:diets]&.include?(diet) %>>
                         <% end %>
+                        <hr>
                       </div>
 
+
+
                       <div class="filter my-2">
-                        <p><strong>Dishtype:</strong></p>
+                        <span class="filter-items"><strong>Dishtype:</strong></span>
                         <% Recipe::DISHTYPE.each do |dishtype| %>
                           <label for="<%= dishtype %>"><%= dishtype %></label>
                           <input type="checkbox" hidden value="<%= dishtype %>" id="<%= dishtype %>" name="dishtypes[]">
                         <% end %>
+                        <hr>
                       </div>
 
+
+
                       <div class="filter my-2">
-                        <p><strong>Cuisine:</strong></p>
+                        <span class="filter-items"><strong>Cuisine:</strong></span>
                         <% Recipe::CUISINE.each do |cuisine| %>
                           <label for="<%= cuisine %>"><%= cuisine %></label>
                           <input type="checkbox" hidden value="<%= cuisine %>" id="<%= cuisine %>" name="cuisines[]">
                         <% end %>
+                        <hr>
                       </div>
 
+
+
                       <div class="filter my-2">
-                        <p><strong>Occasion:</strong></p>
+                        <span class="filter-items"><strong>Occasion:</strong></span>
                         <% Recipe::OCCASION.each do |occasion| %>
                           <label for="<%= occasion %>"><%= occasion %></label>
                           <input type="checkbox" hidden value="<%= occasion %>" id="<%= occasion %>" name="occasions[]">
                         <% end %>
+                        <hr>
                       </div>
 
+
+
                       <div class="filter my-2">
-                        <p><strong>Difficulty:</strong></p>
+                        <span class="filter-items"><strong>Difficulty:</strong></span>
                         <% Recipe::DIFFICULTY.each do |difficulty| %>
                           <label for="<%= difficulty %>"><%= difficulty %></label>
                           <input type="checkbox" hidden value="<%= difficulty %>" id="<%= difficulty %>" name="difficulties[]">
                         <% end %>
+                        <hr>
                       </div>
 
+
                       <div class="filter my-2">
-                        <p><strong>Rating:</strong></p>
+                        <span class="filter-items"><strong>Rating:</strong></span>
                         <% Review::RATING.each do |rating| %>
-                          <label for="<%= rating %>"><%= rating %></label>
-                          <input type="checkbox" hidden value="<%= rating %>" id="<%= rating %>" name="ratings[]">
+                          <label class="starRating <%= 'active' if params[:ratings] && params[:ratings][0]&.to_i  >= rating.to_i %>" for="<%= rating %>"><i class="far fa-star"></i></label>
+                          <!-- <label for="<%= rating %>" class="<%#= 'active' if (params[:ratings].join.to_i) > rating %>"><i class="far fa-star"></i></label> -->
+                          <input type="radio" hidden value="<%= rating %>" id="<%= rating %>" name="ratings[]">
                         <% end %>
                       </div>
 
@@ -85,7 +101,10 @@
 
 
                 </div>
-                <%= submit_tag "Search", class: "btn btn-primary search-btn" %>
+
+                <div class="row">
+                 <%= submit_tag "🦸", class: "btn btn-primary search-btn mx-auto", style: "font-size: xxx-large; background-color: white; border: none;" %>
+                </div>
 
               </div>
               <!-- End of filter Items -->

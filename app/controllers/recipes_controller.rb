@@ -19,12 +19,8 @@ class RecipesController < ApplicationController
     end
 
     # @recipes = @recipes.where('diet = ?', params[:diet]) if params[:diet].present?
-
-    if params[:diets].present?
-     @recipes = @recipes.select do |recipe|
-                  params[:diets].include?(recipe.diet)
-                end
-    end
+    @recipes = @recipes.where('average_rating >= ?', params[:ratings][0].to_i) if params[:ratings].present?
+    @recipes = @recipes.where(diet: params[:diets]) if params[:diets].present?
 
     if params[:dishtypes].present?
      @recipes = @recipes.select do |recipe|
@@ -47,13 +43,6 @@ class RecipesController < ApplicationController
     if params[:difficulties].present?
      @recipes = @recipes.select do |recipe|
                   params[:difficulties].include?(recipe.difficulty)
-                end
-    end
-
-
-    if params[:ratings].present?
-     @recipes = @recipes.select do |recipe|
-                  params[:ratings].include?(recipe.average_rating.round.to_s)
                 end
     end
 

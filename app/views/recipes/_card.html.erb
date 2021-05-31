@@ -19,22 +19,30 @@
             <p class="favorite-count"><strong><%= recipe.favorites.count %></strong></p>
             <% if current_user %>
               <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
-                <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+                <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
               <% end %>
                 <% if current_user.has_favorite?(recipe) %>
                   <%= link_to favorite_path(current_user.has_favorite?(recipe)), method: :delete, class:"bookmark", remote: true do %>
-                    <%= image_tag("bookmark-solid.svg", alt: "current-favorite") %>
+                    <%= image_tag("bookmark-solid.svg", class:"like-icon", alt: "current-favorite") %>
                   <% end %>
                 <% else %>
                   <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
-                    <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+                    <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
                   <% end %>
               <% end %>
              <% else %>
               <%= link_to new_user_session_path, class:"bookmark" do %>
-                <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+                <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
               <% end %>
             <% end %>
+
+            <div class="avg-rating">
+              <% if recipe.average_rating == 0 %>
+                <span>No ratings yet <span>
+              <% else %>
+                <%= recipe.average_rating%>  <i class="fas fa-star"></i>
+              <% end %>
+            </div>
 
           <%= yield %>
           <div class="container-fluid transparent">

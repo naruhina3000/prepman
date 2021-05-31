@@ -10,21 +10,33 @@
       </div>
 
       <p class="favorite-count"><strong><%= @recipe.favorites.count %></strong></p>
-      <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
-        <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
-      <% end %>
       <% if current_user %>
+        <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
+          <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
+        <% end %>
         <% if current_user.has_favorite?(@recipe) %>
           <%= link_to favorite_path(current_user.has_favorite?(@recipe)), method: :delete, class:"bookmark", remote: true do %>
-            <%= image_tag("bookmark-solid.svg", alt: "current-favorite") %>
+            <%= image_tag("bookmark-solid.svg", class:"like-icon", alt: "current-favorite") %>
           <% end %>
         <% else %>
           <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
-            <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
+            <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
           <% end %>
+        <% end %>
+      <% else %>
+        <%= link_to new_user_session_path, class:"bookmark" do %>
+          <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
         <% end %>
       <% end %>
     </div>
+  </div>
+
+  <div class="avg-rating-show">
+    <% if @recipe.average_rating == 0 %>
+      <span>No ratings yet <span>
+    <% else %>
+      <%= @recipe.average_rating.round%>  <i class="fas fa-star"></i>
+    <% end %>
   </div>
 
 <div class="show-recipe-photo">
@@ -80,26 +92,6 @@
     </div>
     </div>
   </div>
-
-
-  <p class="favorite-count"><strong><%= @recipe.favorites.count %></strong></p>
-  <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
-    <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
-  <% end %>
-
-
-
-  <% if current_user %>
-    <% if current_user.has_favorite?(@recipe) %>
-      <%= link_to favorite_path(current_user.has_favorite?(@recipe)), method: :delete, class:"bookmark", remote: true do %>
-        <%= image_tag("bookmark-solid.svg", alt: "current-favorite") %>
-      <% end %>
-    <% else %>
-      <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
-        <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
-      <% end %>
-    <% end %>
-  <% end %>
 
 
   <div class="row mx-auto" style="width: 100%; justify-content: center; ">
@@ -210,10 +202,36 @@
 
     <hr>
     <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
-      <p class="recipe-categories"><%= @recipe.dish_type %></p>
       <p class="recipe-categories"><%= @recipe.cuisine %></p>
+      <p class="recipe-categories"><%= @recipe.dish_type %></p>
       <p class="recipe-categories"><%= @recipe.occasion %></p>
     </div>
+    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
+
+      <div class="col nutritions">
+        <div class="bd-highlight text-center">Calories</div>
+        <div class="bd-highlight text-center"><%= @recipe.calories %></div>
+      </div>
+
+      <div class="col nutritions">
+        <div class="bd-highlight text-center">Protein</div>
+        <div class="bd-highlight text-center"><%= @recipe.protein %></div>
+      </div>
+
+      <div class="col nutritions">
+        <div class="bd-highlight text-center">Fat</div>
+        <div class="bd-highlight text-center"><%= @recipe.fat %></div>
+      </div>
+
+      <div class="col nutritions">
+        <div class="bd-highlight text-center">Carb</div>
+        <div class="bd-highlight text-center"><%= @recipe.carb %></div>
+      </div>
+
+    </div>
+
+
+
 
     <p><%= @recipe.description %></p>
     <h3><strong>Ingredients:</strong></h3>
