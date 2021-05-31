@@ -1,0 +1,28 @@
+.profile-icon {
+  width: 25px;
+}
+
+.icon p {
+  margin: 0;
+  padding-left: 5px;
+  position: relative;
+  top: 11px;
+  font-size: 10px;
+}
+
+.icon .icon-categories {
+  color: $brown;
+  font-size: 25px;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon div {
+  display: flex;
+  padding-top: 10px;
+}

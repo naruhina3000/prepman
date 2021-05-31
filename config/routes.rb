@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   resources :cookbook_recipes, only: [:destroy]
   resources :followed_cookbooks, only: [:destroy]
   resources :ingredients
+  resources :cooked_recipe, only: [:index]
+  resources :followed_cookbooks, only: [:index]
   get "/users/:id", to: "users#show", as: :user
   get "/users/:id/edit", to: "users#edit", as: :user_edit
   patch "/users/:id", to: "users#update"
