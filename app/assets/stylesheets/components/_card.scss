@@ -12,7 +12,7 @@
 .card-show {
   position: relative;
   border-radius: 16px;
-  background-color: #b85a36;
+  background-color: $lightgreen;
   border: 0px;
   opacity: 0.8;
   // height: 80px;
@@ -164,7 +164,7 @@
 .recipe-categories {
   border-radius: 8px;
   padding: 8px;
-  background-color: #91acaa;
+  background-color: $brown;
   color: white;
 }
 
