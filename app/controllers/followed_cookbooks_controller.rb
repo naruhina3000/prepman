@@ -1,4 +1,9 @@
 class FollowedCookbooksController < ApplicationController
+
+  def index
+    @followed_cookbooks = FollowedCookbook.where(user: current_user)
+  end
+
     def create
         @followed_cookbook = FollowedCookbook.new
         @cookbook = Cookbook.find(params[:cookbook_id])

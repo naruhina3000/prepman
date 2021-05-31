@@ -11,6 +11,7 @@ class UsersController < ApplicationController
       @cookbooks = Cookbook.where(user: @user)
       @public_cookbooks = Cookbook.where(user: @user, status: "public")
       @cookbook = Cookbook.new
+      set_cookbook_followers
     end
 
     def edit
@@ -31,6 +32,15 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:username, :name, :url, :bio, :photo)
+    end
+
+    def set_cookbook_followers
+      @cookbooks = Cookbook.where(user: @user)
+      @cookbook_followers = 0
+      @cookbooks.each do |cookbook|
+        @cookbook_followers += cookbook.followed_cookbooks.count
+      end
+      @cookbook_followers
     end
 
 end

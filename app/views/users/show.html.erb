@@ -26,22 +26,55 @@
       <p><%= @user.url %></p>
     <% end %>
   </div>
+  
+  <% if current_user == @user %>
+    <%= link_to user_edit_path(@user) do %>
+     <%= image_tag("settings.svg", alt: "settings", class:"settings-icon") %>
+    <% end %>
+
+    <%= link_to destroy_user_session_path, method: :delete do %>
+     <%= image_tag("logout.svg", alt: "settings", class:"logout-icon") %>
+    <% end %>
+
+  <% end %>
 </div>
 
 <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
-  <p class="recipe-categories"><%= @followed_cookbooks.count %></p>
-  <p class="recipe-categories">
-  <% @cookbooks.each do |cookbook| %>
-      <%= cookbook.followed_cookbooks.count %>
-  <% end %>
-  </p>
-  <p class="recipe-categories"><%= @cooked_recipes.count %></p>
-</div>
 
-
-<% if @user == current_user %>
-  <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+<%= link_to followed_cookbooks_path do %>
+  <div class="icon">
+    <p class="icon-categories"><%= @followed_cookbooks.count %></p>
+    <div>
+      <%= image_tag("like.svg", alt: "likes", class:"profile-icon") %>
+      <p>Followes</p>
+    </div>
+  </div>
 <% end %>
+
+
+<%= link_to cookbooks_path do %>
+<div class="icon">
+  <p class="icon-categories">
+    <%= @cookbook_followers %>
+  </p>
+  <div>
+    <%= image_tag("followers.svg", alt: "followers", class:"profile-icon") %>
+    <p>Followers</p>
+  </div>
+</div>
+<% end %>
+
+
+<%= link_to cooked_recipe_index_path do %>
+  <div class="icon">
+    <p class="icon-categories"><%= @cooked_recipes.count %></p>
+    <div>
+      <%= image_tag("pot.svg", alt: "made-dishes", class:"profile-icon") %>
+      <p>Made Dishes</p>
+    </div>
+  </div>
+<% end %>
+</div>
 
 <nav>
   <div class="nav nav-tabs" style="z-index: 4" id="nav-tab" role="tablist">
@@ -54,10 +87,7 @@
 <div class="tab-content" id="nav-tabContent">
 
       <div class="tab-pane fade show active" id="nav-favorites" role="tabpanel" aria-labelledby="nav-favorites-tab">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-7 px-0">
-            <div class="container-fluid py-2">
+            <div class="container-fluid py-2" style="margin-bottom: 75px;">
               <div class="row">
                 <% @favorites.each do |favorite| %>
                   <div class="col-md-4 py-2">
@@ -66,20 +96,24 @@
                 <% end %>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
       </div>
 
   <!-- <hr> -->
 
   <div class="tab-pane fade" id="nav-my-recipes" role="tabpanel" aria-labelledby="nav-my-recipes-tab">
-  <div class="container-fluid py-2">
+  <div class="container-fluid py-2" style="margin-bottom: 75px;">
     <div class="row">
       <% @recipes.each do |recipe| %>
         <div class="col-md-4 py-2">
             <%= render 'recipes/card', recipe: recipe do %>
-              <%= link_to "Delete", recipe_path(recipe), class: "btn btn-danger", method: :delete %>
+              <% if current_user == @user %>
+                <%= link_to edit_recipe_path(recipe) do %>
+                  <%= image_tag("edit.svg", alt: "edit-recipe", class: "edit-recipe-icon") %>
+                <% end %>
+                <%= link_to recipe_path(recipe), method: :delete do %>
+                <%= image_tag("bin.svg", alt: "settings", class: "delete-recipe-icon") %>
+                <% end %>
+              <% end %>
             <% end %>
         </div>
       <% end %>
@@ -88,7 +122,7 @@
   </div>
 
   <div class="tab-pane fade" id="nav-cookbooks" role="tabpanel" aria-labelledby="nav-cookbooks-received-tab">
-  <div class="container-fluid py-2">
+  <div class="container-fluid py-4" style="margin-bottom: 75px;">
 
   <!-- Button trigger modal -->
   <% if current_user == @user %>
@@ -140,32 +174,6 @@
   </div>
 </div>
 
-
-
- <h3>Followed Cookbooks</h3>
-  <div class="row my-5">
-    <% @followed_cookbooks.each do |fcookbook| %>
-      <div class="col-md-4 py-2">
-        <%= fcookbook.cookbook.title %>
-        <%= link_to "see cookbook", cookbook_path(fcookbook) %>
-      </div>
-    <% end %>
-  </div>
-
-  <h3>Made Dishes</h3>
-  <div class="row my-5">
-    <% @cooked_recipes.each do |cooked_recipe| %>
-      <div class="col-md-4 py-2">
-        <%= render 'recipes/card', recipe: cooked_recipe.recipe do %>
-        <% if current_user %>
-          <% if current_user.has_cooked_recipe?(cooked_recipe.recipe) %>
-            <%= link_to "I lied, I haven't cooked this yet", cooked_recipe_path(current_user.has_cooked_recipe?(cooked_recipe.recipe)), method: :delete, class: "btn btn-info" %>
-          <% else %>
-            <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(cooked_recipe.recipe), method: :post, class: "btn btn-primary" %>
-          <% end %>
-        <% end %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+</div>
+</div>
 

@@ -12,7 +12,7 @@
 .card-show {
   position: relative;
   border-radius: 16px;
-  background-color: #91acaa;
+  background-color: #b85a36;
   border: 0px;
   opacity: 0.8;
   // height: 80px;
@@ -52,6 +52,7 @@
 }
 
 .card-product {
+  position: relative;
   overflow: hidden;
   height: 120px;
   background: white;
@@ -68,21 +69,38 @@
 }
 
 .card-product h2 {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   margin: 0;
 }
 
 .card-product p {
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.4;
   opacity: 0.7;
   margin-bottom: 0;
   margin-top: 8px;
+  margin-right: 25px;
 }
 
 .card-product .card-product-infos {
   padding: 16px;
+}
+
+.card-product .settings-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.card-product .logout-icon {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: 40px;
+  right: 10px;
 }
 
 .search {
@@ -146,7 +164,7 @@
 .recipe-categories {
   border-radius: 8px;
   padding: 8px;
-  background-color: #B85A36;
+  background-color: #91acaa;
   color: white;
 }
 
@@ -154,7 +172,7 @@
   position: absolute;
   top: 160px;
   right: 16px;
-  color: #FFD964;
+  color: #ffd964;
   font-size: medium;
   font-weight: 400;
 }
@@ -163,22 +181,22 @@
   position: absolute;
   top: 440px;
   right: 16px;
-  color: #FFD964;
+  color: #ffd964;
   font-size: medium;
   font-weight: 400;
   z-index: 1000;
 }
 
-.nutritions {
-    border: 2px solid #204742;
-    border-radius: 8px;
-    height: 80px;
-    width: 80px;
-    border-radius: 58px;
-    justify-content: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 12px;
+.edit-recipe-icon {
+  position: absolute;
+  width: 25px;
+  bottom: 100px;
+  right: 45px;
+}
+
+.delete-recipe-icon {
+  position: absolute;
+  width: 25px;
+  bottom: 100px;
+  right: 10px;
 }

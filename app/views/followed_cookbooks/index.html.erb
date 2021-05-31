@@ -1,0 +1,13 @@
+
+
+<% if current_user %>
+ <h3>Followed Cookbooks</h3>
+  <div class="row my-5">
+    <% @followed_cookbooks.each do |fcookbook| %>
+      <div class="col-md-4 py-2">
+        <%= fcookbook.cookbook.title %>
+        <%= link_to "see cookbook", cookbook_path(fcookbook) %>
+      </div>
+    <% end %>
+<% end %>
+

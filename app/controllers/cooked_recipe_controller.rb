@@ -1,4 +1,9 @@
 class CookedRecipeController < ApplicationController
+  
+  def index
+    @cooked_recipes = CookedRecipe.where(user: current_user)
+  end
+  
   def create
     @cooked_recipe = CookedRecipe.new
     @recipe = Recipe.find(params[:recipe_id])
