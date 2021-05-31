@@ -17,7 +17,7 @@
           </div> -->
 
             <p class="favorite-count"><strong><%= recipe.favorites.count %></strong></p>
-            <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark" do %>
+            <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
               <%= image_tag("bookmark-regular.svg", alt: "no-favorite") %>
             <% end %>
             <% if current_user %>
@@ -92,8 +92,6 @@
             </div>
 
        <!--      <p>Likes: <%= recipe.favorites.count %></p> -->
-
-
 
           </div>
 

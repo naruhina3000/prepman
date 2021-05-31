@@ -21,7 +21,7 @@ class Recipe < ApplicationRecord
   DISHTYPE = ["Starter", "Main", "Dessert", "Beverages", "Snacks", "Breakfast", "Side Dish"]
   CUISINE = ["Chinese", "Italian", "European", "American", "Iberian", "Indian", "Middle Eastern", "Japanese", "Korean", "Mexican", "Indonesian", "Others"]
   OCCASION = ["All Day Recipes", "Weeknight", "Prepare ahead", "Crowd Pleaser", "On the go", "Comfort Food", "Kid-friendly", "Finger food", "BBQ", "Christmas", "Easter", "Valentines Day", "Thanksgiving", "Halloween", "October Fest"]
-  STATUS = ["draft", "published"]
+  # STATUS = ["draft", "published"]
 
   validates :title, presence: true
   validates :description, presence: true
@@ -30,7 +30,7 @@ class Recipe < ApplicationRecord
   validates :dish_type, inclusion: { in: DISHTYPE }
   validates :cuisine, inclusion: { in: CUISINE }
   validates :occasion, inclusion: { in: OCCASION }
-  validates :status, inclusion: { in: STATUS }
+  # validates :status, inclusion: { in: STATUS }
 
   # validate :time
 

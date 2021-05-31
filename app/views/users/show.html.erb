@@ -97,11 +97,12 @@
     <%= link_to "x", cookbook_path(cookbook), method: :delete %>
     <hr>
   <% end %>
-  <% else %>
+<% else %>
   <% @public_cookbooks.each do |pcookbook| %>
     <%= pcookbook.title %>
     <%= link_to "see cookbook", cookbook_path(pcookbook) %>
   <% end %>
 <% end %>
+<div style="height: 77px;"></div>
 </div>
 
