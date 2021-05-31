@@ -42,15 +42,4 @@ class Recipe < ApplicationRecord
   def total_time
     self.prep_time + self.bake_time + self.resting_time
   end
-
-
-  def average_rating
-    ratings = self.reviews.pluck(:rating)
-    if ratings.count > 0
-      ratings.sum.to_f / ratings.count.to_f
-    else
-      0
-    end
-  end
-
 end
