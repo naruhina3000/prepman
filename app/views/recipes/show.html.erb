@@ -239,13 +239,13 @@
 
     <div class="row mx-auto" style="width: 100%; justify-content: space-evenly; align-items: center; ">
       <i class="fas fa-minus-circle" style="font-size: 25px"></i>
-      <span style="font-size: 45px; text-align: center;"><%= @recipe.portion %></span>
+      <span id="portion-amount" style="font-size: 45px; text-align: center;">1</span>
       <i class="fas fa-plus-circle" style="font-size: 25px"></i>
     </div>
 
     <h5><strong>Ingredients:</strong></h5>
     <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-      <p><%= recipe_ingredient.quantity.round %> <%= recipe_ingredient.unit %> <%= recipe_ingredient.ingredient.name %></p>
+      <p><span data-unit="<%= recipe_ingredient.quantity.round / @recipe.portion %>" class="ingredient-amount"><%= recipe_ingredient.quantity.round / @recipe.portion %></span> <%= recipe_ingredient.unit %> <%= recipe_ingredient.ingredient.name %></p>
     <% end %>
 
 
@@ -275,10 +275,10 @@
             <%= simple_form_for :recipe, url: add_to_shopping_list_recipe_path(@recipe), method: :post do |f| %>
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="add-list-tab" data-toggle="pill" href="#add-list" role="tab" aria-controls="add-list" aria-selected="true">Home</a>
+                  <a class="nav-link active" id="add-list-tab" data-toggle="pill" href="#add-list" role="tab" aria-controls="add-list" aria-selected="true">Create a new shopping list:</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                  <a class="nav-link" id="chose-list-tab" data-toggle="pill" href="#chose-list" role="tab" aria-controls="chose-list" aria-selected="false">Profile</a>
+                  <a class="nav-link" id="chose-list-tab" data-toggle="pill" href="#chose-list" role="tab" aria-controls="chose-list" aria-selected="false">Add ingredients to:</a>
                 </li>
 
               </ul>
