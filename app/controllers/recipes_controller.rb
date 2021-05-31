@@ -99,7 +99,8 @@ class RecipesController < ApplicationController
       @shopping_list = ShoppingList.find(params[:list])
     end
     @recipe.recipe_ingredients.each do |recipe_ingredient|
-      ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: (recipe_ingredient.quantity / @recipe.portion) * params[:portions], unit: recipe_ingredient.unit)
+      # ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: (recipe_ingredient.quantity / @recipe.portion), unit: recipe_ingredient.unit)
+      ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: ((recipe_ingredient.quantity / @recipe.portion).to_i * params[:recipe][:portion].to_i).round, unit: recipe_ingredient.unit)
     end
     redirect_to request.referer
     flash[:success] = "All the ingredients have been added to your shopping list"
