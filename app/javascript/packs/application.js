@@ -26,6 +26,7 @@ import { initSelect2 } from "../components/init_select2";
 import { initFlatPickr } from "../plugins/initFlatPicker";
 import { initIngredientAutocomplete } from "../plugins/initIngredientAutocomplete";
 import { initSearchForm } from "../components/init_search_form.js";
+import { initRecipePortion } from "../components/init_recipe_portion.js";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
@@ -36,5 +37,6 @@ document.addEventListener("turbolinks:load", () => {
   // initSelect2();
   initSelect2();
   initIngredientAutocomplete();
-  initSearchForm()
+  initSearchForm();
+  initRecipePortion()
 });
