@@ -8,9 +8,9 @@ const updateIngredientsAmount = (portion) => {
 
 const initRecipePortion = () => {
   const amount = document.querySelector('#portion-amount')
+  if (amount){
   const less =  amount.previousElementSibling
   const more =  amount.nextElementSibling
-  if (amount){
     less.addEventListener('click', ()=>{
       if (amount.innerText === '1') return
       const portion = parseInt(amount.innerText) - 1
