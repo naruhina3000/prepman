@@ -174,8 +174,10 @@
                 <div class="tab-pane fade" id="chose-cookbook" role="tabpanel" aria-labelledby="chose-cookbook-tab">
                   <select name="cookbook_list" id="cookbook_list_id" class="select2" style="width: 100%">
                     <option value="" disabled selected>Choose a list</option>
-                    <% current_user.cookbooks.each do |cbook| %>
-                      <option value="<%= cbook.id %>"><%= cbook.title %></option>
+                    <% if current_user %>
+                      <% current_user.cookbooks.each do |cbook| %>
+                        <option value="<%= cbook.id %>"><%= cbook.title %></option>
+                      <% end %>
                     <% end %>
                   </select>
                   <%= f.submit "Add", class: "btn btn-primary" %>
@@ -259,8 +261,10 @@
                 <div class="tab-pane fade" id="chose-list" role="tabpanel" aria-labelledby="chose-list-tab">
                   <select name="list" id="list_id" class="select2" style="width: 100%">
                     <option value="" disabled selected>Choose a list</option>
-                    <% current_user.shopping_lists.each do |slist| %>
-                      <option value="<%= slist.id %>"><%= slist.title %></option>
+                    <% if current_user %>
+                      <% current_user.shopping_lists.each do |slist| %>
+                        <option value="<%= slist.id %>"><%= slist.title %></option>
+                      <% end %>
                     <% end %>
                   </select>
                   <%= f.submit "Add", class: "btn btn-primary" %>
