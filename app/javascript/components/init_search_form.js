@@ -1,5 +1,5 @@
 const initSearchForm = () => {
-  const modal = document.querySelector("#searchModal")
+  const searchModal = document.querySelector("#searchModal")
   const stars = document.querySelectorAll("#searchModal .starRating")
   const cleanStars = () => stars.forEach((s)=> s.classList.remove('active'))
   if (searchModal){
