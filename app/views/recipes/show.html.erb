@@ -340,7 +340,7 @@
         <span><%= step.number %>. <%= step.description %></span>
         <div>
           <% if step.photo.attached? %>
-            <%= cl_image_tag step.photo.key, class: "img-thumbnail" %>
+            <%= cl_image_tag step.photo.key, class: "card-img-recipe", style: "margin-bottom: 16px;" %>
           <% end %>
         </div>
       <% end %>
@@ -420,7 +420,7 @@
         </div>
         <div>
           <% if review.photo.attached? %>
-            <%= cl_image_tag review.photo.key, class: "card-img-top" %>
+            <%= cl_image_tag review.photo.key, class: "card-img-recipe" %>
           <% end %>
         </div>
 

@@ -1,7 +1,5 @@
-
-<div class="container-fluid">
-
-  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+<div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+  <div class="container-fluid">
     <div class="col-2" style="padding-left: 0px; text-align: left;">
       <%= link_to shopping_lists_path do%>
         <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
@@ -14,14 +12,15 @@
       <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target="#ingredientModal"></i>
     </div>
   </div>
+</div>
 
-
+<div class="container-fluid">
   <hr>
   <div class="list-recipe">
     <h5 class="list-option"><strong><%= link_to "ALL", shopping_list_path(@shopping_list), style: "color: #204742;" %></strong></h5>
     <% @shopping_list.recipes.distinct.pluck(:id, :title).each do |result| %>
       <div style="display: flex;">
-        <%= link_to shopping_list_path(@shopping_list, recipe_id: result[0]) do %>
+        <%= link_to shopping_list_path(@shopping_list, recipe_id: result[0]), class: "#{'active' if params[:recipe_id] && params[:recipe_id].include?(result[0].to_s)}" do %>
         <h5 class="list-option" style="color: #204742;"><%= result[1] %></h5>
         <% end %>
       </div>
@@ -34,7 +33,7 @@
     <% @shopping_list_ingredients.each do |shopping_list_ingredient| %>
         <div class="shopping-ingredients-list">
           <span><%= shopping_list_ingredient.quantity.to_i %>  <%= shopping_list_ingredient.unit %> <%= shopping_list_ingredient.ingredient.name %></span>
-          <%= link_to shopping_list_ingredient_path(shopping_list_ingredient),class: "", method: :delete do %>
+          <%= link_to shopping_list_ingredient_path(shopping_list_ingredient), method: :delete do %>
             <%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %>
           <% end %>
       </div>
