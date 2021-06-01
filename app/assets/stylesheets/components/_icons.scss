@@ -26,3 +26,21 @@
   display: flex;
   padding-top: 10px;
 }
+
+.shopping-list-icon {
+  width: 20px;
+}
+
+.edit-recipe-icon {
+  position: absolute;
+  width: 25px;
+  bottom: 100px;
+  right: 45px;
+}
+
+.delete-recipe-icon {
+  position: absolute;
+  width: 25px;
+  bottom: 100px;
+  right: 10px;
+}

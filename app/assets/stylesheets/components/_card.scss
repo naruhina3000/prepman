@@ -179,26 +179,45 @@
 
 .avg-rating-show {
   position: absolute;
-  top: 440px;
+  top: 430px;
   right: 16px;
   color: #ffd964;
   font-size: medium;
-  font-weight: 400;
+  font-weight: 600;
   z-index: 1000;
+  text-shadow: 2px 2px #204742;
 }
 
-.edit-recipe-icon {
-  position: absolute;
-  width: 25px;
-  bottom: 100px;
-  right: 45px;
+.nutritions {
+    border: 2px solid #204742;
+    border-radius: 8px;
+    height: 80px;
+    width: 80px;
+    border-radius: 58px;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
-.delete-recipe-icon {
-  position: absolute;
-  width: 25px;
-  bottom: 100px;
-  right: 10px;
+
+.shopping-list-edit {
+  text-align: right;
+  display: grid;
+  justify-content: end;
+  padding-right: 24px;
+}
+
+.shopping-list-card {
+  background-image: linear-gradient(rgba(250,250,250,0.85), rgba(250,250,250,0.85)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg);
+  margin-bottom: 16px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 2px 2px #204742;
+
 }
 
 .cookbook-pictures {
