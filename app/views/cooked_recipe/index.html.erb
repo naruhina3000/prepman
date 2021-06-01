@@ -1,6 +1,22 @@
-<% if current_user %>
-  <h3>Made Dishes</h3>
-  <div class="row my-5">
+  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+   <div class="container-fluid">
+    <div class="col-2">
+      <%= link_to user_path(current_user) do%>
+        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
+      <% end %>
+    </div>
+    <div class="col-8" style="justify-content: center">
+      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;">Made Dishes</h4>
+    </div>
+    <div class="col-2" style="padding-right: 0px; text-align: right;">
+    </div>
+  </div>
+  </div>
+
+<div class="container-fluid">
+  <hr>
+  <% if current_user %>
+  <div class="row">
     <% @cooked_recipes.each do |cooked_recipe| %>
       <div class="col-md-4 py-2">
         <%= render 'recipes/card', recipe: cooked_recipe.recipe do %>
@@ -15,3 +31,4 @@
       </div>
     <% end %>
 <% end %>
+</div>

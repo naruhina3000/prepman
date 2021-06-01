@@ -1,13 +1,27 @@
-<div class="container-fluid pt-2">
+<div class="container-fluid">
 
-<h3>My Cookbooks</h3>
+  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+    <div class="col-2">
+      <%= link_to user_path(current_user) do%>
+        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
+      <% end %>
+    </div>
+    <div class="col-8" style="justify-content: center">
+      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;">My Cookbooks</h4>
+    </div>
+    <div class="col-2" style="padding-right: 0px; text-align: right;">
+      <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target=#cookbookModal></i>
+    </div>
+  </div>
+
+  <hr>
 
 <!-- Button trigger modal -->
 
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cookbookModal">
+  <%# <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cookbookModal">
     Add Cookbook
   </button>
-  <hr>
+  <hr> %>
 
 <!-- Modal -->
 <div class="modal fade" id="cookbookModal" tabindex="-1" role="dialog" aria-labelledby="cookbookModalLabel" aria-hidden="true">
@@ -32,7 +46,7 @@
 
 
 
-  <div class="container-fluid py-2" style="margin-bottom: 75px;">
+  <div class="container-fluid py-2" >
     <div class="row">
       <% @cookbooks.each do |cookbook| %>
         <div class="col-md-4 py-2">

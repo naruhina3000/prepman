@@ -1,22 +1,33 @@
-<div class="container-fluid py-2" style="margin-bottom: 75px;">
+  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+   <div class="container-fluid">
+   <div class="col-2">
+      <%= link_to cookbooks_path do%>
+        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
+      <% end %>
+    </div>
+    <div class="col-8" style="justify-content: center">
+      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;"><%= @cookbook.title %></h4>
+      <h5 style="margin-bottom: 0px; text-align: center; padding: 0px;">by
+        <% if @user.username.blank? %>
+          <%= link_to "Hero with no name", user_path(@user) %>
+        <% else %>
+          <%= link_to "#{@user.username}", user_path(@user) %>
+        <% end %>
 
-<div class="container-fluid py-2">
-<h1><%= @cookbook.title %> </h1>
+        <% if @user.photo.attached? %>
+          <%= cl_image_tag @user.photo.key, class:"avatar" %>
+        <% else %>
+          <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+      <% end %>
+      </h5>
+    </div>
+    <div class="col-2" style="padding-right: 0px; text-align: right;">
+    </div>
+  </div>
+  </div>
 
-<h4 class="m-0" style="padding-bottom: 2px;">by
-  <% if @user.username.blank? %>
-    <%= link_to "Hero with no name", user_path(@user) %>
-  <% else %>
-    <%= link_to "#{@user.username}", user_path(@user) %>
-  <% end %>
-
-  <% if @user.photo.attached? %>
-    <%= cl_image_tag @user.photo.key, class:"avatar" %>
-  <% else %>
-    <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
-<% end %>
-</h4>
-
+<div class="container-fluid">
+  <hr>
 <% if current_user == @user %>
     <% if @cookbook.status == "private" %>
       <p class= "btn btn-danger"><%= @cookbook.status %></p>
