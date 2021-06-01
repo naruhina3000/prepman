@@ -2,23 +2,23 @@
   <div class="navbar navbar-lewagon" style="height: 75px;">
     <div class="grid" style="color: white;">
       <div class="col m-auto">
-        <%= link_to recipes_path, class:"menu-icons" do %>
-          <%= image_tag("Recipe.png", alt: "Recipes") %>
+        <%= link_to recipes_path do %>
+          <%= image_tag("Recipe.png", alt: "Recipes", class:"menu-icons") %>
         <% end %>
       </div>
       <div class="col m-auto">
-        <%= link_to planners_path, class:"menu-icons" do %>
-          <%= image_tag("calendar.png", alt: "Planner") %>
+        <%= link_to planners_path do %>
+          <%= image_tag("calendar.png", alt: "Planner", class:"menu-icons") %>
         <% end %>
       </div>
       <div class="col m-auto">
-        <%= link_to new_recipe_path, class:"menu-icons" do %>
-          <%= image_tag("add-recipe.png", alt: "Add") %>
+        <%= link_to new_recipe_path do %>
+          <%= image_tag("add-recipe.png", alt: "Add", class:"menu-icons") %>
         <% end %>
       </div>
       <div class="col m-auto">
-        <%= link_to shopping_lists_path, class:"menu-icons" do %>
-          <%= image_tag("shopping-list.png", alt: "Shopping List") %>
+        <%= link_to shopping_lists_path do %>
+          <%= image_tag("shopping-list.png", alt: "Shopping List", class:"menu-icons") %>
         <% end %>
       </div>
       <div class="col m-auto">
@@ -29,8 +29,8 @@
               <%# class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
           <% else %>
-            <%= link_to user_path(current_user), class:"avatar" do %>
-              <%= image_tag("user.png", alt: "Profile") %>
+            <%= link_to user_path(current_user) do %>
+              <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
             <% end %>
           <% end %>
         <% else %>
