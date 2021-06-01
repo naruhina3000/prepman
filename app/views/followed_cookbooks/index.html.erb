@@ -1,13 +1,19 @@
-
+<div class="container-fluid py-2" style="margin-bottom: 75px;">
 
 <% if current_user %>
- <h3>Followed Cookbooks</h3>
-  <div class="row my-5">
-    <% @followed_cookbooks.each do |fcookbook| %>
-      <div class="col-md-4 py-2">
-        <%= fcookbook.cookbook.title %>
-        <%= link_to "see cookbook", cookbook_path(fcookbook) %>
-      </div>
-    <% end %>
+<h1>Followed Cookbooks</h1>
+      <div class="row">
+      <% @followed_cookbooks.each do |fcookbook| %>
+        <div class="col-md-4 py-2">
+            <%= render 'cookbooks/cookbook_card', cookbook: fcookbook.cookbook do %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 <% end %>
+
+
+</div>
+
 

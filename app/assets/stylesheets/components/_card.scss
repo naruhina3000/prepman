@@ -219,3 +219,64 @@
   box-shadow: 2px 2px #204742;
 
 }
+
+.cookbook-pictures {
+  display: flex;
+}
+
+.cookbook-pictures .main-img {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-top-left-radius: 20px;
+}
+
+.cookbook-pictures .cookbook-pictures-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.cookbook-pictures .side-img {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+  border-top-right-radius: 20px;
+}
+
+.cookbook-pictures .side-img-bottom {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.cookbook-pictures .placeholder-main {
+  height: 200px;
+  width: 100%;
+  object-fit: cover;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+}
+
+.cookbook-pictures .placeholder-side {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+  border-top-right-radius: 20px;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3));
+}
+
+.cookbook-pictures .placeholder-side-bottom {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3));
+}
+
+.delete-cookbook-icon {
+  position: absolute;
+  width: 25px;
+  bottom: 60px;
+  right: 10px;
+}
