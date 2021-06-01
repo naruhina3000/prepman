@@ -1,7 +1,71 @@
-  <h3>Planner</h3>
-  <% @planners.each do |planner| %>
-    <%= planner.date %>
-    <%= planner.recipe.title %>
-    <%= link_to "x", planner_path(planner), method: :delete %>
+<div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+  <div class="container-fluid">
+    <div class="col-2"></div>
+    <div class="col-8" style="justify-content: center">
+      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;">Meal Plan</h4>
+    </div>
+    <div class="col-2" style="padding-right: 0px; text-align: right;">
+      <%= link_to recipes_path do%>
+        <i class="fas fa-plus-circle" style="font-size: 25px; color: #204742;"></i>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="container-fluid">
+  <hr>
+  <% @planners.where('date >= ?', Date.today).order(:date).each do |planner| %>
+    <% if planner.date == Date.today() %>
+      <h4>Today</h4>
+    <% else %>
+      <h4><%= Date::DAYNAMES[planner.date.day + 1][0..2] %>, <%= planner.date.day %> <%= Date::MONTHNAMES[planner.date.day][0..2] %></h4>
+    <% end %>
+    <% if planner.recipe.photo.attached? %>
+      <%= cl_image_tag planner.recipe.photo.key, class: "card-img-recipe" %>
+    <% else %>
+      <%= image_tag "placeholder_recipe.jpg", class: "card-img-recipe" %>
+    <% end %>
+    <div class="planner-list">
+      <span><%= planner.recipe.title %></span>
+      <%= link_to planner_path(planner), method: :delete do %>
+        <%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %>
+      <% end %>
+    </div>
+    <div class="row planner-recipe-info" style="padding-left: 15px">
+      <div style="margin-right: 12px;">
+        <% case %>
+        <% when planner.recipe.diet == "Vegan" %>
+        <%= image_tag "vegan.svg", class: "diet-logo", style: "width:24px" %>
+        <% when planner.recipe.diet == "Vegetarian" %>
+        <%= image_tag "vegetarian.svg", class: "diet-logo", style: "width:24px" %>
+        <% when planner.recipe.diet == "Pescetarian" %>
+        <%= image_tag "pescetarian.svg", class: "diet-logo", style: "width:24px" %>
+        <% when planner.recipe.diet == "I eat everything" %>
+        <%= image_tag "meat.svg", class: "diet-logo", style: "width:24px" %>
+        <% when planner.recipe.diet == "Lactose-free" %>
+        <%= image_tag "lactose-free.svg", class: "diet-logo", style: "width:24px" %>
+        <% else planner.recipe.diet == "Gluten-free" %>
+        <%= image_tag "gluten-free.svg", class: "diet-logo", style: "width:24px" %>
+        <% end %>
+      </div>
+
+      <p class="m-0"><%= image_tag "clock.svg", class: "diet-logo", style: "width:24px" %>
+
+      <% if planner.recipe.total_time < 60 %>
+          ~<%= planner.recipe.total_time %> min
+      <% else %>
+          ~<%= (planner.recipe.total_time.to_f/60).floor %> h
+          <%= (((planner.recipe.total_time.to_f/60)-(planner.recipe.total_time.to_f/60).floor)*60).floor %> min
+      <% end %>
+      </p>
+    </div>
     <hr>
   <% end %>
+
+</div>
+
+
+
