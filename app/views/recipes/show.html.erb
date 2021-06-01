@@ -406,8 +406,17 @@
           </div>
 
         </div>
-        <div class="" style="padding-top: 4px;">
-          <%= review.content %>
+        <div class="row" style="padding-top: 4px;">
+          <div class="col-8">
+            <%= review.content %>
+          </div>
+          <div class="col-4" style="text-align: right; padding: 0px; padding-right: 15px; font-size: small;">
+            <% if (Date.today() - review.created_at.to_date) < 1 %>
+              <span>Today</span>
+            <% else %>
+              <span><%= pluralize (Date.today - review.created_at.to_date).to_i, "day" %> ago</span>
+            <% end %>
+          </div>
         </div>
         <div>
           <% if review.photo.attached? %>

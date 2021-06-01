@@ -1,3 +1,5 @@
+require 'date'
+
 class RecipesController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   before_action :set_recipe, only: [:show, :edit, :update, :destroy, :add_to_shopping_list, :add_to_cookbook, :publish]
@@ -54,6 +56,7 @@ class RecipesController < ApplicationController
     @cookbook = Cookbook.new
     @review = Review.new
     @user = @recipe.user
+    @now = Date.today()
   end
 
   def update
