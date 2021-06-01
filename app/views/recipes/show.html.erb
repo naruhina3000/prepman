@@ -1,10 +1,10 @@
   <div class="navbar navbar-inner sticky-top">
     <div class="container-fluid h-40" style="padding-bottom: 8px;">
       <div class="row" style="padding-left: 15px">
-        <%= link_to recipe_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToCookbookModal"} do %>
+        <%= link_to recipe_path(@recipe), class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToCookbookModal"} do %>
           <%= image_tag("cookbook.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
         <% end %>
-        <%= link_to recipe_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToPlannerModal"} do %>
+        <%= link_to recipe_path(@recipe), class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToPlannerModal"} do %>
           <%= image_tag("yellow-calendar.png", class:"search", style:"height: 24px; margin-left: 0px;", alt: "Search") %>
         <% end %>
       </div>
@@ -35,7 +35,7 @@
     <% if @recipe.average_rating == 0 %>
       <span>No ratings yet <span>
     <% else %>
-      <%= @recipe.average_rating.round%>  <i class="fas fa-star"></i>
+      <%= @recipe.average_rating.round(1) %>  <i class="fas fa-star"></i>
     <% end %>
   </div>
 
@@ -209,8 +209,9 @@
       <p class="recipe-categories"><%= @recipe.dish_type %></p>
       <p class="recipe-categories"><%= @recipe.occasion %></p>
     </div>
-    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
 
+    <h4 style="padding: 12px 0px;">Nutrition: per serving </h4>
+    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
       <div class="nutritions">
         <div class="bd-highlight text-center">Cal</div>
         <div class="bd-highlight text-center"><%= @recipe.calories %></div>
@@ -235,15 +236,15 @@
 
     <hr>
 
-    <h4><strong>Portion:</strong></h4>
+    <h4><strong>Portion</strong></h4>
 
-    <div class="row mx-auto" style="width: 100%; justify-content: space-evenly; align-items: center; ">
+    <div class="row mx-auto" style="width: 100%; justify-content: space-evenly; align-items: center; margin-bottom: 16px; ">
       <i class="fas fa-minus-circle" style="font-size: 25px"></i>
       <span id="portion-amount" style="font-size: 45px; text-align: center;">1</span>
       <i class="fas fa-plus-circle" style="font-size: 25px"></i>
     </div>
 
-    <h5><strong>Ingredients:</strong></h5>
+    <h4 style="padding-bottom: 8px; "><strong>Ingredients:</strong></h4>
     <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
       <p><span data-unit="<%= recipe_ingredient.quantity.round / @recipe.portion %>" class="ingredient-amount"><%= recipe_ingredient.quantity.round / @recipe.portion %></span> <%= recipe_ingredient.unit %> <%= recipe_ingredient.ingredient.name %></p>
     <% end %>
@@ -319,52 +320,117 @@
  -->
 
   <!-- Modal -->
+  <hr>
 
+  <h5><strong>Utensils</strong></h5>
+    <% if @recipe.recipe_utensils.count > 0 %>
+      <% @recipe.recipe_utensils.each do |recipe_utensil| %>
+        <span><%= recipe_utensil.quantity%> <%= recipe_utensil.utensil.name %> • </span>
+      <% end %>
+    <% else %>
+      <span> No utensils needed </span>
+    <% end %>
+
+
+  <hr>
+
+ <h5><strong>Steps</strong></h5>
+    <% if @recipe.steps.count > 0 %>
+      <% @recipe.steps.each do |step| %>
+        <span><%= step.number %>. <%= step.description %></span>
+        <div>
+          <% if step.photo.attached? %>
+            <%= cl_image_tag step.photo.key, class: "img-thumbnail" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <p> Easy peasy. No steps to prepare this dish!. </p>
+    <% end %>
 
 
   <% if current_user %>
     <% if current_user.has_cooked_recipe?(@recipe) %>
       <%= link_to "Recipe Cooked", cooked_recipe_path(current_user.has_cooked_recipe?(@recipe)), method: :delete, class: "btn btn-info" %>
     <% else %>
-      <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
+      <div style="width: 100%; display: flex; justify-content: center;">
+        <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
+     </div>
     <% end %>
   <% end %>
 
 
-
-  <div class="row px-15" style="margin-bottom: 30px; padding-left: 15px;">
-    <div class="pt-3">
-      <div class="d-flex justify-content-between pr-8">
-        <h4 class="my-auto">Reviews</h4>
-        <span class="my-auto my-0"><%= @recipe.reviews.count %> reviews | Average Rating: <%= @recipe.average_rating %> <i class="fas fa-star"></i></span>
-      </div>
-
-      <% @recipe.reviews.each do |review| %>
-        <p><strong>Rating: </strong>
-          <% (review.rating).times do %>
-            <i class="fas fa-star"></i>
-          <% end %>
-          <% (5 - review.rating).times do %>
-            <i class="far fa-star"></i>
-          <% end %>
-        </p>
-        <p><strong>Review: </strong><%= review.content %> </p>
-        <div class="short-line"></div>
+  <hr>
+  <div class="row px-15" style="margin-bottom: 30px; padding: 0px 15px; align-items: center;">
+    <div class="col-7" style="padding: 0px;">
+      <h5 style="margin: 0px;"><strong>Reviews</strong></h5>
+    </div>
+    <div class="col-3" style="padding: 0px; text-align: center; border-right: 1px solid">
+      <%= pluralize @recipe.reviews.count, "review" %>
+    </div>
+    <div class="col-2" style="padding: 0px; text-align: right">
+      <% if @recipe.average_rating == 0 %>
+        <%= @recipe.average_rating.round %><i class="fas fa-star"></i>
+      <% else %>
+        <%= @recipe.average_rating.round(1) %> <i class="fas fa-star"></i>
       <% end %>
     </div>
   </div>
+
+
+
+
+      <% @recipe.reviews.each do |review| %>
+        <div  id="review-<%= review.id  %>" class="row px-15" style="margin-bottom: 0px; padding: 0px 15px; align-items: center; justify-content: space-between;">
+          <div style="margin-right: 8px;">
+            <% if review.user.photo.attached? %>
+              <%= cl_image_tag review.user.photo.key, class:"avatar" %>
+            <% else %>
+              <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+            <% end %>
+
+          <% if review.user.username.blank? %>
+            <%= link_to "Hero with no name", user_path(review.user) %>
+          <% else %>
+            <%= link_to "#{review.user.username}", user_path(review.user) %>
+          <% end %>
+          </div>
+
+          <div>
+            <% (review.rating).times do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+            <% (5 - review.rating).times do %>
+              <i class="far fa-star"></i>
+            <% end %>
+          </div>
+
+        </div>
+        <div class="" style="padding-top: 4px;">
+          <%= review.content %>
+        </div>
+        <div>
+          <% if review.photo.attached? %>
+            <%= cl_image_tag review.photo.key, class: "img-thumbnail" %>
+          <% end %>
+        </div>
+
+        <hr>
+      <% end %>
+
+
 
   <div class="row" style="padding-left: 15px;">
     <div class="card-text">
       <h4>Review</h4>
-      <%= simple_form_for [ @recipe, @review ] do |f| %>
-        <%= f.input :rating, collection: Review::RATING %>
+      <%= simple_form_for [ @recipe, @review ], remote: true do |f| %>
+        <%= f.input :rating, collection: ["1", "2", "3", "4", "5"] %>
         <%= f.input :content %>
+        <%= f.input :photo, as: :file %>
         <%= f.submit "Review" %>
       <% end %>
     </div>
   </div>
-  <div style="height: 77px;"></div>
 </div>
 
 
