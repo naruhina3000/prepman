@@ -10,35 +10,36 @@
     <div class="col-8" style="justify-content: center">
       <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;"><%= @shopping_list.title %></h4>
     </div>
-    <div class="col-2"></div>
+        <div class="col-2" style="padding-right: 0px; text-align: right;">
+      <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target="#ingredientModal"></i>
+    </div>
   </div>
 
 
   <hr>
-
-
-  <div class="container-fluid">
-      <div class="row my-5">
-          <% @shopping_list.shopping_list_ingredients.each do |shopping_list_ingredient| %>
-              <div class="col-md-6 py-2">
-                  <div class="card m-0">
-                      <div class="card border-0" style="width: 100%; height: 100%">
-                          <div class="card-body flex-grow-1 p-3">
-                          <p><%= shopping_list_ingredient.quantity.to_i %></p>
-                          <p><%= shopping_list_ingredient.unit %></p>
-                          <p><%= shopping_list_ingredient.ingredient.name %></p>
-                          <%= link_to "x", shopping_list_ingredient_path(shopping_list_ingredient), method: :delete %>
-                      </div>
-                  </div>
-              </div>
-            </div>
+  <div class="list-recipe">
+    <h5 class="list-option"><strong><%= link_to "ALL", shopping_list_path(@shopping_list), style: "color: #204742;" %></strong></h5>
+    <% @shopping_list.recipes.distinct.pluck(:id, :title).each do |result| %>
+      <div style="display: flex;">
+        <%= link_to shopping_list_path(@shopping_list, recipe_id: result[0]) do %>
+        <h5 class="list-option" style="color: #204742;"><%= result[1] %></h5>
         <% end %>
+      </div>
+    <% end %>
   </div>
 
 
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ingredientModal">
-    Add Ingredient
-  </button>
+
+  <div class="container-fluid">
+    <% @shopping_list_ingredients.each do |shopping_list_ingredient| %>
+        <div class="shopping-ingredients-list">
+          <span><%= shopping_list_ingredient.quantity.to_i %>  <%= shopping_list_ingredient.unit %> <%= shopping_list_ingredient.ingredient.name %></span>
+          <%= link_to shopping_list_ingredient_path(shopping_list_ingredient),class: "", method: :delete do %>
+            <%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %>
+          <% end %>
+      </div>
+    <% end %>
+  </div>
 
 
   <!-- Modal -->

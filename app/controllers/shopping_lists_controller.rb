@@ -20,6 +20,7 @@ class ShoppingListsController < ApplicationController
     @shopping_lists = current_user.shopping_lists
     @shopping_list_ingredient = ShoppingListIngredient.new
     @shopping_list_ingredients = @shopping_list.shopping_list_ingredients
+    @shopping_list_ingredients = @shopping_list_ingredients.where(recipe_id: params[:recipe_id]) if params[:recipe_id].present?
   end
 
 
