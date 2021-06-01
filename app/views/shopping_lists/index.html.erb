@@ -35,26 +35,24 @@
   </div>
 
   <% @shopping_lists.each do |shopping_list| %>
-  <div class="cointaner-fluid shopping-list-card">
-    <div class="row" style="padding: 12px;">
-      <div class="col-8">
-        <% if (Date.today() - shopping_list.created_at.to_date) < 1 %>
-          <span>Today</span>
-        <% else %>
-          <span><%= pluralize (Date.today - shopping_list.created_at.to_date).to_i, "day" %> ago</span>
-        <% end %>
-        <h4><%= shopping_list.title %></h4>
-      </div>
-      <div class="col-4 shopping-list-edit">
-        <%= link_to shopping_list_path(shopping_list) do %>
-          <%= image_tag("edit.svg", alt: "see-list", class: "shopping-list-icon") %>
-        <% end %>
-        <%= link_to shopping_list_path(shopping_list), method: :delete do %>
-          <%= image_tag("bin.svg", alt: "delete", class: "shopping-list-icon") %>
-        <% end %>
-      </div>
+    <div class="shopping-list-card-wrapper">
+      <%= link_to shopping_list_path(shopping_list) do %>
+        <div class="shopping-list-card p-2" style="background-image: linear-gradient(rgba(250,250,250,0.9), rgba(250,250,250,0.9)), url(https://loremflickr.com/<%= rand(330..360) %>/<%= rand(50..100) %>/food);">
+          <div class="row">
+            <div class="col-8" style="padding-left: 40px; color: #204742;">
+              <% if (Date.today() - shopping_list.created_at.to_date) < 1 %>
+                <span>Today</span>
+              <% else %>
+                <span><%= pluralize (Date.today - shopping_list.created_at.to_date).to_i, "day" %> ago</span>
+              <% end %>
+              <h4><%= shopping_list.title %></h4>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <%= link_to shopping_list_path(shopping_list),class: "shopping-list-icon", method: :delete do %>
+        <%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %>
+      <% end %>
     </div>
-  </div>
   <% end %>
-
 </div>
