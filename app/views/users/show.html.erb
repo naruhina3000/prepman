@@ -87,7 +87,7 @@
 <div class="tab-content" id="nav-tabContent">
 
       <div class="tab-pane fade show active" id="nav-favorites" role="tabpanel" aria-labelledby="nav-favorites-tab">
-            <div class="container-fluid py-2" style="margin-bottom: 75px;">
+            <div class="container-fluid py-2">
               <div class="row">
                 <% @favorites.each do |favorite| %>
                   <div class="col-md-4 py-2">
@@ -101,7 +101,7 @@
   <!-- <hr> -->
 
   <div class="tab-pane fade" id="nav-my-recipes" role="tabpanel" aria-labelledby="nav-my-recipes-tab">
-  <div class="container-fluid py-2" style="margin-bottom: 75px;">
+  <div class="container-fluid py-2" >
     <div class="row">
       <% @recipes.each do |recipe| %>
         <div class="col-md-4 py-2">
@@ -122,7 +122,7 @@
   </div>
 
   <div class="tab-pane fade" id="nav-cookbooks" role="tabpanel" aria-labelledby="nav-cookbooks-received-tab">
-  <div class="container-fluid py-2" style="margin-bottom: 75px;">
+  <div class="container-fluid py-2">
 
   <!-- Button trigger modal -->
   <% if current_user == @user %>
