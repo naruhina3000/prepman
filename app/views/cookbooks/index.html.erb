@@ -30,10 +30,13 @@
 
 
 
-
-  <% @cookbooks.each do |cookbook| %>
-    <%= cookbook.title %>
-    <%= link_to "see cookbook", cookbook_path(cookbook) %>
-    <%= link_to "x", cookbook_path(cookbook), method: :delete %>
-    <hr>
-  <% end %>
+  <div class="container-fluid py-2" style="margin-bottom: 75px;">
+    <div class="row">
+      <% @cookbooks.each do |cookbook| %>
+        <div class="col-md-4 py-2">
+            <%= render 'cookbook_card', cookbook: cookbook do %>
+            <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
