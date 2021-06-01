@@ -5,11 +5,12 @@ class ReviewsController < ApplicationController
     @review.recipe = @recipe
     @review.user = current_user
     if @review.save
-      redirect_to @recipe
+      redirect_to recipe_path(@recipe, anchor:"review-#{@review.id}")
     else
       @planner = Planner.new
       @shopping_list = ShoppingList.new
       render 'recipes/show'
+      # render recipe_path(@recipe, anchor:"review-#{@review.id}")
     end
   end
 
@@ -17,6 +18,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:rating, :content, :reply)
+    params.require(:review).permit(:rating, :content, :photo)
   end
 end
