@@ -3,23 +3,83 @@
     <div class="cookbook-pictures">
     <% if cookbook.cookbook_recipes != [] %>
           <% if cookbook.cookbook_recipes[0].recipe.photo.attached? %>
-          <%= cl_image_tag cookbook.cookbook_recipes[0].recipe.photo.key, class: "card-img-top" %>
+          <%= cl_image_tag cookbook.cookbook_recipes[0].recipe.photo.key, class: "main-img" %>
           <% else %>
-          <%= image_tag "placeholder_recipe.jpg", class: "card-img-top" %>
+          <%= image_tag "placeholder_recipe.jpg", class: "main-img" %>
           <% end %>
-        <div>
-            <img class="card-img-top" src="..." alt="Card image cap">
-            <img class="card-img-top" src="..." alt="Card image cap">
+        <div class="cookbook-pictures-left">
+
+        <% if cookbook.cookbook_recipes[1] %>
+          <% if cookbook.cookbook_recipes[1].recipe.photo.attached? %>
+          <%= cl_image_tag cookbook.cookbook_recipes[1].recipe.photo.key, class: "side-img" %>
+          <% else %>
+          <%= image_tag "placeholder_recipe.jpg", class: "side-img" %>
+          <% end %>
+           <% else %>
+            <div class="placeholder-side">
+            <%= image_tag "plus.jpg", class: "side-img" %>
+            </div>
+        <% end %>
+
+        <% if cookbook.cookbook_recipes[2] %>  
+          <% if cookbook.cookbook_recipes[2].recipe.photo.attached? %>
+          <%= cl_image_tag cookbook.cookbook_recipes[2].recipe.photo.key, class: "side-img-bottom" %>
+          <% else %>
+          <%= image_tag "placeholder_recipe.jpg", class: "side-img-bottom" %>
+          <% end %>
+         <% else %>
+            <div class="placeholder-side">
+            <%= image_tag "plus.jpg", class: "side-img-bottom" %>
+            </div>
+        <% end %>
+        </div>
+        
+        <% else %>
+        <div class="placeholder-main">
+        <%= image_tag "plus.jpg", class: "placeholder-main" %>
         </div>
     <% end %>
-    
+    <p class="favorite-count"><strong><%= cookbook.followed_cookbooks.count %></strong></p>
+    <%= image_tag("followers-yellow.svg", class:"bookmark", alt: "followers") %>
     </div>
     
     <%= yield %>
-    <div class="card-body">
-        <%= cookbook.title %>
-        <%= link_to "see cookbook", cookbook_path(cookbook) %>
-        <%= link_to "x", cookbook_path(cookbook), method: :delete %>
+    
+    <div class="container-fluid transparent">
+    <div class="row" style="padding-left: 8px; padding-top: 6px;">
+        <%= link_to "#{cookbook.title}", cookbook, style: "color: #204742; font-size: x-large" %>
+         <% if current_user == cookbook.user %>
+          <%= link_to cookbook_path(cookbook), method: :delete do %>
+          <% end %>
+         <% end %>
     </div>
+
+    <div class="row recipe-info">
+    <p class="m-0" style="padding-bottom: 2px;">Recipe by
+    <% if cookbook.user.username.blank? %>
+        <%= link_to "Hero with no name", user_path(cookbook.user) %>
+    <% else %>
+        <%= link_to "#{cookbook.user.username}", user_path(cookbook.user) %>
+    <% end %>
+
+    <% if cookbook.user.photo.attached? %>
+        <%= cl_image_tag cookbook.user.photo.key, class:"avatar" %>
+    <% else %>
+        <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+    <% end %>
+
+    </p>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
     </div>
 </div>
