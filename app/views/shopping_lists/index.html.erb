@@ -1,41 +1,60 @@
-  <h3>Shopping List</h3>
-  <%#= link_to "Add List", new_shopping_list_path, class: "btn btn-info my-2 my-sm-0 mr-2" %>
+
+<div class="container-fluid">
+
+  <div class="navbar sticky-top" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+    <div class="col-2"></div>
+    <div class="col-8" style="justify-content: center">
+      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;">Shopping List</h4>
+    </div>
+    <div class="col-2" style="padding-right: 0px; text-align: right;">
+      <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target="#addShoppingList"></i>
+    </div>
+  </div>
 
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addShoppingList">
-  Create Shopping List
-</button>
+  <hr>
 
-<hr>
-
-<!-- Modal -->
-<div class="modal fade" id="addShoppingList" tabindex="-1" role="dialog" aria-labelledby="addShoppingListLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Shopping List:</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+  <!-- Modal -->
+  <div class="modal fade" id="addShoppingList" tabindex="-1" role="dialog" aria-labelledby="addShoppingListLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New Shopping List:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for @shopping_list do |f| %>
+            <%= f.input :title, type: :text %>
+            <%= f.submit "Add", class:"btn btn-primary"%>
+          <% end %>
+        </div>
       </div>
-      <div class="modal-body">
-        <%= simple_form_for @shopping_list do |f| %>
-          <%= f.input :title, type: :text %>
-          <%= f.submit "Add" %>
+    </div>
+  </div>
+
+  <% @shopping_lists.each do |shopping_list| %>
+  <div class="cointaner-fluid shopping-list-card">
+    <div class="row" style="padding: 12px;">
+      <div class="col-8">
+        <% if (Date.today() - shopping_list.created_at.to_date) < 1 %>
+          <span>Today</span>
+        <% else %>
+          <span><%= pluralize (Date.today - shopping_list.created_at.to_date).to_i, "day" %> ago</span>
+        <% end %>
+        <h4><%= shopping_list.title %></h4>
+      </div>
+      <div class="col-4 shopping-list-edit">
+        <%= link_to shopping_list_path(shopping_list) do %>
+          <%= image_tag("edit.svg", alt: "see-list", class: "shopping-list-icon") %>
+        <% end %>
+        <%= link_to shopping_list_path(shopping_list), method: :delete do %>
+          <%= image_tag("bin.svg", alt: "delete", class: "shopping-list-icon") %>
         <% end %>
       </div>
     </div>
   </div>
-</div>
-
-
-
-
-  <% @shopping_lists.each do |shopping_list| %>
-    <%= shopping_list.title %>
-    <%= link_to "see shopping list", shopping_list_path(shopping_list) %>
-    <%= link_to "x", shopping_list_path(shopping_list), method: :delete %>
-    <hr>
   <% end %>
 
+</div>

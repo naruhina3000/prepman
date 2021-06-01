@@ -202,16 +202,20 @@
     margin-bottom: 12px;
 }
 
-.edit-recipe-icon {
-  position: absolute;
-  width: 25px;
-  bottom: 100px;
-  right: 45px;
+
+.shopping-list-edit {
+  text-align: right;
+  display: grid;
+  justify-content: end;
+  padding-right: 24px;
 }
 
-.delete-recipe-icon {
-  position: absolute;
-  width: 25px;
-  bottom: 100px;
-  right: 10px;
+.shopping-list-card {
+  background-image: linear-gradient(rgba(250,250,250,0.85), rgba(250,250,250,0.85)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg);
+  margin-bottom: 16px;
+  border-radius: 20px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 2px 2px #204742;
+
 }
