@@ -1,8 +1,23 @@
-<div class="container">
+<div class="container-fluid">
+
+  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+    <div class="col-2">
+      <%= link_to recipes_path do%>
+        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
+      <% end %>
+    </div>
+    <div class="col-8" style="justify-content: center">
+      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;">Create your own Recipe</h4>
+    </div>
+    <div class="col-2" style="padding-right: 0px; text-align: right;"></div>
+  </div>
+
+<div class="container-fluid">
+  <hr>
+
   <div class="row">
-    <div class="col-md-6 mx-auto my-5">
+    <div class="col-md-6 mx-auto">
       <div class="card p-4">
-        <h1>Create your recipe</h1>
           <%= simple_form_for @recipe do |f| %>
             <%= f.input :title %>
             <%= f.input :description %>
@@ -15,6 +30,7 @@
             <%= f.input :dish_type, collection: Recipe::DISHTYPE, input_html: { class: 'select2' } %>
             <%= f.input :cuisine, collection: Recipe::CUISINE, input_html: { class: 'select2' } %>
             <%= f.input :occasion, collection: Recipe::OCCASION, input_html: { class: 'select2' } %>
+            <h5>Nutritions per serving</h5>
             <%= f.input :calories %>
             <%= f.input :protein %>
             <%= f.input :fat %>
@@ -23,8 +39,7 @@
             <%= f.submit "Add ingredients", class:"btn btn-primary" %>
           <% end %>
       </div>
-      <hr>
-      <%= link_to "Back", recipes_path, class: "btn btn-warning" %>
     </div>
   </div>
+</div>
 </div>
