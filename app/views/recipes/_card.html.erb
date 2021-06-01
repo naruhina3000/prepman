@@ -5,44 +5,34 @@
           <% else %>
           <%= image_tag "placeholder_recipe.jpg", class: "card-img-top" %>
           <% end %>
-<!--           <div class="card-body transparent flex-grow-1 p-3">
-              <%= link_to "#{recipe.title}", recipe, style: "color: black; font-size: x-large" %>
-              <span><strong>ID: </strong><%= recipe.id %></span>
-              <span><strong>Diet: </strong><%= recipe.diet %></span>
-              <span><strong>Dish Type: </strong><%= recipe.dish_type %></span>
-              <span><strong>Cuisine: </strong><%= recipe.cuisine %></span>
-              <span><strong>Occasion: </strong><%= recipe.occasion %></span>
-              <span><strong>Difficulty: </strong><%= recipe.difficulty %></span>
-              <span><strong>Rating: </strong><%= recipe.average_rating %></span>
-          </div> -->
-
-            <p class="favorite-count"><strong><%= recipe.favorites.count %></strong></p>
-            <% if current_user %>
-              <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
-                <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
-              <% end %>
-                <% if current_user.has_favorite?(recipe) %>
-                  <%= link_to favorite_path(current_user.has_favorite?(recipe)), method: :delete, class:"bookmark", remote: true do %>
-                    <%= image_tag("bookmark-solid.svg", class:"like-icon", alt: "current-favorite") %>
-                  <% end %>
-                <% else %>
-                  <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
-                    <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
-                  <% end %>
-              <% end %>
-             <% else %>
-              <%= link_to new_user_session_path, class:"bookmark" do %>
-                <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
-              <% end %>
-            <% end %>
-
-            <div class="avg-rating">
+          <div class="card-nav">
+            <div class="" style="color: #FFD964; text-shadow: 0 0 black; font-weight: 600; font-size: smaller;">
               <% if recipe.average_rating == 0 %>
                 <span>No ratings yet <span>
               <% else %>
                 <%= recipe.average_rating%>  <i class="fas fa-star"></i>
               <% end %>
             </div>
+              <p class="favorite-count"><strong><%= recipe.favorites.count %></strong></p>
+              <% if current_user %>
+                <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
+                  <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
+                <% end %>
+                  <% if current_user.has_favorite?(recipe) %>
+                    <%= link_to favorite_path(current_user.has_favorite?(recipe)), method: :delete, class:"bookmark", remote: true do %>
+                      <%= image_tag("bookmark-solid.svg", class:"like-icon", alt: "current-favorite") %>
+                    <% end %>
+                  <% else %>
+                    <%= link_to recipe_favorites_path(recipe) , method: :post, class:"bookmark", remote: true do %>
+                      <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
+                    <% end %>
+                <% end %>
+               <% else %>
+                <%= link_to new_user_session_path, class:"bookmark" do %>
+                  <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
+                <% end %>
+              <% end %>
+          </div>
 
           <%= yield %>
           <div class="container-fluid transparent">
