@@ -1,11 +1,13 @@
+<div class="container-fluid pt-2">
+
 <h3>My Cookbooks</h3>
 
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cookbookModal">
-  Cookbook
-</button>
 
-<hr>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cookbookModal">
+    Add Cookbook
+  </button>
+  <hr>
 
 <!-- Modal -->
 <div class="modal fade" id="cookbookModal" tabindex="-1" role="dialog" aria-labelledby="cookbookModalLabel" aria-hidden="true">
@@ -35,8 +37,10 @@
       <% @cookbooks.each do |cookbook| %>
         <div class="col-md-4 py-2">
             <%= render 'cookbook_card', cookbook: cookbook do %>
+            <%= image_tag("bin.svg", alt: "settings", class: "delete-cookbook-icon") %>
             <% end %>
         </div>
       <% end %>
     </div>
   </div>
+</div>
