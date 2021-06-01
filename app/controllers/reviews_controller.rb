@@ -9,7 +9,8 @@ class ReviewsController < ApplicationController
     else
       @planner = Planner.new
       @shopping_list = ShoppingList.new
-      render 'recipes/show'
+      redirect_to new_user_session_path
+      # render 'recipes/show'
       # render recipe_path(@recipe, anchor:"review-#{@review.id}")
     end
   end
