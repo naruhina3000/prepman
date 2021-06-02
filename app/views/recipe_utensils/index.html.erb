@@ -1,28 +1,43 @@
 <div class="container-fluid">
-    <div class="row my-5">
+
+  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+    <div class="col-2">
+      <%= link_to recipe_recipe_ingredients_path(@recipe) do%>
+        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
+      <% end %>
+    </div>
+    <div class="col-8" style="justify-content: center">
+      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;">Recipe Utensils</h4>
+    </div>
+    <div class="col-2" style="padding-right: 0px; text-align: right;">
+      <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target=#utensilModal></i>
+    </div>
+  </div>
+
+  <hr>
+
+
+
+    <div class="container-fluid">
+    <%= link_to "Go to steps", recipe_steps_path(@recipe), class: "btn btn-warning mb-3" %>
         <% @recipe_utensils.each do |recipe_utensil| %>
-            <div class="col-md-6 py-2">
-                <div class="card m-0">
-                    <div class="card border-0" style="width: 100%; height: 100%">
-                        <div class="card-body flex-grow-1 p-3">
-                        <p><%= recipe_utensil.quantity%></p>
-                        <p><%= recipe_utensil.utensil.name %></p>
-                        </div> 
-                      <%= link_to "Delete Utensil", recipe_utensil_path(recipe_utensil), class: "btn btn-danger", method: :delete %>
-                    </div> 
-                </div>
-            </div> 
-        <% end %> 
+            <div class="shopping-ingredients-list">
+            <span><%= recipe_utensil.quantity%> <%= recipe_utensil.utensil.name %></span>
+          <%= link_to recipe_utensil_path(recipe_utensil), method: :delete do %>
+          <%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %>
+          <% end %>
+         </div>
+        <% end %>
     </div>
 </div>
 
 <!-- Button trigger modal -->
-<%= link_to "Back to ingredients", recipe_recipe_ingredients_path(@recipe), class: "btn btn-warning" %>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#utensilModal">
+<%#= link_to "Back to ingredients", recipe_recipe_ingredients_path(@recipe), class: "btn btn-warning" %>
+<%# <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#utensilModal">
   Add Utensil
-</button>
+</button> %>
 
-<%= link_to "Add the steps", recipe_steps_path(@recipe), class: "btn btn-warning" %>
+
 
 <!-- Modal -->
 <div class="modal fade" id="utensilModal" tabindex="-1" role="dialog" aria-labelledby="utensilModalLabel" aria-hidden="true">
@@ -46,4 +61,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

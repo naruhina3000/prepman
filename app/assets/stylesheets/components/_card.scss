@@ -13,7 +13,7 @@
   right: 0px;
   height: 50px;
   width: 100%;
-  background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.1));
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1));
   display: flex;
   align-items: center;
   padding-left: 8px;
@@ -33,7 +33,6 @@
   text-align: right;
   padding-right: 12px;
 }
-
 
 .card-body {
   border: 0px;
@@ -237,7 +236,7 @@
   margin-bottom: 12px;
 }
 
-.shopping-list-card-wrapper{
+.shopping-list-card-wrapper {
   position: relative;
   color: #204742;
 
@@ -292,7 +291,6 @@
   border-radius: 21px;
 }
 
-
 .planner-list {
   display: flex;
   width: 100%;
@@ -302,7 +300,6 @@
   align-items: center;
   font-size: large;
 }
-
 
 .cookbook-pictures {
   display: flex;
@@ -363,4 +360,18 @@
   width: 25px;
   bottom: 60px;
   right: 10px;
+}
+
+.delete-step-icon {
+  position: absolute;
+  width: 25px;
+  top: 215px;
+  right: 10px;
+}
+
+.edit-step-icon {
+  position: absolute;
+  width: 25px;
+  top: 215px;
+  right: 50px;
 }

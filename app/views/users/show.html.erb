@@ -28,34 +28,69 @@
 
       <div class="row" style="align-items: baseline;">
         <% if current_user == @user %>
-          <%= link_to user_edit_path(@user) do %>
-           <%= image_tag("settings.svg", alt: "settings", class:"settings-icon") %>
-          <% end %>
-
+           <!-- Button trigger modal -->
+           <%= image_tag("settings.svg", alt: "settings", class:"settings-icon", data: {toggle: "modal", target: "#editProfileModal"}) %>
           <%= link_to destroy_user_session_path, method: :delete do %>
            <%= image_tag("logout.svg", alt: "settings", class:"logout-icon") %>
           <% end %>
 
         <% end %>
       </div>
-
-
     </div>
 
     <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
+    
+    
+    <% if current_user == @user %>
+        <%= link_to followed_cookbooks_path do %>
+        <div class="icon">
+          <p class="icon-categories"><%= @followed_cookbooks.count %></p>
+          <div>
+            <%= image_tag("like.svg", alt: "likes", class:"profile-icon") %>
+            <p>Follows</p>
+          </div>
+        </div>
+      <% end %>
 
-    <%= link_to followed_cookbooks_path do %>
+
+      <%= link_to cookbooks_path do %>
+      <div class="icon">
+        <p class="icon-categories">
+          <%= @cookbook_followers %>
+        </p>
+        <div>
+          <%= image_tag("followers.svg", alt: "followers", class:"profile-icon") %>
+          <p>Followers</p>
+        </div>
+      </div>
+      <% end %>
+
+
+      <%= link_to cooked_recipe_index_path do %>
+        <div class="icon">
+          <p class="icon-categories"><%= @cooked_recipes.count %></p>
+          <div>
+            <%= image_tag("pot.svg", alt: "made-dishes", class:"profile-icon") %>
+            <p>Made Dishes</p>
+          </div>
+        </div>
+      <% end %>
+
+    <% else %>
+
+
+    <%= link_to followed_cookbooks_path, class:"disabled" do %>
       <div class="icon">
         <p class="icon-categories"><%= @followed_cookbooks.count %></p>
         <div>
           <%= image_tag("like.svg", alt: "likes", class:"profile-icon") %>
-          <p>Followes</p>
+          <p>Follows</p>
         </div>
       </div>
     <% end %>
 
 
-    <%= link_to cookbooks_path do %>
+    <%= link_to cookbooks_path, class:"disabled" do %>
     <div class="icon">
       <p class="icon-categories">
         <%= @cookbook_followers %>
@@ -68,7 +103,7 @@
     <% end %>
 
 
-    <%= link_to cooked_recipe_index_path do %>
+    <%= link_to cooked_recipe_index_path, class:"disabled" do %>
       <div class="icon">
         <p class="icon-categories"><%= @cooked_recipes.count %></p>
         <div>
@@ -77,6 +112,10 @@
         </div>
       </div>
     <% end %>
+
+
+    <% end %>
+    
     </div>
 
     <nav style="width: 100%;">
@@ -135,7 +174,7 @@
   <div class="tab-pane fade" id="nav-cookbooks" role="tabpanel" aria-labelledby="nav-cookbooks-received-tab">
   <div class="container-fluid pb-2 px-0">
 
-  <!-- Button trigger modal -->
+  <!-- Button trigger Cookbook modal -->
   <% if current_user == @user %>
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cookbookModal">
     Create Cookbook
@@ -143,7 +182,7 @@
     <hr>
   <% end %>
 
-<!-- Modal -->
+<!-- Cookbook Modal -->
   <div class="modal fade" id="cookbookModal" tabindex="-1" role="dialog" aria-labelledby="cookbookModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -190,5 +229,39 @@
 </div>
 
 </div>
+
+
+
+<!-- Edit PRofile Modal -->
+  <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProfileModalLabel">Edit Profile:</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= simple_form_for @user do |f| %>
+            <%= f.input :username %>
+            <%= f.input :name %>
+            <%= f.input :url %>
+            <%= f.input :bio %>
+            <div> 
+              <% if @user.photo.attached? %>
+                <%= cl_image_tag @user.photo.key, class: "img-thumbnail" %>
+              <% end %>
+            </div>
+            <%= f.input :photo, as: :file, input_html: {class:"clickable-photo-input"} %>
+            <%= f.submit "Update Profile", class:"btn btn-primary", method: :patch %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>
 
