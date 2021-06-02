@@ -26,7 +26,7 @@
 
 
 <!-- Modal Add Step-->
-<div class="modal fade" id="stepModal" tabindex="-1" role="dialog" aria-labelledby="stepModalLabel" aria-hidden="true">
+<div class="modal fade" id="stepModal" tabindex="-1" data-show="true" role="dialog" aria-labelledby="stepModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -51,29 +51,36 @@
   </div>
 </div>
 
-  <div class="container-fluid">
+  <% @steps.each do |step| %>
+    <div class="card" style="margin-bottom: 16px;">
+      <div class="card border-0" style="width: 100%; height: 100%">
+        <% if step.photo.attached? %>
+          <%= cl_image_tag step.photo.key, class: "card-img-top" %>
+        <% end %>
+        <div class="card-body transparent flex-grow-1 p-3">
+          <div style="display: flex; align-items: center;">
+            <div class="col-9 p-0">
+              <h4>Step <%= step.number %></h4>
+              <p style="margin-bottom: 0px;"><%= step.description %></p>
+            </div>
+            <div class="col-3 p-0" style="text-align: right;">
+              <%= link_to edit_step_path(step) do %>
+                <%= image_tag("green-edit.svg", alt: "delete", style: "width: 25px; margin-right: 8px;", class: "edit-recipe-icon") %>
+              <% end %>
+              <%= link_to step_path(step), method: :delete do %>
+                <%= image_tag("green-bin.svg", alt: "delete", style: "width: 25px", class: "delete-recipe-icon") %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
   <%= link_to "See your recipe", recipe_path(@recipe), class: "btn btn-primary mb-3" %>
-      <% @steps.each do |step| %>
-              <div class="card m-0">
-                  <div class="card border-0" style="width: 100%; height: 100%">
-                      <% if step.photo.attached? %>
-                      <%= cl_image_tag step.photo.key, class: "card-img-top" %>
-                      <% end %>
-                      <div class="card-body flex-grow-1 p-3">
-                      <h4>Step <%= step.number %></h4>
-                      <p><%= step.description %></p>
-                      <%= link_to step_path(step), method: :delete do %>
-                      <%= image_tag("bin.svg", alt: "delete", style: "width: 30px", class: "delete-step-icon") %>
-                      <% end %>
-                      <%= link_to edit_step_path(step) do %>
-                      <%= image_tag("edit.svg", alt: "delete", style: "width: 30px", class: "edit-step-icon") %>
-                      <% end %>
-                      </div>
-                  </div>
-              </div>
-      <% end %>
-  </div>
 
 
 </div>
 
+<% if @error %>
+  <span id="errorModal"></span>
+<% end %>

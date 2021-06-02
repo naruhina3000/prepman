@@ -98,12 +98,12 @@
     <div class="recipe-status">
       <% if current_user == @user %>
           <% if @recipe.status == "draft" %>
-            <p class= "btn btn-danger mb-0"><%= @recipe.status %></p>
+            <p class= "btn btn-danger"><%= @recipe.status %></p>
             <%= link_to "publish recipe", publish_recipe_path(@recipe), class: "btn btn-info", method: :patch %>
           <% else %>
-            <p class= "btn btn-success mb-0"><%= @recipe.status %></p>
+            <p class= "btn btn-success"><%= @recipe.status %></p>
           <% end %>
-          <%= link_to "Update Recipe", edit_recipe_path(@recipe), class: "btn btn-info" %>
+          <%= link_to "update recipe", edit_recipe_path(@recipe), class: "btn btn-info" %>
       <% end %>
     </div>
   </div>
