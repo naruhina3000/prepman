@@ -110,8 +110,8 @@
   <!-- <hr> -->
 
   <div class="tab-pane fade" id="nav-my-recipes" role="tabpanel" aria-labelledby="nav-my-recipes-tab">
-  <div class="container-fluid py-2" >
-    <div class="row justify-content-evenly mx-0">
+  <div class="container-fluid pb-2 px-0" >
+    <div class="row">
       <% @recipes.each do |recipe| %>
         <div class="col-md-6 col-lg-4 py-2">
             <%= render 'recipes/card', recipe: recipe do %>
@@ -133,7 +133,7 @@
   </div>
 
   <div class="tab-pane fade" id="nav-cookbooks" role="tabpanel" aria-labelledby="nav-cookbooks-received-tab">
-  <div class="container-fluid py-2">
+  <div class="container-fluid pb-2 px-0">
 
   <!-- Button trigger modal -->
   <% if current_user == @user %>
@@ -165,7 +165,7 @@
   </div>
 
 
-    <div class="row justify-content-evenly mx-0">
+    <div class="row">
         <% if current_user == @user %>
           <% @cookbooks.each do |cookbook| %>
           <div class="col-md-6 col-lg-4 py-2">
