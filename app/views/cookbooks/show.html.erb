@@ -15,9 +15,9 @@
         <% end %>
 
         <% if @user.photo.attached? %>
-          <%= cl_image_tag @user.photo.key, class:"avatar" %>
+          <%= cl_image_tag @user.photo.key, class:"avatar", style:"margin-top: 8px;" %>
         <% else %>
-          <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+          <%= image_tag("user.png", alt: "Profile", class:"avatar", style:"margin-top: 8px;") %>
       <% end %>
       </h5>
     </div>
@@ -60,11 +60,13 @@
         <%  @cookbook_recipes.each do |crecipe| %>
             <div class="col-md-6 py-2">
               <%= render 'recipes/card', recipe: crecipe.recipe, current_user: user_signed_in? ? current_user : nil do %>
+              <div class="card-footer">
                 <% if current_user == @user %>
-                <%= link_to cookbook_recipe_path(crecipe.id), method: :delete do %>
-                <%= image_tag("bin.svg", alt: "delete", class: "delete-recipe-icon") %>
+                  <%= link_to cookbook_recipe_path(crecipe.id), method: :delete do %>
+                    <%= image_tag("bin.svg", alt: "delete", class: "delete-recipe-icon") %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
               <% end %>
             </div>
         <% end %>

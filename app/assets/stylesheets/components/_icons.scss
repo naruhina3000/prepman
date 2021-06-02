@@ -12,7 +12,8 @@
 
 .icon .icon-categories {
   color: $brown;
-  font-size: 25px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .icon {
@@ -32,15 +33,15 @@
 }
 
 .edit-recipe-icon {
-  position: absolute;
+  background-color: transparent;
+  // position: absolute;
   width: 25px;
   bottom: 150px;
   right: 45px;
-  color: #B85A36;
 }
 
 .delete-recipe-icon {
-  position: absolute;
+  background-color: transparent;
   width: 25px;
   bottom: 150px;
   right: 10px;

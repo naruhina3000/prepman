@@ -1,88 +1,97 @@
+<div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; padding: 16px 0px;">
+  <div class="container-fluid">
+    <div class="card-product">
+      <% if @user.photo.attached? %>
+        <%= link_to user_path(@user) do %>
+          <%= cl_image_tag @user.photo.key, class:"avatar-profile-bordered" %>
+        <% end %>
+      <% else %>
+        <%= link_to user_path(@user) do %>
+          <%= image_tag("user.png", alt: "Profile", class:"avatar-profile") %>
+        <% end %>
+      <% end %>
+
+
+      <div class="card-product-infos">
+        <% if @user.username.present? %>
+          <h2>@<%= @user.username %></h2>
+          <% else %>
+          <h2>Hero with no name</h2>
+        <% end %>
+        <% if @user.bio.present? %>
+          <p><%= @user.bio %></p>
+        <% end %>
+        <% if @user.url.present? %>
+          <p><%= @user.url %></p>
+        <% end %>
+      </div>
+
+      <div class="row" style="align-items: baseline;">
+        <% if current_user == @user %>
+          <%= link_to user_edit_path(@user) do %>
+           <%= image_tag("settings.svg", alt: "settings", class:"settings-icon") %>
+          <% end %>
+
+          <%= link_to destroy_user_session_path, method: :delete do %>
+           <%= image_tag("logout.svg", alt: "settings", class:"logout-icon") %>
+          <% end %>
+
+        <% end %>
+      </div>
+
+
+    </div>
+
+    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
+
+    <%= link_to followed_cookbooks_path do %>
+      <div class="icon">
+        <p class="icon-categories"><%= @followed_cookbooks.count %></p>
+        <div>
+          <%= image_tag("like.svg", alt: "likes", class:"profile-icon") %>
+          <p>Followes</p>
+        </div>
+      </div>
+    <% end %>
+
+
+    <%= link_to cookbooks_path do %>
+    <div class="icon">
+      <p class="icon-categories">
+        <%= @cookbook_followers %>
+      </p>
+      <div>
+        <%= image_tag("followers.svg", alt: "followers", class:"profile-icon") %>
+        <p>Followers</p>
+      </div>
+    </div>
+    <% end %>
+
+
+    <%= link_to cooked_recipe_index_path do %>
+      <div class="icon">
+        <p class="icon-categories"><%= @cooked_recipes.count %></p>
+        <div>
+          <%= image_tag("pot.svg", alt: "made-dishes", class:"profile-icon") %>
+          <p>Made Dishes</p>
+        </div>
+      </div>
+    <% end %>
+    </div>
+
+    <nav style="width: 100%;">
+      <div class="nav nav-tabs" style="z-index: 4" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-favorites-tab" data-toggle="tab" href="#nav-favorites" role="tab" aria-controls="nav-favorites aria-selected="true">Likes</a>
+        <a class="nav-item nav-link" id="nav-my-recipes-tab" data-toggle="tab" href="#nav-my-recipes" role="tab" aria-controls="nav-my-recipes" aria-selected="false">Recipes</a>
+        <a class="nav-item nav-link" id="nav-cookbooks-tab" data-toggle="tab" href="#nav-cookbooks" role="tab" aria-controls="nav-cookbooks" aria-selected="false">Cookbooks</a>
+      </div>
+    </nav>
+  </div>
+</div>
+
 <div class="container-fluid py-2">
 
 
-<div class="card-product">
-  <% if @user.photo.attached? %>
-    <%= link_to user_path(@user) do %>
-      <%= cl_image_tag @user.photo.key, class:"avatar-profile-bordered" %>
-    <% end %>
-  <% else %>
-    <%= link_to user_path(@user) do %>
-      <%= image_tag("user.png", alt: "Profile", class:"avatar-profile") %>
-    <% end %>
-  <% end %>
-
-
-  <div class="card-product-infos">
-    <% if @user.username.present? %>
-      <h2>@<%= @user.username %></h2>
-      <% else %>
-      <h2>Hero with no name</h2>
-    <% end %>
-    <% if @user.bio.present? %>
-      <p><%= @user.bio %></p>
-    <% end %>
-    <% if @user.url.present? %>
-      <p><%= @user.url %></p>
-    <% end %>
-  </div>
-
-  <% if current_user == @user %>
-    <%= link_to user_edit_path(@user) do %>
-     <%= image_tag("settings.svg", alt: "settings", class:"settings-icon") %>
-    <% end %>
-
-    <%= link_to destroy_user_session_path, method: :delete do %>
-     <%= image_tag("logout.svg", alt: "settings", class:"logout-icon") %>
-    <% end %>
-
-  <% end %>
-</div>
-
-<div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
-
-<%= link_to followed_cookbooks_path do %>
-  <div class="icon">
-    <p class="icon-categories"><%= @followed_cookbooks.count %></p>
-    <div>
-      <%= image_tag("like.svg", alt: "likes", class:"profile-icon") %>
-      <p>Followes</p>
-    </div>
-  </div>
-<% end %>
-
-
-<%= link_to cookbooks_path do %>
-<div class="icon">
-  <p class="icon-categories">
-    <%= @cookbook_followers %>
-  </p>
-  <div>
-    <%= image_tag("followers.svg", alt: "followers", class:"profile-icon") %>
-    <p>Followers</p>
-  </div>
-</div>
-<% end %>
-
-
-<%= link_to cooked_recipe_index_path do %>
-  <div class="icon">
-    <p class="icon-categories"><%= @cooked_recipes.count %></p>
-    <div>
-      <%= image_tag("pot.svg", alt: "made-dishes", class:"profile-icon") %>
-      <p>Made Dishes</p>
-    </div>
-  </div>
-<% end %>
-</div>
-
-<nav>
-  <div class="nav nav-tabs" style="z-index: 4" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active" id="nav-favorites-tab" data-toggle="tab" href="#nav-favorites" role="tab" aria-controls="nav-favorites aria-selected="true">Likes</a>
-    <a class="nav-item nav-link" id="nav-my-recipes-tab" data-toggle="tab" href="#nav-my-recipes" role="tab" aria-controls="nav-my-recipes" aria-selected="false">Recipes</a>
-    <a class="nav-item nav-link" id="nav-cookbooks-tab" data-toggle="tab" href="#nav-cookbooks" role="tab" aria-controls="nav-cookbooks" aria-selected="false">Cookbooks</a>
-  </div>
-</nav>
 
 <div class="tab-content" id="nav-tabContent">
 
@@ -106,15 +115,16 @@
       <% @recipes.each do |recipe| %>
         <div class="card col-md-6 mb-3 px-0">
             <%= render 'recipes/card', recipe: recipe do %>
-              <div class="card-footer"></div>
+              <div class="card-footer">
               <% if current_user == @user %>
                 <%= link_to edit_recipe_path(recipe) do %>
-                  <%= image_tag("edit.svg", alt: "edit-recipe", class: "edit-recipe-icon") %>
+                  <%= image_tag("edit.svg", alt: "edit-recipe", class: "edit-recipe-icon", style: "margin-right: 10px;") %>
                 <% end %>
                 <%= link_to recipe_path(recipe), method: :delete do %>
-                <%= image_tag("bin.svg", alt: "settings", class: "delete-recipe-icon") %>
+                  <%= image_tag("bin.svg", alt: "settings", class: "delete-recipe-icon") %>
                 <% end %>
               <% end %>
+              </div>
             <% end %>
         </div>
       <% end %>

@@ -7,18 +7,36 @@
         <% end %>
       </div>
       <div class="col m-auto">
-        <%= link_to planners_path do %>
-          <%= image_tag("calendar.png", alt: "Planner", class:"menu-icons") %>
+        <% if user_signed_in? %>
+          <%= link_to planners_path do %>
+            <%= image_tag("calendar.png", alt: "Planner", class:"menu-icons") %>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class:"menu-icons", data: {toggle: "modal", target: "#newUserModal"} do %>
+            <%= image_tag("calendar.png", alt: "Planner", class:"menu-icons") %>
+          <% end %>
         <% end %>
       </div>
       <div class="col m-auto">
-        <%= link_to new_recipe_path do %>
-          <%= image_tag("add-recipe.png", alt: "Add", class:"menu-icons") %>
+        <% if user_signed_in? %>
+          <%= link_to new_recipe_path do %>
+            <%= image_tag("add-recipe.png", alt: "Add", class:"menu-icons") %>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class:"menu-icons", data: {toggle: "modal", target: "#newUserModal"} do %>
+            <%= image_tag("add-recipe.png", alt: "Add", class:"menu-icons") %>
+          <% end %>
         <% end %>
       </div>
       <div class="col m-auto">
-        <%= link_to shopping_lists_path do %>
-          <%= image_tag("shopping-list.png", alt: "Shopping List", class:"menu-icons") %>
+        <% if user_signed_in? %>
+          <%= link_to shopping_lists_path do %>
+            <%= image_tag("shopping-list.png", alt: "Shopping List", class:"menu-icons") %>
+          <% end %>
+        <% else %>
+          <%= link_to new_user_session_path, class:"menu-icons", data: {toggle: "modal", target: "#newUserModal"} do %>
+            <%= image_tag("shopping-list.png", alt: "Shopping List", class:"menu-icons") %>
+          <% end %>
         <% end %>
       </div>
       <div class="col m-auto">

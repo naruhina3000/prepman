@@ -49,7 +49,7 @@
   <div class="container-fluid py-2" >
     <div class="row">
       <% @cookbooks.each do |cookbook| %>
-        <div class="col-md-4 py-2">
+        <div class="card col-md-6 mb-3 px-0">
             <%= render 'cookbook_card', cookbook: cookbook do %>
             <%= image_tag("bin.svg", alt: "settings", class: "delete-cookbook-icon") %>
             <% end %>
