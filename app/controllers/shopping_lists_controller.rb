@@ -1,5 +1,5 @@
 class ShoppingListsController < ApplicationController
-  before_action :set_shopping_list, only: [:show, :destroy]
+  before_action :set_shopping_list, only: [:show, :destroy, :destroy_all]
 
 
   # resources :shopping_list, only: [:index, :create, :show, :destroy] do
@@ -38,6 +38,19 @@ class ShoppingListsController < ApplicationController
     @shopping_list.destroy
     redirect_to shopping_lists_path
   end
+
+
+  def destroy_all
+    if params[:recipe_id].present?
+      @recipe = Recipe.find(params[:recipe_id])
+      @shopping_list.shopping_list_ingredients.where(recipe_id: @recipe.id).destroy_all
+    else
+      @shopping_list.shopping_list_ingredients.destroy_all
+    end
+    redirect_to shopping_list_path(@shopping_list)
+
+  end
+
 
   private
 

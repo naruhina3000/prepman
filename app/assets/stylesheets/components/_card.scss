@@ -261,11 +261,23 @@
 
 .list-recipe {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 16px;
+  align-items: center;
+
+  overflow-x: scroll;
+  white-space: nowrap;
+  margin-top: 32px;
+  &::-webkit-scrollbar {
+    opacity: 0;
+    size: 1px;
+  }
 }
 
-.active {
+.list-option {
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.active-list {
   border-bottom: 2px solid #204742;
 }
 

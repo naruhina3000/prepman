@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
   resources :shopping_lists, only: [:index, :new, :create, :show, :destroy] do
     resources :shopping_list_ingredients, only: [:create]
+    member do
+      delete :destroy_all
+    end
   end
   resources :shopping_list_ingredients, only: [:destroy]
 
@@ -46,5 +49,6 @@ Rails.application.routes.draw do
   get "/users/:id", to: "users#show", as: :user
   get "/users/:id/edit", to: "users#edit", as: :user_edit
   patch "/users/:id", to: "users#update"
+
 
 end
