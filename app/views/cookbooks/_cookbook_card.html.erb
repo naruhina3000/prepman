@@ -21,7 +21,7 @@
             </div>
         <% end %>
 
-        <% if cookbook.cookbook_recipes[2] %>  
+        <% if cookbook.cookbook_recipes[2] %>
           <% if cookbook.cookbook_recipes[2].recipe.photo.attached? %>
           <%= cl_image_tag cookbook.cookbook_recipes[2].recipe.photo.key, class: "side-img-bottom" %>
           <% else %>
@@ -33,26 +33,36 @@
             </div>
         <% end %>
         </div>
-        
+
         <% else %>
         <div class="placeholder-main">
         <%= image_tag "plus.jpg", class: "placeholder-main" %>
         </div>
     <% end %>
-    <p class="favorite-count"><strong><%= cookbook.followed_cookbooks.count %></strong></p>
-    <%= image_tag("followers-yellow.svg", class:"bookmark", alt: "followers") %>
+      <div class="card-nav">
+        <!-- <div class="" style="color: #FFD964; text-shadow: 0 0 black; font-weight: 600; font-size: smaller;"> -->
+          <p class="favorite-count"><strong><%= cookbook.followed_cookbooks.count %></strong></p>
+          <%= image_tag("followers-yellow.svg", class:"bookmark", alt: "followers") %>
+      <!--   </div> -->
+      </div>
+
     </div>
-    
+
     <%= yield %>
-    
+
     <div class="container-fluid transparent">
     <div class="row" style="padding-left: 8px; padding-top: 6px;">
-        <%= link_to "#{cookbook.title}", cookbook, style: "color: #204742; font-size: x-large", class:"truncate" %>
+        <% if user_signed_in?  %>
+          <%= link_to "#{cookbook.title}", cookbook, style: "color: #204742; font-size: x-large", class:"truncate" %>
+        <% else %>
+          <%= link_to "#{cookbook.title}", new_user_session_path, style: "color: #204742; font-size: x-large", class:"truncate", data: {toggle: "modal", target: "#newUserModal"} %>
+        <% end %>
          <% if current_user == cookbook.user %>
           <%= link_to cookbook_path(cookbook), method: :delete do %>
           <% end %>
          <% end %>
     </div>
+
 
     <div class="row recipe-info">
     <p class="m-0" style="padding-bottom: 2px;">Recipe by

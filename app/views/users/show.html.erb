@@ -39,8 +39,8 @@
     </div>
 
     <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
-    
-    
+
+
     <% if current_user == @user %>
         <%= link_to followed_cookbooks_path do %>
         <div class="icon">
@@ -115,7 +115,7 @@
 
 
     <% end %>
-    
+
     </div>
 
     <nav style="width: 100%;">
@@ -209,7 +209,11 @@
           <% @cookbooks.each do |cookbook| %>
           <div class="col-md-6 col-lg-4 py-2">
             <%= render 'cookbooks/cookbook_card', cookbook: cookbook do %>
-            <%= image_tag("green-bin.svg", alt: "settings", class: "delete-cookbook-icon") %>
+             <div class="card-footer">
+              <%= link_to cookbook_path(cookbook), method: :delete do %>
+                <%= image_tag("bin.svg", alt: "settings", class: "delete-cookbook-icon", style: "bottom: 10px;") %>
+              <% end %>
+            </div>
             <% end %>
           </div>
           <% end %>
@@ -248,7 +252,7 @@
             <%= f.input :name %>
             <%= f.input :url %>
             <%= f.input :bio %>
-            <div> 
+            <div>
               <% if @user.photo.attached? %>
                 <%= cl_image_tag @user.photo.key, class: "img-thumbnail" %>
               <% end %>
