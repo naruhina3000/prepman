@@ -1,4 +1,7 @@
 class ReviewsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:create]
+
+
   def create
     @review = Review.new(review_params)
     @recipe = Recipe.find(params[:recipe_id])
