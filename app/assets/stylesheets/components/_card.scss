@@ -363,3 +363,12 @@
   top: 215px;
   right: 50px;
 }
+
+@media only screen and (min-width: 768px) {
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-right: 10px;
+  }
+}
