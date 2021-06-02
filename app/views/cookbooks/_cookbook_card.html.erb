@@ -47,7 +47,7 @@
     
     <div class="container-fluid transparent">
     <div class="row" style="padding-left: 8px; padding-top: 6px;">
-        <%= link_to "#{cookbook.title}", cookbook, style: "color: #204742; font-size: x-large" %>
+        <%= link_to "#{cookbook.title}", cookbook, style: "color: #204742; font-size: x-large", class:"truncate" %>
          <% if current_user == cookbook.user %>
           <%= link_to cookbook_path(cookbook), method: :delete do %>
           <% end %>
@@ -71,15 +71,6 @@
     </p>
 </div>
 </div>
-
-
-
-
-
-
-
-
-
 
     </div>
 </div>
