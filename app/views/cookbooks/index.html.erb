@@ -1,7 +1,6 @@
-<div class="container-fluid">
 
-  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
-    <div class="col-2">
+ <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; padding-top: 32px; padding-bottom: 16px;">
+    <div class="col-2" style="padding-left: 0px;">
       <%= link_to user_path(current_user) do%>
         <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
       <% end %>
@@ -14,7 +13,7 @@
     </div>
   </div>
 
-  <hr>
+
 
 <!-- Button trigger modal -->
 
@@ -24,6 +23,8 @@
   <hr> %>
 
 <!-- Modal -->
+
+
 <div class="modal fade" id="cookbookModal" tabindex="-1" role="dialog" aria-labelledby="cookbookModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -45,16 +46,27 @@
 </div>
 
 
-
-  <div class="container-fluid py-2" >
+<div class="container-fluid pb-2">
+ <hr>
     <div class="row">
       <% @cookbooks.each do |cookbook| %>
-        <div class="card col-md-6 mb-3 px-0">
+        <div class="col-md-6 col-lg-4 py-2">
             <%= render 'cookbook_card', cookbook: cookbook do %>
-            <%= image_tag("bin.svg", alt: "settings", class: "delete-cookbook-icon") %>
+              <div class="card-footer">
+                <%= link_to cookbook_path(cookbook), method: :delete do %>
+                  <%= image_tag("bin.svg", alt: "settings", class: "delete-cookbook-icon", style: "bottom: 10px;") %>
+                <% end %>
+              </div>
             <% end %>
         </div>
       <% end %>
     </div>
-  </div>
+
 </div>
+
+
+
+
+
+
+
