@@ -39,8 +39,47 @@
     </div>
 
     <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
+    
+    
+    <% if current_user == @user %>
+        <%= link_to followed_cookbooks_path do %>
+        <div class="icon">
+          <p class="icon-categories"><%= @followed_cookbooks.count %></p>
+          <div>
+            <%= image_tag("like.svg", alt: "likes", class:"profile-icon") %>
+            <p>Follows</p>
+          </div>
+        </div>
+      <% end %>
 
-    <%= link_to followed_cookbooks_path do %>
+
+      <%= link_to cookbooks_path do %>
+      <div class="icon">
+        <p class="icon-categories">
+          <%= @cookbook_followers %>
+        </p>
+        <div>
+          <%= image_tag("followers.svg", alt: "followers", class:"profile-icon") %>
+          <p>Followers</p>
+        </div>
+      </div>
+      <% end %>
+
+
+      <%= link_to cooked_recipe_index_path do %>
+        <div class="icon">
+          <p class="icon-categories"><%= @cooked_recipes.count %></p>
+          <div>
+            <%= image_tag("pot.svg", alt: "made-dishes", class:"profile-icon") %>
+            <p>Made Dishes</p>
+          </div>
+        </div>
+      <% end %>
+
+    <% else %>
+
+
+    <%= link_to followed_cookbooks_path, class:"disabled" do %>
       <div class="icon">
         <p class="icon-categories"><%= @followed_cookbooks.count %></p>
         <div>
@@ -51,7 +90,7 @@
     <% end %>
 
 
-    <%= link_to cookbooks_path do %>
+    <%= link_to cookbooks_path, class:"disabled" do %>
     <div class="icon">
       <p class="icon-categories">
         <%= @cookbook_followers %>
@@ -64,7 +103,7 @@
     <% end %>
 
 
-    <%= link_to cooked_recipe_index_path do %>
+    <%= link_to cooked_recipe_index_path, class:"disabled" do %>
       <div class="icon">
         <p class="icon-categories"><%= @cooked_recipes.count %></p>
         <div>
@@ -73,6 +112,10 @@
         </div>
       </div>
     <% end %>
+
+
+    <% end %>
+    
     </div>
 
     <nav style="width: 100%;">
