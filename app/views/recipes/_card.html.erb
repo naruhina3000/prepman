@@ -38,7 +38,7 @@
           <%= yield %>
           <div class="container-fluid transparent">
             <div class="row" style="padding-left: 8px; padding-top: 6px;">
-              <%= link_to "#{recipe.title}", recipe, style: "color: #204742; font-size: x-large" %>
+              <%= link_to "#{recipe.title}", recipe, style: "color: #204742; font-size: x-large", class:"truncate" %>
             </div>
             <div class="row recipe-info">
               <% case %>
