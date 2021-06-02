@@ -1,4 +1,4 @@
-<div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+<div class="navbar sticky-top bg-white px-0" style="width: 100%; margin-bottom: 0px; padding-top: 32px; padding-bottom: 16px;">
   <div class="container-fluid">
     <div class="col-2"></div>
     <div class="col-8" style="justify-content: center">
@@ -31,7 +31,7 @@
     <div class="planner-list">
       <span><%= planner.recipe.title %></span>
       <%= link_to planner_path(planner), method: :delete do %>
-        <%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %>
+        <%= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %>
       <% end %>
     </div>
     <div class="row planner-recipe-info" style="padding-left: 15px">

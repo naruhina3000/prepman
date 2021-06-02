@@ -1,4 +1,4 @@
-<div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; padding: 16px 0px;">
+<div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; padding: 16px 0px 0px 0px;">
   <div class="container-fluid">
     <div class="card-product">
       <% if @user.photo.attached? %>
@@ -209,7 +209,7 @@
           <% @cookbooks.each do |cookbook| %>
           <div class="col-md-6 col-lg-4 py-2">
             <%= render 'cookbooks/cookbook_card', cookbook: cookbook do %>
-            <%= image_tag("bin.svg", alt: "settings", class: "delete-cookbook-icon") %>
+            <%= image_tag("green-bin.svg", alt: "settings", class: "delete-cookbook-icon") %>
             <% end %>
           </div>
           <% end %>

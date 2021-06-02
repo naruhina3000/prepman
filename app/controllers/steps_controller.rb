@@ -6,13 +6,15 @@ before_action :set_recipe, only: [:index, :create]
         @steps = @recipe.steps
         @step = Step.new
     end
-    
+
     def create
+        @steps = @recipe.steps
         @step = Step.new(step_params)
-        @step.recipe = @recipe    
+        @step.recipe = @recipe
         if @step.save
             redirect_to recipe_steps_path(@recipe)
         else
+          @error = true
          render "steps/index"
         end
     end
@@ -38,7 +40,7 @@ before_action :set_recipe, only: [:index, :create]
     private
 
     def set_recipe
-        @recipe = Recipe.find(params[:recipe_id]) 
+        @recipe = Recipe.find(params[:recipe_id])
     end
 
     def set_step

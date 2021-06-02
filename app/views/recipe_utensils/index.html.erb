@@ -1,35 +1,36 @@
-<div class="container-fluid">
 
-  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
-    <div class="col-2">
-      <%= link_to recipe_recipe_ingredients_path(@recipe) do%>
-        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
-      <% end %>
-    </div>
-    <div class="col-8" style="justify-content: center">
-      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;">Recipe Utensils</h4>
-    </div>
-    <div class="col-2" style="padding-right: 0px; text-align: right;">
-      <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target=#utensilModal></i>
-    </div>
+<div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; padding-top: 32px; padding-bottom: 16px;">
+  <div class="col-2" style="padding-left: 0px";>
+    <%= link_to recipe_recipe_ingredients_path(@recipe) do%>
+      <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
+    <% end %>
   </div>
+  <div class="col-8" style="justify-content: center">
+    <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;">Recipe Utensils</h4>
+  </div>
+  <div class="col-2" style="padding-right: 0px; text-align: right;">
+    <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target=#utensilModal></i>
+  </div>
+</div>
 
+
+
+
+
+<div class="container-fluid">
   <hr>
 
 
+  <% @recipe_utensils.each do |recipe_utensil| %>
+      <div class="shopping-ingredients-list">
+      <span><%= recipe_utensil.quantity%> <%= recipe_utensil.utensil.name %></span>
+    <%= link_to recipe_utensil_path(recipe_utensil), method: :delete do %>
+    <%= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %>
+    <% end %>
+   </div>
+  <% end %>
+  <%= link_to "Go to steps", recipe_steps_path(@recipe), class: "btn btn-primary mb-3" %>
 
-    <div class="container-fluid">
-    <%= link_to "Go to steps", recipe_steps_path(@recipe), class: "btn btn-warning mb-3" %>
-        <% @recipe_utensils.each do |recipe_utensil| %>
-            <div class="shopping-ingredients-list">
-            <span><%= recipe_utensil.quantity%> <%= recipe_utensil.utensil.name %></span>
-          <%= link_to recipe_utensil_path(recipe_utensil), method: :delete do %>
-          <%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %>
-          <% end %>
-         </div>
-        <% end %>
-    </div>
-</div>
 
 <!-- Button trigger modal -->
 <%#= link_to "Back to ingredients", recipe_recipe_ingredients_path(@recipe), class: "btn btn-warning" %>
