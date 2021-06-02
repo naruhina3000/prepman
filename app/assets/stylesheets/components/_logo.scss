@@ -1,0 +1,29 @@
+.login-modal-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: 1px;
+  border-top-right-radius: 1px;
+  align-items: center;
+}
+
+.logo {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -12px;
+}
+
+.close-login {
+  padding-right: 15px;
+  padding-top: 5px;
+}
+
+.login-modal-title {
+  margin-bottom: 0;
+  margin-top: -30px;
+  line-height: 1.5;
+}
