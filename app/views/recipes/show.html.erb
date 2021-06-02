@@ -1,42 +1,55 @@
-  <div class="navbar navbar-inner sticky-top" style="padding-bottom: 0px;">
-    <div class="container-fluid h-40" style="padding-bottom: 8px;">
-      <div class="row" style="padding-left: 15px">
+<div class="navbar navbar-inner sticky-top" style="padding-bottom: 0px;">
+  <div class="container-fluid h-40" style="padding-bottom: 8px;">
+    <div class="row" style="padding-left: 15px">
+      <% if user_signed_in? %>
         <%= link_to recipe_path(@recipe), class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToCookbookModal"} do %>
           <%= image_tag("cookbook.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
         <% end %>
+      <% else %>
+        <%= link_to new_user_session_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#newUserModal"} do %>
+          <%= image_tag("cookbook.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
+        <% end %>
+      <% end %>
+      <% if user_signed_in? %>
         <%= link_to recipe_path(@recipe), class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToPlannerModal"} do %>
           <%= image_tag("yellow-calendar.png", class:"search", style:"height: 24px; margin-left: 0px;", alt: "Search") %>
         <% end %>
-        <div class="avg-rating-show">
-          <% if @recipe.average_rating == 0 %>
-            <span>No ratings yet <span>
-          <% else %>
-            <%= @recipe.average_rating.round(1) %>  <i class="fas fa-star"></i>
-          <% end %>
-        </div>
-      </div>
+      <% else %>
+        <%= link_to new_user_session_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#newUserModal"} do %>
+          <%= image_tag("yellow-calendar.png", class:"search", style:"height: 24px; margin-left: 0px;", alt: "Search") %>
+        <% end %>
+      <% end %>
 
-      <p class="favorite-count"><strong><%= @recipe.favorites.count %></strong></p>
-      <% if current_user %>
+      <div class="avg-rating-show">
+        <% if @recipe.average_rating == 0 %>
+          <span>No ratings yet <span>
+        <% else %>
+          <%= @recipe.average_rating.round(1) %>  <i class="fas fa-star"></i>
+        <% end %>
+      </div>
+    </div>
+
+    <p class="favorite-count"><strong><%= @recipe.favorites.count %></strong></p>
+    <% if current_user %>
+      <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
+        <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
+      <% end %>
+      <% if current_user.has_favorite?(@recipe) %>
+        <%= link_to favorite_path(current_user.has_favorite?(@recipe)), method: :delete, class:"bookmark", remote: true do %>
+          <%= image_tag("bookmark-solid.svg", class:"like-icon", alt: "current-favorite") %>
+        <% end %>
+      <% else %>
         <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
           <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
         <% end %>
-        <% if current_user.has_favorite?(@recipe) %>
-          <%= link_to favorite_path(current_user.has_favorite?(@recipe)), method: :delete, class:"bookmark", remote: true do %>
-            <%= image_tag("bookmark-solid.svg", class:"like-icon", alt: "current-favorite") %>
-          <% end %>
-        <% else %>
-          <%= link_to recipe_favorites_path(@recipe) , method: :post, class:"bookmark", remote: true do %>
-            <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
-          <% end %>
-        <% end %>
-      <% else %>
-        <%= link_to new_user_session_path, class:"bookmark" do %>
-          <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
-        <% end %>
       <% end %>
-    </div>
+    <% else %>
+      <%= link_to new_user_session_path, class:"bookmark", data: {toggle: "modal", target: "#newUserModal"} do %>
+        <%= image_tag("bookmark-regular.svg", class:"like-icon", alt: "no-favorite") %>
+      <% end %>
+    <% end %>
   </div>
+</div>
 
 
 <div class="show-recipe-photo">
@@ -151,7 +164,7 @@
             <%= simple_form_for :recipe, url: add_to_cookbook_recipe_path(@recipe), method: :post do |f| %>
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation">
-                  <a class="nav-link active" id="add-cookbook-tab" data-toggle="pill" href="#add-cookbook" role="tab" aria-controls="add-list" aria-selected="true">Create new Cookbook</a>
+                  <a class="nav-link active" id="add-cookbook-tab" data-toggle="pill" href="#add-cookbook" role="tab" aria-controls="add-list" aria-selected="true">New Cookbook</a>
                 </li>
                 <li class="nav-item" role="presentation">
                   <a class="nav-link" id="chose-cookbook-tab" data-toggle="pill" href="#chose-cookbook" role="tab" aria-controls="chose-list" aria-selected="false">Choose cookbook</a>
@@ -254,10 +267,15 @@
 
   </div>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addToShoppingListModal">
-    Add to Shopping List
-  </button>
-
+  <% if user_signed_in? %>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addToShoppingListModal">
+      Add to Shopping List
+    </button>
+  <% else %>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newUserModal">
+      Add to Shopping List
+    </button>
+  <% end %>
   <!-- Modal -->
   <div class="modal fade" id="addToShoppingListModal" tabindex="-1" role="dialog" aria-labelledby="addToShoppingListLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">

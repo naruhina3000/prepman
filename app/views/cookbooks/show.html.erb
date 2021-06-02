@@ -1,29 +1,39 @@
   <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
-   <div class="container-fluid">
-   <div class="col-2">
-      <%= link_to cookbooks_path do%>
-        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
-      <% end %>
-    </div>
-    <div class="col-8" style="justify-content: center">
-      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;"><%= @cookbook.title %></h4>
-      <h5 style="margin-bottom: 0px; text-align: center; padding: 0px;">by
-        <% if @user.username.blank? %>
-          <%= link_to "Hero with no name", user_path(@user) %>
-        <% else %>
-          <%= link_to "#{@user.username}", user_path(@user) %>
+    <div class="container-fluid">
+      <div class="col-2">
+        <%= link_to cookbooks_path do%>
+          <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
         <% end %>
+      </div>
+      <div class="col-8" style="justify-content: center">
+        <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;"><%= @cookbook.title %></h4>
+        <h5 style="margin-bottom: 8px; text-align: center; padding: 0px;">by
+          <% if @user.username.blank? %>
+            <%= link_to "Hero with no name", user_path(@user), style:"margin-top: 8px;" %>
+          <% else %>
+            <%= link_to "#{@user.username}", user_path(@user), style:"margin-top: 8px;" %>
+          <% end %>
 
-        <% if @user.photo.attached? %>
-          <%= cl_image_tag @user.photo.key, class:"avatar", style:"margin-top: 8px;" %>
-        <% else %>
-          <%= image_tag("user.png", alt: "Profile", class:"avatar", style:"margin-top: 8px;") %>
-      <% end %>
-      </h5>
+          <% if @user.photo.attached? %>
+            <%= cl_image_tag @user.photo.key, class:"avatar" %>
+          <% else %>
+            <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+        <% end %>
+        </h5>
+        <div style="margin-bottom: 0px; text-align: center; padding: 0px;">
+          <% if current_user %>
+            <% if current_user.has_followed_cookbook?(@cookbook) %>
+              <%= link_to "Followed", followed_cookbook_path(current_user.has_followed_cookbook?(@cookbook)), style: "margin-bottom: 0px", method: :delete, class: "btn btn-warning" %>
+            <% else %>
+              <%= link_to "Follow", cookbook_followed_cookbooks_path(@cookbook), method: :post, class: "btn btn-info", style: "margin-bottom: 0px" %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-2" style="padding-right: 0px; text-align: right;">
+
+      </div>
     </div>
-    <div class="col-2" style="padding-right: 0px; text-align: right;">
-    </div>
-  </div>
   </div>
 
 <div class="container-fluid">
@@ -43,14 +53,6 @@
     <hr>
 <% end %>
 
-
-<% if current_user %>
-  <% if current_user.has_followed_cookbook?(@cookbook) %>
-    <%= link_to "Followed", followed_cookbook_path(current_user.has_followed_cookbook?(@cookbook)), method: :delete, class: "btn btn-warning" %>
-  <% else %>
-    <%= link_to "Follow", cookbook_followed_cookbooks_path(@cookbook), method: :post, class: "btn btn-info" %>
-  <% end %>
-<% end %>
 
 </div>
 

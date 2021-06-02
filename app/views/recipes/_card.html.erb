@@ -8,7 +8,7 @@
           <div class="card-nav">
             <div class="" style="color: #FFD964; text-shadow: 0 0 black; font-weight: 600; font-size: smaller;">
               <% if recipe.average_rating == 0 %>
-                <span style="text-shadow: 2px 2px #204742;">No ratings yet <span>
+                <span style="text-shadow: 2px 2px #204742;">No ratings yet </span>
               <% else %>
                 <span style="text-shadow: 2px 2px #204742;"><%= recipe.average_rating.round(1)%>  <i class="fas fa-star"></i></span>
               <% end %>
