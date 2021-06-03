@@ -3,20 +3,20 @@
     <div class="row" style="padding-left: 15px">
       <% if user_signed_in? %>
         <%= link_to recipe_path(@recipe), class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToCookbookModal"} do %>
-          <%= image_tag("cookbook.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
+          <%= image_tag("cookbook.png", class:"add-to-icon", alt: "Add to cookbook") %>
         <% end %>
       <% else %>
         <%= link_to new_user_session_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#newUserModal"} do %>
-          <%= image_tag("cookbook.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
+          <%= image_tag("cookbook.png", class:"add-to-icon", style:"height: 20px; width: 18px; margin-left: 0px;", alt: "Search") %>
         <% end %>
       <% end %>
       <% if user_signed_in? %>
         <%= link_to recipe_path(@recipe), class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToPlannerModal"} do %>
-          <%= image_tag("yellow-calendar.png", class:"search", style:"height: 24px; margin-left: 0px;", alt: "Search") %>
+          <%= image_tag("yellow-calendar.png", class:"add-to-icon", alt: "Search") %>
         <% end %>
       <% else %>
         <%= link_to new_user_session_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#newUserModal"} do %>
-          <%= image_tag("yellow-calendar.png", class:"search", style:"height: 24px; margin-left: 0px;", alt: "Search") %>
+          <%= image_tag("yellow-calendar.png", class:"add-to-icon", alt: "Search") %>
         <% end %>
       <% end %>
 
