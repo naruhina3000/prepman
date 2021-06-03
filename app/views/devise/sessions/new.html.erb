@@ -1,5 +1,22 @@
-<h2>Log in</h2>
+ <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; padding-top: 32px; padding-bottom: 16px;">
+    <div class="col-2" style="padding-left: 0px;">
+      <%= link_to root_path do%>
+        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
+      <% end %>
+    </div>
+    <div class="col-8" style="justify-content: center">
+      <div class="login-modal-header">
+        <div class="logo">
+        <%= image_tag("prepman.svg", alt: "logo", class:"logo") %>
+        <h3 class="login-modal-title" id="newUserModalLabel">Login</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-2" style="padding-right: 0px; text-align: right;">
+    </div>
+  </div>
 
+<div class="container-fluid">
 <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="form-inputs">
     <%= f.input :email,
@@ -16,5 +33,19 @@
     <%= f.button :submit, "Log in", class:"btn btn-primary" %>
   </div>
 <% end %>
+<hr>
 
-<%= render "devise/shared/links" %>
+<%= link_to user_facebook_omniauth_authorize_path, method: :post do%>
+  <%= image_tag "fb-login-button", class: "fb-button"%><br />
+<% end %>
+
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+<% end %>
+
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<% end %>
+
+<%#= render "devise/shared/links" %>
+</div>
