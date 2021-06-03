@@ -23,6 +23,8 @@ const initMultipleSweetAlert = () => {
     document.querySelectorAll('.delete-planner'),
     document.querySelectorAll('.delete-shoppinglist'),
     document.querySelectorAll('.delete-cookbook'),
+    document.querySelectorAll('.delete-cookbook-user-show'),
+    document.querySelectorAll('.delete-recipe'),
   ]
   buttonsArray.forEach((array)=> {
     attachAlert(array)
