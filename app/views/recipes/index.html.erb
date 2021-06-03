@@ -103,7 +103,10 @@
                 </div>
 
                 <div class="row">
-                 <%= submit_tag "🦸", class: "btn btn-primary search-btn mx-auto", style: "font-size: xxx-large; background-color: white; border: none;" %>
+                 <%= button_tag class: "btn btn-primary search-btn mx-auto", style: "font-size: xxx-large; background-color: white; border: none;" do %>
+                 <%= image_tag("prepman.svg", alt: "Filter", style: "width: 100px;") %>
+                 <% end %>
+                 
                 </div>
 
               </div>
