@@ -1,4 +1,4 @@
-<% if current_user != @user %>
+<% if current_user != @shopping_list.user %>
 
     <div class="container-fluid m-auto" style="padding-top: 100px;">
     <!-- <div style="margin: 20px; text-align: center; align-items: center;"> -->
@@ -40,8 +40,13 @@
     <hr>
 
 
-    <%= link_to "Remove All Ingredients", destroy_all_shopping_list_path(recipe_id: params[:recipe_id]), method: :delete, class: "btn btn-primary", style: "margin-bottom: 12px; margin-top: 0px", data: { confirm: "hello"} %>
 
+    <button id="delete-ingredients" class="btn btn-primary" style="margin-bottom: 12px; margin-top: 0px;" >Remove All Ingredients</button>
+    <%= link_to "", destroy_all_shopping_list_path(recipe_id: params[:recipe_id]), method: :delete, id: "delete-link", class: "hidden" %>
+
+
+
+    <%#= link_to "Remove All Ingredients", destroy_all_shopping_list_path(recipe_id: params[:recipe_id]), method: :delete, id: "sweet-alert-demo", class: "btn btn-primary", style: "margin-bottom: 12px; margin-top: 0px", data: { confirm: "hello"} %>
 
       <% @shopping_list_ingredients.each do |shopping_list_ingredient| %>
           <div class="shopping-ingredients-list">

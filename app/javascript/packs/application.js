@@ -28,6 +28,7 @@ import { initIngredientAutocomplete } from "../plugins/initIngredientAutocomplet
 import { initSearchForm } from "../components/init_search_form.js";
 import { initRecipePortion } from "../components/init_recipe_portion.js";
 import { initErrorModal } from "../components/init_error_modal.js";
+import { initSweetalert } from "../components/init_sweetalert.js";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
@@ -35,10 +36,19 @@ document.addEventListener("turbolinks:load", () => {
   initFlatPickr();
   // Call your functions here, e.g:
   // initSelect2();
-  initIngredientAutocomplete();
   initSearchForm();
   initRecipePortion();
   initErrorModal();
+  initSweetalert('#delete-ingredients', {
+    title: "Are you sure?",
+    text: "You would be removing all ingredients on this page from your shopping list.",
+    icon: "warning"
+  }, (value) => {
+    if (value) {
+      const link = document.querySelector('#delete-link');
+      link.click();
+    }
+  });
   initSelect2();
-
+  initIngredientAutocomplete();
 });
