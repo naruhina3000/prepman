@@ -50,6 +50,7 @@
                 <span><%= pluralize (Date.today - shopping_list.created_at.to_date).to_i, "day" %> ago</span>
               <% end %>
               <h4><%= shopping_list.title %></h4>
+              <span><strong><%= shopping_list.shopping_list_ingredients.size %></strong> items to purchase </span>
             </div>
           </div>
         </div>
