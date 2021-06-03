@@ -1,5 +1,5 @@
 class CookbooksController < ApplicationController
-    before_action :set_cookbook, only: [:show, :destroy, :edit, :update, :publish]
+    before_action :set_cookbook, only: [:show, :destroy, :edit, :update, :publish, :private]
 
     def index
       @cookbooks = current_user.cookbooks
@@ -39,6 +39,11 @@ class CookbooksController < ApplicationController
 
     def publish
       @cookbook.update(status: "public")
+      redirect_to request.referer
+    end
+
+    def private
+      @cookbook.update(status: "private")
       redirect_to request.referer
     end
 
