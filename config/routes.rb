@@ -30,6 +30,7 @@ Rails.application.routes.draw do
   resources :cookbooks do
     member do
       patch :publish
+      patch :private
     end
     resources :cookbook_recipe, only: [:create]
     resources :followed_cookbooks, only: [:create]
