@@ -47,11 +47,12 @@
       <% else %>
       <p class= "btn btn-warning"><%= @cookbook.status %></p>
     <% end %>
-    <br>
-    <%= link_to "Find your recipe", recipes_path, class: "btn btn-info"%>
+    <%= link_to "Add recipe", recipes_path, class: "btn btn-info", data: {toggle: "modal", target: "#editCookbookModal"%>
     <%= link_to "Update Cookbook", edit_cookbook_path(@cookbook), class: "btn btn-info" %>
     <hr>
 <% end %>
+
+
 
 
 </div>
