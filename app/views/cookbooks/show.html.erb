@@ -1,5 +1,5 @@
   <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
-    <div class="container-fluid">
+
       <div class="col-2">
         <%= link_to cookbooks_path do%>
           <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
@@ -33,32 +33,71 @@
       <div class="col-2" style="padding-right: 0px; text-align: right;">
 
       </div>
-    </div>
   </div>
 
 <div class="container-fluid">
   <hr>
 <% if current_user == @user %>
+  <div style="display: flex; justify-content: space-between;">
     <% if @cookbook.status == "private" %>
-      <p class= "btn btn-danger"><%= @cookbook.status %></p>
-      <%# <br> %>
-      <%#= link_to "publish cookbook", publish_cookbook_path(@cookbook), class: "btn btn-info mt-2", method: :patch %>
-      <%# <br> %>
-      <% else %>
-      <p class= "btn btn-warning"><%= @cookbook.status %></p>
+      <%= link_to publish_cookbook_path(@cookbook), method: :patch do %>
+        <%= image_tag("private.png", class:"like-icon", alt: "public") %>
+      <% end %>
+    <% else %>
+      <%= link_to private_cookbook_path(@cookbook), method: :patch do %>
+        <%= image_tag("public.png", class:"like-icon", alt: "private") %>
+      <% end %>
     <% end %>
-    <br>
-    <%= link_to "Find your recipe", recipes_path, class: "btn btn-info"%>
-    <%= link_to "Update Cookbook", edit_cookbook_path(@cookbook), class: "btn btn-info" %>
-    <hr>
+    <%= link_to "Add recipe", recipes_path, class: "btn btn-info", style: "margin-bottom: 0px;" %>
+    <%= link_to "Update Cookbook", cookbook_path(@cookbook), class: "btn btn-info", style: "margin-bottom: 0px;", data: {toggle: "modal", target: "#editCookbookModal"} %>
+  </div>
+
+  <div class="modal fade" id="editCookbookModal" tabindex="-1" role="dialog" aria-labelledby="editCookbookLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editCookbookLabel"> Update <%= @cookbook.title %></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div id='edit-cookbook'>
+            <%= simple_form_for @cookbook do |f| %>
+              <%= f.input :title %>
+              <%= f.input :status, collection: Cookbook::STATUS %>
+              <%= f.submit "Update", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
 <% end %>
 
 
-</div>
 
-<div class="container-fluid pt-2">
-<h2>Recipes</h2>
-    <div class="row my-2">
+
+
+
+
+
+
+
+
+
+
+
+  <div class="row my-2">
+    <% if current_user != @user && @cookbook.status == "private" %>
+      <div class="m-auto">
+      <!-- <div style="margin: 20px; text-align: center; align-items: center;"> -->
+        <%= image_tag("prepman.svg", alt: "logo", class:"m-auto", style:"width: 200px;") %>
+        <h1>Sorry, this cookbook is private</h1>
+      </div>
+      <% else %>
+        <h2 style="margin-left: 15px;">Recipes</h2>
         <%  @cookbook_recipes.each do |crecipe| %>
             <div class="col-md-6 py-2">
               <%= render 'recipes/card', recipe: crecipe.recipe, current_user: user_signed_in? ? current_user : nil do %>
@@ -72,7 +111,8 @@
               <% end %>
             </div>
         <% end %>
-    </div>
-</div>
+    <% end %>
+  </div>
+
 </div>
 

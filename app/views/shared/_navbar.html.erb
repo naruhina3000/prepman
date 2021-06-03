@@ -1,5 +1,5 @@
 <footer class="fixed-bottom">
-  <div class="navbar navbar-lewagon" style="height: 75px;">
+  <div class="navbar navbar-lewagon" style="height: 50px;">
     <div class="grid" style="color: white;">
       <div class="col m-auto">
         <%= link_to recipes_path do %>
@@ -43,12 +43,12 @@
         <% if user_signed_in? %>
           <% if current_user.photo.attached? %>
             <%= link_to user_path(current_user) do %>
-              <%= cl_image_tag current_user.photo.key, class:"avatar-bordered" %>
+              <%= cl_image_tag current_user.photo.key, class:"avatar-navbar-bordered" %>
               <%# class: "avatar-bordered dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
             <% end %>
           <% else %>
             <%= link_to user_path(current_user) do %>
-              <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+              <%= image_tag("user.png", alt: "Profile", class:"avatar-navbar") %>
             <% end %>
           <% end %>
         <% else %>

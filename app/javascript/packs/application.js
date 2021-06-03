@@ -35,9 +35,10 @@ document.addEventListener("turbolinks:load", () => {
   initFlatPickr();
   // Call your functions here, e.g:
   // initSelect2();
-  initSelect2();
   initIngredientAutocomplete();
   initSearchForm();
   initRecipePortion();
   initErrorModal();
+  initSelect2();
+
 });
