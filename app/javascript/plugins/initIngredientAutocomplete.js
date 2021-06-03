@@ -25,3 +25,4 @@ const initIngredientAutocomplete = () => {
   });
 };
 export { initIngredientAutocomplete };
+

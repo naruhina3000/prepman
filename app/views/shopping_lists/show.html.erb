@@ -1,70 +1,87 @@
-<div class="navbar sticky-top bg-white px-0" style="width: 100%; margin-bottom: 0px; padding-top: 32px;">
-  <div class="container-fluid">
-    <div class="col-2" style="padding-left: 0px; text-align: left;">
-      <%= link_to shopping_lists_path do%>
-        <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
-      <% end %>
-    </div>
-    <div class="col-8" style="justify-content: center">
-      <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;"><%= @shopping_list.title %></h4>
-    </div>
-        <div class="col-2" style="padding-right: 0px; text-align: right;">
-      <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target="#ingredientModal"></i>
-    </div>
-    <div class="list-recipe">
-      <h5 class="list-option pr-3"><strong><%= link_to "ALL", shopping_list_path(@shopping_list, all: true ), style: "color: #204742;", class: "#{'active-list' if params[:all].present? || !params[:recipe_id].present? }" %></strong></h5>
-      <% @shopping_list.recipes.distinct.pluck(:id, :title).each do |result| %>
-        <div class="" style="display: flex;">
-          <%= link_to shopping_list_path(@shopping_list, recipe_id: result[0]), class: "#{'active-list' if params[:recipe_id] && params[:recipe_id].include?(result[0].to_s)}" do %>
-          <h5 class="list-option px-3" style="color: #204742;"><%= result[1] %></h5>
-          <% end %>
+<% if current_user != @shopping_list.user %>
 
-        </div>
+    <div class="container-fluid m-auto" style="padding-top: 100px;">
+    <!-- <div style="margin: 20px; text-align: center; align-items: center;"> -->
+      <%= image_tag("prepman.svg", alt: "logo", class:"m-auto", style:"width: 200px;") %>
+      <h3>Please don't go looking at other Hero's shopping list</h3>
+    </div>
+
+
+<% else %>
+
+  <div class="navbar sticky-top bg-white px-0" style="width: 100%; margin-bottom: 0px; padding-top: 32px;">
+    <div class="container-fluid">
+      <div class="col-2" style="padding-left: 0px; text-align: left;">
+        <%= link_to shopping_lists_path do%>
+          <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
         <% end %>
-    </div>
-  </div>
-</div>
+      </div>
+      <div class="col-8" style="justify-content: center">
+        <h4 style="margin-bottom: 0px; text-align: center; padding: 0px;"><%= @shopping_list.title %></h4>
+      </div>
+          <div class="col-2" style="padding-right: 0px; text-align: right;">
+        <i class="fas fa-plus-circle" style="font-size: 25px;" data-toggle="modal" data-target="#ingredientModal"></i>
+      </div>
+      <div class="list-recipe">
+        <h5 class="list-option pr-3"><strong><%= link_to "ALL", shopping_list_path(@shopping_list, all: true ), style: "color: #204742;", class: "#{'active-list' if params[:all].present? || !params[:recipe_id].present? }" %></strong></h5>
+        <% @shopping_list.recipes.distinct.pluck(:id, :title).each do |result| %>
+          <div class="" style="display: flex;">
+            <%= link_to shopping_list_path(@shopping_list, recipe_id: result[0]), class: "#{'active-list' if params[:recipe_id] && params[:recipe_id].include?(result[0].to_s)}" do %>
+            <h5 class="list-option px-3" style="color: #204742;"><%= result[1] %></h5>
+            <% end %>
 
-<div class="container-fluid">
-  <hr>
-
-
-  <%= link_to "Remove All Ingredients", destroy_all_shopping_list_path(recipe_id: params[:recipe_id]), method: :delete, class: "btn btn-primary", style: "margin-bottom: 12px; margin-top: 0px", data: { confirm: "hello"} %>
-
-
-    <% @shopping_list_ingredients.each do |shopping_list_ingredient| %>
-        <div class="shopping-ingredients-list">
-          <span><%= shopping_list_ingredient.quantity.to_i %>  <%= shopping_list_ingredient.unit %> <%= shopping_list_ingredient.ingredient.name %></span>
-          <%= link_to shopping_list_ingredient_path(shopping_list_ingredient), method: :delete do %>
-            <%= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %>
+          </div>
           <% end %>
       </div>
-    <% end %>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <hr>
 
 
 
-  <!-- Modal -->
-  <div class="modal fade" id="ingredientModal" tabindex="-1" role="dialog" aria-labelledby="ingredientModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="ingredientModalLabel">Add ingredient</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-              <%= simple_form_for [@shopping_list, @shopping_list_ingredient] do |f| %>
-              <%= f.input :quantity %>
-              <%= f.input :unit, collection: ShoppingListIngredient::UNIT %>
-              <%= render "ingredients/autocomplete", model_name: 'shopping_list_ingredient' %>
-              <%= f.submit "Add Ingredient", class:"btn btn-primary" %>
+    <button id="delete-ingredients" class="btn btn-primary" style="margin-bottom: 12px; margin-top: 0px;" >Remove All Ingredients</button>
+    <%= link_to "", destroy_all_shopping_list_path(recipe_id: params[:recipe_id]), method: :delete, id: "delete-link", class: "hidden" %>
+
+
+
+    <%#= link_to "Remove All Ingredients", destroy_all_shopping_list_path(recipe_id: params[:recipe_id]), method: :delete, id: "sweet-alert-demo", class: "btn btn-primary", style: "margin-bottom: 12px; margin-top: 0px", data: { confirm: "hello"} %>
+
+      <% @shopping_list_ingredients.each do |shopping_list_ingredient| %>
+          <div class="shopping-ingredients-list">
+            <span><%= shopping_list_ingredient.quantity.to_i %>  <%= shopping_list_ingredient.unit %> <%= shopping_list_ingredient.ingredient.name %></span>
+            <%= link_to shopping_list_ingredient_path(shopping_list_ingredient), method: :delete do %>
+              <%= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %>
             <% end %>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <% end %>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="ingredientModal" tabindex="-1" role="dialog" aria-labelledby="ingredientModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="ingredientModalLabel">Add ingredient</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+                <%= simple_form_for [@shopping_list, @shopping_list_ingredient] do |f| %>
+                <%= f.input :quantity %>
+                <%= f.input :unit, collection: ShoppingListIngredient::UNIT %>
+                <%= render "ingredients/autocomplete", model_name: 'shopping_list_ingredient' %>
+                <%= f.submit "Add Ingredient", class:"btn btn-primary" %>
+              <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
