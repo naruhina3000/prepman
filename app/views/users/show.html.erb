@@ -159,9 +159,10 @@
                 <%= link_to edit_recipe_path(recipe) do %>
                   <%= image_tag("edit.svg", alt: "edit-recipe", class: "edit-recipe-icon", style: "margin-right: 10px;") %>
                 <% end %>
-                <%= link_to recipe_path(recipe), method: :delete do %>
-                  <%= image_tag("bin.svg", alt: "settings", class: "delete-recipe-icon") %>
-                <% end %>
+                <div class="delete-recipe-icon" style="bottom: 10px; margin-right: 10px;">
+                  <button data-label="We love your recipe!"  class="delete-recipe" style="border: none; background-color: transparent;" ><%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %></button>
+                  <%= link_to "", recipe_path(recipe), method: :delete, id: "delete-link", class: "hidden" %>
+                </div>
               <% end %>
               </div>
             <% end %>
@@ -210,9 +211,10 @@
           <div class="col-md-6 col-lg-4 py-2">
             <%= render 'cookbooks/cookbook_card', cookbook: cookbook do %>
              <div class="card-footer">
-              <%= link_to cookbook_path(cookbook), method: :delete do %>
-                <%= image_tag("bin.svg", alt: "settings", class: "delete-cookbook-icon", style: "bottom: 10px;") %>
-              <% end %>
+              <div class="delete-cookbook-icon" style="bottom: 10px; margin-right: 10px;">
+                <button data-label="Although you are a hero, once you delete this cookbook, you can't have it back."  class="delete-cookbook-user-show" style="border: none; background-color: transparent;" ><%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %></button>
+                <%= link_to "", cookbook_path(cookbook), method: :delete, id: "delete-link", class: "hidden" %>
+              </div>
             </div>
             <% end %>
           </div>

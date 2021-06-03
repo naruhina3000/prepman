@@ -53,9 +53,10 @@
         <div class="col-md-6 col-lg-4 py-2">
             <%= render 'cookbook_card', cookbook: cookbook do %>
               <div class="card-footer">
-                <%= link_to cookbook_path(cookbook), method: :delete do %>
-                  <%= image_tag("bin.svg", alt: "settings", class: "delete-cookbook-icon", style: "bottom: 10px;") %>
-                <% end %>
+               <div class="delete-cookbook-icon" style="bottom: 10px; margin-right: 10px;">
+                <button data-label="Although you are a hero, once you delete this cookbook, you can't have it back."  class="delete-cookbook" style="border: none; background-color: transparent;" ><%= image_tag("bin.svg", alt: "delete", style: "width: 30px") %></button>
+                <%= link_to "", cookbook_path(cookbook), method: :delete, id: "delete-link", class: "hidden" %>
+              </div>
               </div>
             <% end %>
         </div>
