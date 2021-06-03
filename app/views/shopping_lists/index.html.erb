@@ -54,9 +54,22 @@
           </div>
         </div>
       <% end %>
-      <%= link_to shopping_list_path(shopping_list),class: "shopping-list-icon", method: :delete do %>
-        <%= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %>
-      <% end %>
+      <%#= link_to shopping_list_path(shopping_list),class: "shopping-list-icon", method: :delete do %>
+        <%#= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %>
+      <%# end %>
+
+      <div class= "shopping-list-icon" style="text-align: right">
+        <button data-label="Once you delete, you can't have it back."  class="delete-shoppinglist" style="border: none; background-color: transparent;" ><%= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %></button>
+        <%= link_to "", shopping_list_path(shopping_list), method: :delete, id: "delete-link", class: "hidden" %>
+      </div>
+
+
+
+
+
+
+
+
     </div>
   <% end %>
 </div>

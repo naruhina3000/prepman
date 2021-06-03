@@ -142,7 +142,7 @@
             <%= simple_form_for @planner do |f| %>
               <%= f.hidden_field :recipe_id, value: @recipe.id %>
               <%= f.input :date, as: :string, type: :text %>
-              <%= f.submit "Add" %>
+              <%= f.submit "Add", class: "btn btn-primary" %>
             <% end %>
           </div>
         </div>

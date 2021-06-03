@@ -21,18 +21,25 @@
     <% if planner.date == Date.today() %>
       <h4>Today</h4>
     <% else %>
-      <h4><%= Date::DAYNAMES[planner.date.day + 1][0..2] %>, <%= planner.date.day %> <%= Date::MONTHNAMES[planner.date.day][0..2] %></h4>
+      <h4><%= Date::DAYNAMES[planner.date.day + 1][0..2] %>, <%= planner.date.day %> <%= Date::MONTHNAMES[planner.date.month][0..2] %></h4>
     <% end %>
     <% if planner.recipe.photo.attached? %>
       <%= cl_image_tag planner.recipe.photo.key, class: "card-img-recipe" %>
     <% else %>
       <%= image_tag "placeholder_recipe.jpg", class: "card-img-recipe" %>
     <% end %>
-    <div class="planner-list">
+    <div class="planner-list" style="display: flex; justify-content: space-between;">
       <span><%= planner.recipe.title %></span>
-      <%= link_to planner_path(planner), method: :delete do %>
-        <%= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %>
-      <% end %>
+      <%#= link_to planner_path(planner), id: "delete-ingredients" do %>
+        <%#= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %>
+      <%# end %>
+      <div style="text-align: right">
+        <button data-label="This is a really good recipe. Do you really want to remove it from your planner?"  class="delete-planner" style="border: none; background-color: transparent;" ><%= image_tag("green-bin.svg", alt: "delete", style: "width: 30px") %></button>
+        <%= link_to "", planner_path(planner), method: :delete, id: "delete-link", class: "hidden" %>
+      </div>
+
+
+
     </div>
     <div class="row planner-recipe-info" style="padding-left: 15px">
       <div style="margin-right: 12px;">
