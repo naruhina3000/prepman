@@ -203,7 +203,7 @@
         <% if @recipe.user.photo.attached? %>
           <%= cl_image_tag @recipe.user.photo.key, class:"avatar" %>
         <% else %>
-          <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+          <%= image_tag @recipe.user.facebook_picture_url || "user.png", alt: "Profile", class:"avatar" %>
         <% end %>
       </div>
       <% if @recipe.user.username.blank? %>
@@ -404,7 +404,7 @@
             <% if review.user.photo.attached? %>
               <%= cl_image_tag review.user.photo.key, class:"avatar" %>
             <% else %>
-              <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+              <%= image_tag review.user.facebook_picture_url || "user.png", alt: "Profile", class:"avatar" %>
             <% end %>
 
           <% if review.user.username.blank? %>
@@ -461,7 +461,24 @@
       <% end %>
     </div>
   </div>
+
+
+<div class="container">
+  <div>
+    <a class="btn btn-sm btn-social btn-fb" href="https://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" target="_blank" title="Share this post on Facebook">
+        <i class="fab fa-facebook-square"></i> Share
+    </a>
+    <a class="btn btn-sm btn-social btn-gp" href="https://plus.google.com/share?url=<%= request.url %>" target="_blank" title="Share this post on Google Plus">
+      <i class="fab fa-google-plus-g" data-fa-transform="grow-2"></i>
+    </a>
+    <a class="btn btn-sm btn-social btn-tw" href="https://twitter.com/intent/tweet?url=<%= request.url %>" target="_blank" title="Share this post on Twitter">
+        <i class="fab fa-twitter"></i> Tweet
+    </a>
+    <p><%= request.url %></p>
+  </div>
+
 </div>
+
 
 
  <%= render 'shared/login_modal'%>

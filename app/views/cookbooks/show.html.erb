@@ -16,7 +16,7 @@
           <% if @user.photo.attached? %>
             <%= cl_image_tag @user.photo.key, class:"avatar" %>
           <% else %>
-            <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+            <%= image_tag @user.facebook_picture_url || "user.png", alt: "Profile", class:"avatar" %>
         <% end %>
         </h5>
         <div style="margin-bottom: 0px; text-align: center; padding: 0px;">
