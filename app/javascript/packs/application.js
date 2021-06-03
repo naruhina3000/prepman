@@ -29,6 +29,7 @@ import { initSearchForm } from "../components/init_search_form.js";
 import { initRecipePortion } from "../components/init_recipe_portion.js";
 import { initErrorModal } from "../components/init_error_modal.js";
 import { initSweetalert } from "../components/init_sweetalert.js";
+import { initMultipleSweetAlert } from "../plugins/initMultipleSweetAlert.js";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
@@ -41,7 +42,7 @@ document.addEventListener("turbolinks:load", () => {
   initErrorModal();
   initSweetalert('#delete-ingredients', {
     title: "Are you sure?",
-    text: "You would be removing all ingredients on this page from your shopping list.",
+    text: "Once you remove these ingredients, you can't have them back.",
     icon: "warning"
   }, (value) => {
     if (value) {
@@ -51,4 +52,5 @@ document.addEventListener("turbolinks:load", () => {
   });
   initSelect2();
   initIngredientAutocomplete();
+  initMultipleSweetAlert()
 });
