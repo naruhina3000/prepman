@@ -47,7 +47,9 @@
 
 
     <%#= link_to "Remove All Ingredients", destroy_all_shopping_list_path(recipe_id: params[:recipe_id]), method: :delete, id: "sweet-alert-demo", class: "btn btn-primary", style: "margin-bottom: 12px; margin-top: 0px", data: { confirm: "hello"} %>
-
+      <div style="margin-bottom: 15px; text-align: right;">
+        <span><strong><%= @shopping_list_ingredients.size %></strong> items to purchase </span>
+      </div>
       <% @shopping_list_ingredients.each do |shopping_list_ingredient| %>
           <div class="shopping-ingredients-list">
             <span><%= shopping_list_ingredient.quantity.to_i %>  <%= shopping_list_ingredient.unit %> <%= shopping_list_ingredient.ingredient.name %></span>

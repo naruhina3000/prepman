@@ -1,7 +1,7 @@
   <div class="navbar navbar-inner-recipes sticky-top">
-    <div class="container-fluid h-40" style="padding: 0px">
+    <div class="container-fluid" style="padding: 0px; height: 35px;">
       <%= link_to recipes_path, class:"menu-icons", data: {toggle: "modal", target: "#searchModal"} do %>
-        <%= image_tag("search.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
+        <%= image_tag("search.png", class:"search", style:"margin-left: 15px;", alt: "Search") %>
       <% end %>
     </div>
   </div>
@@ -34,7 +34,7 @@
                 <!-- other filter items -->
                 <div class="container-fluid px-0">
                   <div class="row justify-content-evenly mx-0">
-                      <div class="filter my-2 col-lg-4 col-md-6" style="width: 100%;">
+                      <div class="filter my-2" style="width: 100%;">
                         <span class="filter-items"><strong>Diet:</strong></span>
                         <% Recipe::DIET.each do |diet| %>
                           <label for="<%= diet %>" class="<%= 'active' if params[:diets]&.include?(diet) %>"><%= diet %></label>
@@ -48,7 +48,7 @@
                       <div class="filter my-2">
                         <span class="filter-items"><strong>Dishtype:</strong></span>
                         <% Recipe::DISHTYPE.each do |dishtype| %>
-                          <label for="<%= dishtype %>"><%= dishtype %></label>
+                          <label for="<%= dishtype %>" class="<%= 'active' if params[:dishtypes]&.include?(dishtype) %>"><%= dishtype %></label>
                           <input type="checkbox" hidden value="<%= dishtype %>" id="<%= dishtype %>" name="dishtypes[]">
                         <% end %>
                         <hr>
@@ -78,7 +78,7 @@
 
 
 
-                      <div class="filter my-2">
+                      <div class="filter my-2" style="width:100%;">
                         <span class="filter-items"><strong>Difficulty:</strong></span>
                         <% Recipe::DIFFICULTY.each do |difficulty| %>
                           <label for="<%= difficulty %>"><%= difficulty %></label>
@@ -95,6 +95,8 @@
                           <!-- <label for="<%= rating %>" class="<%#= 'active' if (params[:ratings].join.to_i) > rating %>"><i class="far fa-star"></i></label> -->
                           <input type="radio" hidden value="<%= rating %>" id="<%= rating %>" name="ratings[]">
                         <% end %>
+                        <br>
+                        <span class="filter-items" style="font-size: smaller;">(1 star, if you want to see all recipes)</span>
                       </div>
 
                  <!--    </div> -->
@@ -103,10 +105,10 @@
                 </div>
 
                 <div class="row">
-                 <%= button_tag class: "btn btn-primary search-btn mx-auto", style: "font-size: xxx-large; background-color: white; border: none;" do %>
+                 <%= button_tag class: "search-btn mx-auto", style: "font-size: xxx-large; background-color: white; border: none;" do %>
                  <%= image_tag("prepman.svg", alt: "Filter", style: "width: 100px;") %>
                  <% end %>
-                 
+
                 </div>
 
               </div>
@@ -125,7 +127,17 @@
 <!-- Recipes index -->
 
     <div style="height: 2px"></div>
-    <div class="row my-0">
+    <div class="row my-0" style="justify-content: flex-end;">
+      <div style="margin: 15px;">
+        <% if @recipes.count > 0 %>
+          <span><strong> <%= @recipes.count %> </strong>Recipes Found</span>
+        <% else %>
+          <div class="container-fluid m-auto" style="padding-top: 100px;">
+            <%= image_tag("prepman.svg", alt: "logo", class:"m-auto", style:"width: 200px;") %>
+            <h3>Sorry, no recipe found based on your search. Please try to broaden your filter.</h3>
+          </div>
+        <% end %>
+      </div>
         <% @recipes.each do |recipe| %>
             <div class="col-md-6 pb-3">
               <%= render 'card', recipe: recipe, current_user: user_signed_in? ? current_user : nil %>
