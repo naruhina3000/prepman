@@ -4,14 +4,6 @@
   border-radius: 50%;
   object-fit: cover;
 }
-
-.avatar-navbar {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .avatar-large {
   width: 56px;
   height: 56px;
@@ -26,17 +18,6 @@
   border: $darkgreen 1px solid;
   object-fit: cover;
 }
-
-.avatar-navbar-bordered {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-  border: $darkgreen 1px solid;
-  object-fit: cover;
-}
-
-
 .avatar-square {
   height: 40px;
   border-radius: 0px;

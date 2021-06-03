@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
-  root to: 'recipes#index'
+  root to: 'pages#home'
 
   resources :recipes do
     member do
@@ -30,7 +30,6 @@ Rails.application.routes.draw do
   resources :cookbooks do
     member do
       patch :publish
-      patch :private
     end
     resources :cookbook_recipe, only: [:create]
     resources :followed_cookbooks, only: [:create]

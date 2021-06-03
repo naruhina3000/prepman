@@ -23,9 +23,9 @@
             <%= f.input :description %>
             <%= f.input :portion %>
             <%= f.input :difficulty, collection: Recipe::DIFFICULTY %>
-            <%= f.input :prep_time %>
-            <%= f.input :bake_time %>
-            <%= f.input :resting_time %>
+            <%= f.input :prep_time, label: 'Prep-Time in min' %>
+            <%= f.input :bake_time, label: 'Bake-Time in min' %>
+            <%= f.input :resting_time, label: 'Resting-Time in min' %>
             <%= f.input :diet, collection: Recipe::DIET, input_html: { class: 'select2' } %>
             <%= f.input :dish_type, collection: Recipe::DISHTYPE, input_html: { class: 'select2' } %>
             <%= f.input :cuisine, collection: Recipe::CUISINE, input_html: { class: 'select2' } %>
