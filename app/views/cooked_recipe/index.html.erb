@@ -1,6 +1,6 @@
-
-  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; padding-top: 32px; padding-bottom: 16px;">
-    <div class="col-2" style="padding-left: 0px";>
+  <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; margin-top: 16px; padding: 16px 0px;">
+   <div class="container-fluid">
+    <div class="col-2">
       <%= link_to user_path(current_user) do%>
         <i class="fas fa-chevron-left" style="font-size: 25px; color: #B85A36;"></i>
       <% end %>
@@ -10,6 +10,7 @@
     </div>
     <div class="col-2" style="padding-right: 0px; text-align: right;">
     </div>
+  </div>
   </div>
 
 <div class="container-fluid">
@@ -21,8 +22,7 @@
         <%= render 'recipes/card', recipe: cooked_recipe.recipe do %>
         <% if current_user %>
           <% if current_user.has_cooked_recipe?(cooked_recipe.recipe) %>
-            <%= link_to "I lied, I haven't cooked this yet", cooked_recipe_path(current_user.has_cooked_recipe?(cooked_recipe.recipe)), method: :delete, class: "btn btn-info", style: "border-radius: 0px;
-    margin: 0px;" %>
+            <%= link_to "I lied, I haven't cooked this yet", cooked_recipe_path(current_user.has_cooked_recipe?(cooked_recipe.recipe)), method: :delete, class: "btn btn-info" %>
           <% else %>
             <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(cooked_recipe.recipe), method: :post, class: "btn btn-primary" %>
           <% end %>
@@ -32,6 +32,3 @@
     <% end %>
 <% end %>
 </div>
-
-
-
