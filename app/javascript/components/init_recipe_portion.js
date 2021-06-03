@@ -1,6 +1,6 @@
-
 const updateIngredientsAmount = (portion) => {
   const amounts = document.querySelectorAll('.ingredient-amount')
+  document.querySelector('#recipe_portion').value = portion
   amounts.forEach((amount) => {
     amount.innerText = parseInt(amount.dataset.unit) * portion
   })
