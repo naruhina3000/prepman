@@ -20,5 +20,5 @@ body {
 
 #home {
   background-color: $lightgreen;
-  background-image: url(home.svg);
+  background-image: asset-url("home.svg");
 }

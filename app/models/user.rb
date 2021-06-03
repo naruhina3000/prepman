@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  devise :omniauthable, omniauth_providers: [:facebook]
   has_one_attached :photo
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
