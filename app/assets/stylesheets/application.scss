@@ -12,10 +12,13 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-@import 'flatpickr/dist/flatpickr';
+@import "flatpickr/dist/flatpickr";
 
 body {
   background-color: white;
 }
 
-
+#home {
+  background-color: $lightgreen;
+  background-image: url(home.svg);
+}

@@ -7,7 +7,7 @@ const initSelect2 = () => {
   if (document.querySelector("#utensilModal")) {
     options = { dropdownParent: $("#utensilModal") };
   }
-   $(".select2").select2(options);
+  $(".select2").select2(options);
 };
 
 export { initSelect2 };
