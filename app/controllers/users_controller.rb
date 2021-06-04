@@ -8,6 +8,7 @@ class UsersController < ApplicationController
       @cooked_recipes = CookedRecipe.where(user: @user)
       @favorites = Favorite.where(user: @user)
       @recipes = Recipe.where(user: @user)
+      @published_recipes = Recipe.where(user: @user, status: "published")
       @cookbooks = Cookbook.where(user: @user)
       @public_cookbooks = Cookbook.where(user: @user, status: "public")
       @cookbook = Cookbook.new

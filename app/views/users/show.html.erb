@@ -151,7 +151,13 @@
   <div class="tab-pane fade" id="nav-my-recipes" role="tabpanel" aria-labelledby="nav-my-recipes-tab">
   <div class="container-fluid pb-2 px-0" >
     <div class="row">
-      <% @recipes.each do |recipe| %>
+
+
+
+
+    
+    <% if current_user == @user %>
+       <% @recipes.each do |recipe| %>
         <div class="col-md-6 col-lg-4 py-2">
             <%= render 'recipes/card', recipe: recipe do %>
               <div class="card-footer">
@@ -168,6 +174,19 @@
             <% end %>
         </div>
       <% end %>
+    
+    <% else %>
+
+      <% @published_recipes.each do |precipe| %>
+        <div class="col-md-6 col-lg-4 py-2">
+            <%= render 'recipes/card', recipe: precipe do %>
+            <% end %>
+        </div>
+      <% end %>
+      
+    <% end %>
+    
+
     </div>
   </div>
   </div>
