@@ -16,7 +16,8 @@
   <hr>
   <div class="row">
     <div class="col-md-6 mx-auto">
-      <div class="card p-4">
+      <div class="card">
+        <div class="transparent p-4">
           <%= simple_form_for @recipe do |f| %>
             <%= f.input :title %>
             <%= f.input :description %>
@@ -41,6 +42,7 @@
             <%= f.input :photo, as: :file %>
             <%= f.submit "Update Ingredients", class:"btn btn-primary", method: :patch %>
           <% end %>
+        </div>
       </div>
     </div>
   </div>
