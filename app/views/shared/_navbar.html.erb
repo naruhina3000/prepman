@@ -48,7 +48,7 @@
             <% end %>
             <% else %>
             <%= link_to user_path(current_user) do %>
-              <%= image_tag "#{current_user.facebook_picture_url || 'user.png'}", class:"avatar-navbar-bordered" || "user.png", alt: "Profile", class:"avatar-navbar" %>
+              <%= image_tag "#{current_user.facebook_picture_url || 'user.png'}", class:"avatar-navbar-bordered", alt: "Profile", class:"avatar-navbar" %>
             <% end %>
           <% end %>
         <% else %>
