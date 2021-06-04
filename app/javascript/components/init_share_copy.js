@@ -23,14 +23,14 @@ function initShareFunction() {
 
     /* Alert the copied text */
     // alert("Link copied");
-    initShareSweetalert(".copybtn", {
+    initShareSweetalert("#copy-link-button", {
       title: "Copied link",
       text: "Now you can chare it with the world",
       icon: "success",
     });
   };
 
-  document.querySelector(".copybtn").addEventListener("click", copy);
+  document.querySelector("#copy-link-button").addEventListener("click", copy);
 }
 
 export { initShareFunction };
