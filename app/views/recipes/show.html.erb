@@ -264,7 +264,7 @@
 
     <h4 style="padding-bottom: 8px; "><strong>Ingredients:</strong></h4>
     <% @recipe.recipe_ingredients.each do |recipe_ingredient| %>
-      <p><span data-unit="<%= (recipe_ingredient.quantity.round / @recipe.portion.to_f).round(2) %>" class="ingredient-amount"><%= recipe_ingredient.quantity.round / @recipe.portion %></span> <%= recipe_ingredient.unit %> <%= recipe_ingredient.ingredient.name %></p>
+      <p><span data-unit="<%= (recipe_ingredient.quantity.round / @recipe.portion.to_f).round(2) %>" class="ingredient-amount"><%= (recipe_ingredient.quantity.round / @recipe.portion.to_f).round(2) %></span> <%= recipe_ingredient.unit %> <%= recipe_ingredient.ingredient.name %></p>
     <% end %>
 
 
