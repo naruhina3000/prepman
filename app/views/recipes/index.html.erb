@@ -127,19 +127,22 @@
 <!-- Recipes index -->
 
     <div style="height: 2px"></div>
-    <div class="row my-0" style="justify-content: flex-end;">
-      <div style="margin: 15px;">
+
+      <div class="row" style="margin: 15px; justify-content: flex-end;">
         <% if @recipes.count > 0 %>
           <span><strong> <%= @recipes.count %> </strong>Recipes Found</span>
         <% else %>
-          <div class="container-fluid m-auto" style="padding-top: 100px;">
-            <%= image_tag("prepman.svg", alt: "logo", class:"m-auto", style:"width: 200px;") %>
-            <h3>Sorry, no recipe found based on your search. Please try to broaden your filter.</h3>
+          <div class="container-fluid m-auto" style="width: 100%; padding-top: 100px;">
+            <div style="display-flex; justify-content: center;">
+              <%= image_tag("prepman.svg", alt: "logo", class:"m-auto", style:"width: 200px;") %>
+              <h3>Sorry, no recipe found based on your search. Please try to broaden your filter.</h3>
+            </div>
           </div>
         <% end %>
       </div>
-    </div>
-    <div class="row my-0" style="justify-content: flex-end;">
+
+
+    <div class="row my-0">
         <% @recipes.each do |recipe| %>
             <div class="col-md-6 pb-3">
               <%= render 'card', recipe: recipe, current_user: user_signed_in? ? current_user : nil %>

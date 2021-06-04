@@ -1,4 +1,4 @@
-<% if current_user != @shopping_list.user %>
+<% if !@shopping_list || current_user != @shopping_list&.user %>
 
     <div class="container-fluid m-auto" style="padding-top: 100px;">
     <!-- <div style="margin: 20px; text-align: center; align-items: center;"> -->

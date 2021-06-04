@@ -1,5 +1,5 @@
 class ShoppingListsController < ApplicationController
-  before_action :set_shopping_list, only: [:show, :destroy, :destroy_all]
+  before_action :set_shopping_list, only: [:destroy, :destroy_all]
 
 
   # resources :shopping_list, only: [:index, :create, :show, :destroy] do
@@ -17,10 +17,11 @@ class ShoppingListsController < ApplicationController
   end
 
   def show
+    @shopping_list = ShoppingList.where(id: params[:id]).first
     @shopping_lists = current_user.shopping_lists
     @shopping_list_ingredient = ShoppingListIngredient.new
-    @shopping_list_ingredients = @shopping_list.shopping_list_ingredients
-    @shopping_list_ingredients = @shopping_list_ingredients.where(recipe_id: params[:recipe_id]) if params[:recipe_id].present?
+    @shopping_list_ingredients = @shopping_list&.shopping_list_ingredients
+    @shopping_list_ingredients = @shopping_list_ingredients&.where(recipe_id: params[:recipe_id]) if params[:recipe_id].present?
   end
 
 
