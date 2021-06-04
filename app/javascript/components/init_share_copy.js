@@ -25,7 +25,7 @@ function initShareFunction() {
     // alert("Link copied");
     initShareSweetalert("#copy-link-button", {
       title: "Copied link",
-      text: "Now you can chare it with the world",
+      text: "Now you can share it with the world",
       icon: "success",
     });
   };
