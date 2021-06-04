@@ -37,7 +37,7 @@
 <div class="container-fluid">
   <hr>
 <% if current_user == @user %>
-  <div style="display: flex; justify-content: space-between;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
     <% if @cookbook.status == "private" %>
       <%= link_to publish_cookbook_path(@cookbook), method: :patch do %>
         <%= image_tag("private.png", class:"like-icon", alt: "public") %>

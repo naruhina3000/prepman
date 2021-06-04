@@ -98,27 +98,45 @@ class RecipesController < ApplicationController
   def add_to_shopping_list
     if params[:new_list].present?
       @shopping_list = ShoppingList.create(title: params[:new_list], user:current_user)
-    else
-      @shopping_list = ShoppingList.find(params[:list])
-    end
-    @recipe.recipe_ingredients.each do |recipe_ingredient|
+      @recipe.recipe_ingredients.each do |recipe_ingredient|
       # ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: (recipe_ingredient.quantity / @recipe.portion), unit: recipe_ingredient.unit)
-      ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: ((recipe_ingredient.quantity / @recipe.portion).to_i * params[:recipe][:portion].to_i).round, unit: recipe_ingredient.unit)
+        ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: ((recipe_ingredient.quantity / @recipe.portion).to_i * params[:recipe][:portion].to_i).round, unit: recipe_ingredient.unit)
+      end
+      redirect_to request.referer
+      flash[:success] = "All the ingredients have been added to your shopping list"
+    elsif params[:list].present?
+      @shopping_list = ShoppingList.find(params[:list])
+      @recipe.recipe_ingredients.each do |recipe_ingredient|
+      # ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: (recipe_ingredient.quantity / @recipe.portion), unit: recipe_ingredient.unit)
+        ShoppingListIngredient.create(shopping_list: @shopping_list, recipe: @recipe, ingredient: recipe_ingredient.ingredient, quantity: ((recipe_ingredient.quantity / @recipe.portion).to_i * params[:recipe][:portion].to_i).round, unit: recipe_ingredient.unit)
+      end
+      redirect_to request.referer
+      flash[:success] = "All the ingredients have been added to your shopping list"
+    else
+      @error = true
+      flash[:alert] = "Ingredients not added. Create a new shopping list with a title or choose an existing shopping list."
+      redirect_to recipe_path(@recipe)
     end
-    redirect_to request.referer
-    flash[:success] = "All the ingredients have been added to your shopping list"
   end
 
 
   def add_to_cookbook
     if params[:new_cookbook_list].present?
       @cookbook = Cookbook.create(title: params[:new_cookbook_list], user:current_user)
-    else
+      CookbookRecipe.create(cookbook: @cookbook, recipe: @recipe)
+      flash[:success] = "Your recipe was added to your #{@cookbook.title}"
+      redirect_to request.referer
+    elsif params[:cookbook_list].present?
       @cookbook = Cookbook.find(params[:cookbook_list])
+      CookbookRecipe.create(cookbook: @cookbook, recipe: @recipe)
+      flash[:success] = "Your recipe was added to your #{@cookbook.title}"
+      redirect_to request.referer
+    else
+      # render "recipe/show"
+      @error = true
+      flash[:alert] = "Recipe not added. Create a new cookbook with a title or choose an existing cookbook."
+      redirect_to recipe_path(@recipe)
     end
-    CookbookRecipe.create(cookbook: @cookbook, recipe: @recipe)
-    redirect_to request.referer
-    flash[:success] = "Your recipe was added to your #{@cookbook.title}"
   end
 
   def publish

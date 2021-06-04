@@ -30,7 +30,9 @@ class ShoppingListsController < ApplicationController
     if @shopping_list.save
       redirect_to @shopping_list
     else
-      render "/"
+      @error = true
+      flash[:alert] = "Shopping list not created. Title cannot be blank."
+      redirect_to @shopping_list
     end
   end
 

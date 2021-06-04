@@ -13,7 +13,9 @@ class PlannersController < ApplicationController
     if @planner.save
       redirect_to @recipe
     else
-      render "/recipes/show"
+      @error = true
+      flash[:alert] = "Recipe not added to your planner. Please choose a date to add the recipe to your planner"
+      redirect_to @recipe
     end
   end
 
