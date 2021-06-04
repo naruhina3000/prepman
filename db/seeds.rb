@@ -30,14 +30,14 @@ User.destroy_all
 
 
 20.times do
-    user = User.create!(
-        email: Faker::Internet.email,
-        username: Faker::Internet.username,
-        password: "password",
-        name: Faker::Name.name,
-        url: Faker::Internet.url,
-        bio: Faker::Marketing.buzzwords
-    )
+  user = User.create!(
+      email: Faker::Internet.email,
+      username: Faker::Internet.username,
+      password: "password",
+      name: Faker::Name.name,
+      url: Faker::Internet.url,
+      bio: Faker::Marketing.buzzwords
+  )
 
 
   rand(0..5).times do
@@ -76,14 +76,75 @@ User.destroy_all
           unit: ["gr", "ml", "unit"].sample,
         )
     end
+    rand(1..10).times do
+      Step.create(
+          number: recipe.steps.all.size + 1,
+          description: Faker::Quotes::Shakespeare.as_you_like_it_quote,
+          recipe: recipe,
+        )
+    end
     if [true, false].sample
         review = Review.create(
             rating: rand(1..5),
-            content: Faker::ChuckNorris.fact,
-            user: User.all.sample
+            content: Faker::TvShows::BigBangTheory.quote,
+            user: User.all.sample,
+            recipe: recipe,
         )
     end
   end
+
+
+  rand(0..5).times do
+    cookbook = Cookbook.create!(
+        title: Faker::Restaurant.type,
+        status: ["public", "private"].sample,
+        user: user
+    )
+
+
+    # CookbookRecipe.create(
+    #       recipe: Recipe.all.sample,
+    #       cookbook: cookbook,
+    #     )
+  end
+
+
+
+    # CookedRecipe.create!(
+    #   recipe: Recipe.all.sample,
+    #   user: user
+    #   )
+
+
+
+    # Favorite.create!(
+    #   recipe: Recipe.all.sample,
+    #   user: user
+    #   )
+
+
+
+    # FollowedCookbook.create!(
+    #   cookbook: Cookbook.all.sample,
+    #   user: user
+    #   )
+
+
+  rand(0..10).times do
+    planner = Planner.create!(
+      date: Faker::Date.in_date_period(year: 2021, month: 6),
+      recipe: Recipe.all.sample,
+      user: user
+      )
+  end
+
+  rand(0..5).times do
+    ShoppingList.create!(
+      title: Faker::Dessert.flavor,
+      user: user
+      )
+  end
+
 end
 
 

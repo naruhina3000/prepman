@@ -13,7 +13,7 @@ class User < ApplicationRecord
   has_many :cooked_recipes, dependent: :destroy
   has_many :followed_cookbooks, dependent: :destroy
   has_many :favorites, dependent: :destroy
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 
   # validates :username, presence: true, uniqueness: true
   # validates :name, presence: true

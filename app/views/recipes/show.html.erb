@@ -355,11 +355,13 @@
  <h5><strong>Steps</strong></h5>
     <% if @recipe.steps.count > 0 %>
       <% @recipe.steps.each do |step| %>
-        <span><%= step.number %>. <%= step.description %></span>
-        <div>
-          <% if step.photo.attached? %>
-            <%= cl_image_tag step.photo.key, class: "card-img-recipe", style: "margin-bottom: 16px;" %>
-          <% end %>
+        <div style="margin-bottom: 16px;">
+          <span><%= step.number %>. <%= step.description %></span>
+          <div>
+            <% if step.photo.attached? %>
+              <%= cl_image_tag step.photo.key, class: "card-img-recipe", style: "margin-bottom: 16px;" %>
+            <% end %>
+          </div>
         </div>
       <% end %>
     <% else %>

@@ -5,16 +5,16 @@ class Recipe < ApplicationRecord
   has_many :planners, dependent: :destroy
   has_many :steps, dependent: :destroy
   has_many :recipe_ingredients, dependent: :destroy
-  has_many :ingredients, through: :recipe_ingredients
+  has_many :ingredients, through: :recipe_ingredients, dependent: :destroy
   has_many :recipe_utensils, dependent: :destroy
-  has_many :utensils, through: :recipe_utensils
+  has_many :utensils, through: :recipe_utensils, dependent: :destroy
   has_many :shopping_list_ingredients, dependent: :destroy
-  has_many :shopping_lists, through: :shopping_list_ingredients
-  has_many :cookbook_recipes
-  has_many :cookbooks, through: :cookbook_recipes
-  has_many :favorites
-  has_many :reviews
-  has_many :cooked_recipes
+  has_many :shopping_lists, through: :shopping_list_ingredients, dependent: :destroy
+  has_many :cookbook_recipes, dependent: :destroy
+  has_many :cookbooks, through: :cookbook_recipes, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :reviews, dependent: :destroy
+  has_many :cooked_recipes, dependent: :destroy
 
   DIFFICULTY = ["easy", "medium", "hard"]
   DIET = ["I eat everything", "Vegan", "Vegetarian", "Pescetarian", "Gluten-free", "Lactose-free"]
