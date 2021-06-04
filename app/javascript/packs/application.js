@@ -30,6 +30,7 @@ import { initRecipePortion } from "../components/init_recipe_portion.js";
 import { initErrorModal } from "../components/init_error_modal.js";
 import { initSweetalert } from "../components/init_sweetalert.js";
 import { initMultipleSweetAlert } from "../plugins/initMultipleSweetAlert.js";
+import { initShareFunction } from "../components/init_share_copy.js";
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
@@ -40,17 +41,22 @@ document.addEventListener("turbolinks:load", () => {
   initSearchForm();
   initRecipePortion();
   initErrorModal();
-  initSweetalert('#delete-ingredients', {
-    title: "Are you sure?",
-    text: "Once you remove these ingredients, you can't have them back.",
-    icon: "warning"
-  }, (value) => {
-    if (value) {
-      const link = document.querySelector('#delete-link');
-      link.click();
+  initSweetalert(
+    "#delete-ingredients",
+    {
+      title: "Are you sure?",
+      text: "Once you remove these ingredients, you can't have them back.",
+      icon: "warning",
+    },
+    (value) => {
+      if (value) {
+        const link = document.querySelector("#delete-link");
+        link.click();
+      }
     }
-  });
+  );
+  initShareFunction();
   initSelect2();
   initIngredientAutocomplete();
-  initMultipleSweetAlert()
+  initMultipleSweetAlert();
 });

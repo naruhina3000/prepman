@@ -198,12 +198,13 @@
   <div style="height: 550px;"></div>
 
   <div>
-    <div class="row mx-auto" style="width: 100%; justify-content: center; align-items: center; ">
+    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
+      <div style="display: flex; align-items: center; justify-content: center;">
       <div style="margin-right: 8px;">
         <% if @recipe.user.photo.attached? %>
           <%= cl_image_tag @recipe.user.photo.key, class:"avatar" %>
         <% else %>
-          <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+          <%= image_tag @recipe.user.facebook_picture_url || "user.png", alt: "Profile", class:"avatar" %>
         <% end %>
       </div>
       <% if @recipe.user.username.blank? %>
@@ -211,6 +212,10 @@
       <% else %>
         <%= link_to "#{@recipe.user.username}", user_path(@recipe.user) %>
       <% end %>
+      </div>
+      <div>
+        <%= image_tag("share-green.svg", alt: "share", class:"share-icon", data: {toggle: "modal", target: "#shareModal"}) %>
+      </div>
     </div>
 
     <hr>
@@ -406,7 +411,7 @@
             <% if review.user.photo.attached? %>
               <%= cl_image_tag review.user.photo.key, class:"avatar" %>
             <% else %>
-              <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+              <%= image_tag review.user.facebook_picture_url || "user.png", alt: "Profile", class:"avatar" %>
             <% end %>
 
           <% if review.user.username.blank? %>
@@ -465,6 +470,8 @@
   </div>
 </div>
 
+
+ <%= render 'share_modal'%>
 
  <%= render 'shared/login_modal'%>
 

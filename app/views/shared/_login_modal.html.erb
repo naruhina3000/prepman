@@ -32,8 +32,8 @@
           <hr>
 
         
-        <%= link_to user_facebook_omniauth_authorize_path, method: :post do%>
-          <%= image_tag "fb-login-button.png", class: "fb-button"%>
+        <%= link_to user_facebook_omniauth_authorize_path, class:"btn btn-social btn-fb", style: "font-size: 10px;max-height: 50px; max-width: 165px;" , method: :post do %>
+          <i class="fab fa-facebook-square"></i> Login with Facebook
         <% end %>
          <br>
 

@@ -5,9 +5,9 @@
         <%= link_to user_path(@user) do %>
           <%= cl_image_tag @user.photo.key, class:"avatar-profile-bordered" %>
         <% end %>
-      <% else %>
+        <% else %>
         <%= link_to user_path(@user) do %>
-          <%= image_tag("user.png", alt: "Profile", class:"avatar-profile") %>
+          <%= image_tag current_user.facebook_picture_url, class:"avatar-profile-bordered" || "user.png", alt: "Profile", class:"avatar-profile" %>
         <% end %>
       <% end %>
 
@@ -267,7 +267,7 @@
     </div>
   </div>
 
-
-
+</div>
+  
 </div>
 
