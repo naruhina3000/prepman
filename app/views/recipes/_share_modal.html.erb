@@ -1,0 +1,25 @@
+  <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="shareModalLabel">Share the Recipe</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="share-modal-body" style="margin-top: 12px;">
+            <a class="btn btn-social btn-fb" href="https://www.facebook.com/sharer/sharer.php?u=<%= request.url %>" target="_blank" title="Share this post on Facebook">
+                <i class="fab fa-facebook-square"></i> Share
+            </a>
+            <a class="btn btn-social btn-gp" href="https://plus.google.com/share?url=<%= request.url %>" target="_blank" title="Share this post on Google Plus">
+            <i class="fab fa-google-plus-g" data-fa-transform="grow-2"></i>
+            </a>
+            <a class="btn btn-social btn-tw" href="https://twitter.com/intent/tweet?url=<%= request.url %>" target="_blank" title="Share this post on Twitter">
+                <i class="fab fa-twitter"></i> Tweet
+            </a>
+            <input type="text" value="<%= request.url %>" id="shareInput" style="width: 75%; margin-top: 12px; text-align: center">
+            <button class="btn btn-info" style= "width: 50%; margin-top: 12px;">Copy link</button>
+        </div>
+      </div>
+    </div>
+  </div>
