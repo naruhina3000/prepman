@@ -1,4 +1,4 @@
-<% if current_user != @shopping_list.user %>
+<% if !@shopping_list || current_user != @shopping_list&.user %>
 
     <div class="container-fluid m-auto" style="padding-top: 100px;">
     <!-- <div style="margin: 20px; text-align: center; align-items: center;"> -->
@@ -75,12 +75,10 @@
                 <%= simple_form_for [@shopping_list, @shopping_list_ingredient] do |f| %>
                 <%= f.input :quantity %>
                 <%= f.input :unit, collection: ShoppingListIngredient::UNIT %>
+                <p>Ingredient</p>
                 <%= render "ingredients/autocomplete", model_name: 'shopping_list_ingredient' %>
                 <%= f.submit "Add Ingredient", class:"btn btn-primary" %>
               <% end %>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
