@@ -17,9 +17,11 @@ class CookbooksController < ApplicationController
       if @cookbook.save
         redirect_to @cookbook
       else
-        render "/"
+        @error = true
+        render "/recipes/show"
       end
     end
+
 
     def edit
     end

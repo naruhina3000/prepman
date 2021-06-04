@@ -15,7 +15,10 @@ class ShoppingListIngredientsController < ApplicationController
       if @shopping_list_ingredient.save
         redirect_to shopping_list_path(@shopping_list)
       else
-        render '/shopping_lists/show'
+        # @error = @shopping_list_ingredient.errors
+        flash[:alert] = "Your ingredient was not saved :(  Have you added quantity, unit & ingredient? "
+        redirect_to shopping_list_path(@shopping_list)
+        # render '/shopping_lists/show'
       end
     end
 

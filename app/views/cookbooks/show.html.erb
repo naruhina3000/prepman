@@ -16,7 +16,7 @@
           <% if @user.photo.attached? %>
             <%= cl_image_tag @user.photo.key, class:"avatar" %>
           <% else %>
-            <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+            <%= image_tag @user.facebook_picture_url || "user.png", alt: "Profile", class:"avatar" %>
         <% end %>
         </h5>
         <div style="margin-bottom: 0px; text-align: center; padding: 0px;">
@@ -37,7 +37,7 @@
 <div class="container-fluid">
   <hr>
 <% if current_user == @user %>
-  <div style="display: flex; justify-content: space-between;">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
     <% if @cookbook.status == "private" %>
       <%= link_to publish_cookbook_path(@cookbook), method: :patch do %>
         <%= image_tag("private.png", class:"like-icon", alt: "public") %>

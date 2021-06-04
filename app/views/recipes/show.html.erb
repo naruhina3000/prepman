@@ -3,20 +3,20 @@
     <div class="row" style="padding-left: 15px">
       <% if user_signed_in? %>
         <%= link_to recipe_path(@recipe), class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToCookbookModal"} do %>
-          <%= image_tag("cookbook.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
+          <%= image_tag("cookbook.png", class:"add-to-icon", alt: "Add to cookbook") %>
         <% end %>
       <% else %>
         <%= link_to new_user_session_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#newUserModal"} do %>
-          <%= image_tag("cookbook.png", class:"search", style:"margin-left: 0px;", alt: "Search") %>
+          <%= image_tag("cookbook.png", class:"add-to-icon", style:"height: 20px; width: 18px; margin-left: 0px;", alt: "Search") %>
         <% end %>
       <% end %>
       <% if user_signed_in? %>
         <%= link_to recipe_path(@recipe), class:"navbar-recipe-show", data: {toggle: "modal", target: "#addToPlannerModal"} do %>
-          <%= image_tag("yellow-calendar.png", class:"search", style:"height: 24px; margin-left: 0px;", alt: "Search") %>
+          <%= image_tag("yellow-calendar.png", class:"add-to-icon", alt: "Search") %>
         <% end %>
       <% else %>
         <%= link_to new_user_session_path, class:"navbar-recipe-show", data: {toggle: "modal", target: "#newUserModal"} do %>
-          <%= image_tag("yellow-calendar.png", class:"search", style:"height: 24px; margin-left: 0px;", alt: "Search") %>
+          <%= image_tag("yellow-calendar.png", class:"add-to-icon", alt: "Search") %>
         <% end %>
       <% end %>
 
@@ -198,12 +198,13 @@
   <div style="height: 550px;"></div>
 
   <div>
-    <div class="row mx-auto" style="width: 100%; justify-content: center; align-items: center; ">
+    <div class="row mx-auto" style="width: 100%; justify-content: space-around; align-items: center; ">
+      <div style="display: flex; align-items: center; justify-content: center;">
       <div style="margin-right: 8px;">
         <% if @recipe.user.photo.attached? %>
           <%= cl_image_tag @recipe.user.photo.key, class:"avatar" %>
         <% else %>
-          <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+          <%= image_tag @recipe.user.facebook_picture_url || "user.png", alt: "Profile", class:"avatar" %>
         <% end %>
       </div>
       <% if @recipe.user.username.blank? %>
@@ -211,6 +212,10 @@
       <% else %>
         <%= link_to "#{@recipe.user.username}", user_path(@recipe.user) %>
       <% end %>
+      </div>
+      <div>
+        <%= image_tag("share-green.svg", alt: "share", class:"share-icon", data: {toggle: "modal", target: "#shareModal"}) %>
+      </div>
     </div>
 
     <hr>
@@ -365,18 +370,20 @@
         </div>
       <% end %>
     <% else %>
-      <p> Easy peasy. No steps to prepare this dish!. </p>
+      <p> Easy peasy. No steps to prepare this dish! </p>
     <% end %>
 
 
   <% if current_user %>
     <% if current_user.has_cooked_recipe?(@recipe) %>
-      <%= link_to "Recipe Cooked", cooked_recipe_path(current_user.has_cooked_recipe?(@recipe)), method: :delete, class: "btn btn-info" %>
+      <%= link_to "I lied, I haven't cooked this yet", cooked_recipe_path(current_user.has_cooked_recipe?(@recipe)), method: :delete, class: "btn btn-info", style: "width: 100%;" %>
     <% else %>
       <div style="width: 100%; display: flex; justify-content: center;">
         <%= link_to "Cooked it!", recipe_cooked_recipe_index_path(@recipe), method: :post, class: "btn btn-primary" %>
      </div>
     <% end %>
+  <% else %>
+    <%= link_to "Cooked it!", new_user_session_path, class:"btn btn-primary", data: {toggle: "modal", target: "#newUserModal"} %>
   <% end %>
 
 
@@ -406,7 +413,7 @@
             <% if review.user.photo.attached? %>
               <%= cl_image_tag review.user.photo.key, class:"avatar" %>
             <% else %>
-              <%= image_tag("user.png", alt: "Profile", class:"avatar") %>
+              <%= image_tag review.user.facebook_picture_url || "user.png", alt: "Profile", class:"avatar" %>
             <% end %>
 
           <% if review.user.username.blank? %>
@@ -466,5 +473,11 @@
 </div>
 
 
+ <%= render 'share_modal'%>
+
  <%= render 'shared/login_modal'%>
 
+
+<% if @error %>
+  <span id="errorModal"></span>
+<% end %>

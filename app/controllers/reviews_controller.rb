@@ -1,5 +1,4 @@
 class ReviewsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:create]
 
 
   def create
@@ -9,12 +8,16 @@ class ReviewsController < ApplicationController
     @review.user = current_user
     if @review.save
       redirect_to recipe_path(@recipe, anchor:"review-#{@review.id}")
+    # elsif @user_signed_in?
+    #   flash[:alert] = "Review cannot be created without a rating."
+    #   redirect_to recipe_path(@recipe)
+    #   # @error = true
+    #   # @planner = Planner.new
+    #   # @shopping_list = ShoppingList.new
+    #   redirect_to new_user_session_path
     else
-      @planner = Planner.new
-      @shopping_list = ShoppingList.new
-      redirect_to new_user_session_path
-      # render 'recipes/show'
-      # render recipe_path(@recipe, anchor:"review-#{@review.id}")
+      flash[:alert] = "Review cannot be created without a rating."
+      redirect_to recipe_path(@recipe)
     end
   end
 
