@@ -1,6 +1,18 @@
 
 
+<% if !@recipe_ingredients || current_user != @recipe&.user %>
+
+    <div class="container-fluid m-auto" style="padding-top: 100px;">
+    <!-- <div style="margin: 20px; text-align: center; align-items: center;"> -->
+      <%= image_tag("prepman.svg", alt: "logo", class:"m-auto", style:"width: 200px;") %>
+      <h3>Please don't go looking at other Hero's recipe ingredients</h3>
+    </div>
+
+
+<% else %>
+
 <div class="navbar sticky-top bg-white" style="width: 100%; margin-bottom: 0px; padding-top: 32px; padding-bottom: 16px;">
+
 
     <div class="col-2" style="padding-left: 0px";>
       <%= link_to edit_recipe_path(@recipe) do%>
@@ -62,5 +74,6 @@
             <% end %>
         </div>
       </div>
-    </div>
+    </div>  
   </div>
+<% end %>
