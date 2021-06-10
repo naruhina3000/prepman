@@ -20,6 +20,7 @@ before_action :set_recipe, only: [:index, :create]
     end
 
     def edit
+        @recipe = @step.recipe
     end
 
     def update
