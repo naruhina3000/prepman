@@ -1,24 +1,24 @@
-#searchModal{
-  label{
-    border: 1px solid #91ACAA;
+#searchModal {
+  label {
+    border: 1px solid #91acaa;
     border-radius: 8px;
     padding: 7px;
-    &.active{
-      background-color: #91ACAA;
+    &.active {
+      background-color: #91acaa;
       color: white;
     }
   }
 }
 
 .btn-primary {
-    color: #204742;
-    background-color: #FFD964;
-    border-color: #FFD964;
-    margin: auto;
-    border-radius: 18px;
-    font-weight: 600;
-    width:  100%;
-    margin-top: 1rem;
+  color: #204742;
+  background-color: #ffd964;
+  border-color: #ffd964;
+  margin: auto;
+  border-radius: 18px;
+  font-weight: 600;
+  width: 100%;
+  margin-top: 1rem;
 }
 
 .btn-info {
@@ -36,5 +36,12 @@
 }
 
 .btn-warning {
+  border-radius: 20px;
+}
+
+.btn-facebook {
+  background-color: #3b5998;
+  width: 100%;
+  margin-bottom: 12px;
   border-radius: 20px;
 }
