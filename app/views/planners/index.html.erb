@@ -21,7 +21,7 @@
     <% if planner.date == Date.today() %>
       <h4>Today</h4>
     <% else %>
-      <h4><%= Date::DAYNAMES[planner.date.strftime('%A') %>, <%= planner.date.day %> <%= Date::MONTHNAMES[planner.date.month][0..2] %></h4>
+      <h4><%= planner.date.strftime('%A') %>, <%= planner.date.day %> <%= Date::MONTHNAMES[planner.date.month][0..2] %></h4>
     <% end %>
     <% if planner.recipe.photo.attached? %>
       <%= cl_image_tag planner.recipe.photo.key, class: "card-img-recipe" %>
